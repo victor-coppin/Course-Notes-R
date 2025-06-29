@@ -1,0 +1,56 @@
+project:
+  type: book
+
+book:
+  title: "Data Science with R"
+  author: "Victor Coppin"
+  date: "29/06/2025"
+  chapters:
+    - index.qmd
+    
+    - part: "R Basics : Introduction to Data Science"
+      chapters:
+        - basics-introduction.qmd
+        - basics-lecture-01.qmd
+        - basics-lecture-02.qmd
+    
+    - part: "ggplot2: Elegant Graphics for Data Analysis"
+      chapters:
+        - ggplot2-introduction.qmd
+        - ggplot2-lecture-01.qmd
+        - ggplot2-lecture-02.qmd
+     
+    - part: "Foundations of Statistical Analysis and Machine Learning"
+      chapters:
+        - found-ml-introduction.qmd    
+        - found-ml-lecture-01.qmd
+        - found-ml-lecture-02.qmd
+
+    - part: "Advanced Statistical Analysis and Machine Learning"
+      chapters:
+        - adv-ml-introduction.qmd    
+        - adv-ml-lecture-01.qmd
+        - adv-ml-lecture-02.qmd
+
+    - part: "Time Series Analysis"
+      chapters:
+        - ts-introduction.qmd    
+        - ts-lecture-01.qmd
+        - ts-lecture-02.qmd
+
+    - part: "Statistical Analysis of Massive and High Dimensional Data"
+      chapters:
+        - massive-data-introduction.qmd    
+        - massive-data-lecture-01.qmd
+        - massive-data-lecture-02.qmd  
+
+    - summary.qmd
+    - references.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+
+  pdf:
+    documentclass: scrreprt
