@@ -1,0 +1,55 @@
+# Survival Analysis 
+
+```{r}
+library(BSDA)
+library(webr)
+```
+
+
+```{r}
+x <- seq(-4, 4, 0.1)
+```
+
+```{r}
+plot(x, dnorm(x, mean = 0, sd = 1), type = "l",
+     ylim = c(0, 0.6), ylab = "", lwd = 2, col = "red")
+```
+
+```{r}
+pnorm(-1.53)
+qnorm(0.025)
+qnorm(0.06300)
+qnorm(0.06300, lower.tail=FALSE)
+dnorm(2)
+dnorm(1.53)
+```
+
+```{r}
+set.seed(1234)
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(xtable)
+library(BSDA) # to install this library run.  devtools::install_github('alanarnholt/BSDA')
+library(webr)  #.   devtools::install_github("cardiomoon/webr")
+```
+
+
+```{r}
+x = rnorm(mean=170, sd=5, 100)
+```
+
+```{r}
+hist(x,main='Height')
+```
+
+```{r}
+hist(x,breaks=20)
+```
+
+```{r}
+hist(x,breaks=100)
+```

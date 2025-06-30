@@ -1,0 +1,20 @@
+# The Tidyverse 
+
+
+The tidyverse can be installed with a single line of code : 
+install.packages("tidyverse")
+
+This command loads the nine "core" packages: dplyr, forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr. 
+These are considered the core of the tidyverse because you’ll use them in almost every analysis : 
+- dplyr : manipulating data frames   
+- forcats : provides tools for dealing with categorical variables  
+- ggplot2 : producing statistical, or data, graphics  
+- lubridate : makes it easier to work with dates and times in R  
+- purr : working with function  
+
+#| label: load-tidyverse
+#| warning: false
+#| message: false
+```{r}
+library(tidyverse)
+```

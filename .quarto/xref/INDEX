@@ -10,5 +10,23 @@
   },
   "references.qmd": {
     "references.html": "91dbdb89"
+  },
+  "Tidyverse.qmd": {
+    "Tidyverse.html": "0671ffbf"
+  },
+  "ggplot2-introduction.qmd": {
+    "ggplot2-introduction.html": "2998f165"
+  },
+  "FSML-introduction.qmd": {
+    "FSML-introduction.html": "68936ef3"
+  },
+  "ASML-introduction.qmd": {
+    "ASML-introduction.html": "0422f9fa"
+  },
+  "TimeSeries-introduction.qmd": {
+    "TimeSeries-introduction.html": "2c10df3d"
+  },
+  "massive-data-introduction.qmd": {
+    "massive-data-introduction.html": "5cb95167"
   }
 }
