@@ -1,8 +1,41 @@
 [
   {
+    "objectID": "Tidyverse.html",
+    "href": "Tidyverse.html",
+    "title": "1  The Tidyverse",
+    "section": "",
+    "text": "2 Manipulating Data frames with dplyr and purrr\nThe Tidyverse can be installed with a single line of code: install.packages(“tidyverse”)\nThis command installs the nine core packages of the Tidyverse: dplyr, forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr. These are considered the core of the Tidyverse because you’ll use them in almost every analysis: - dplyr : manipulating data frames\n- forcats : provides tools for dealing with categorical variables\n- ggplot2 : producing statistical, or data, graphics\n- lubridate : makes it easier to work with dates and times in R\n- purr : working with functions and iteration in a functional programming style\n#| label: load-tidyverse #| warning: false #| message: false",
+    "crumbs": [
+      "R Basics : Introduction to Data Science",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Tidyverse</span>"
+    ]
+  },
+  {
+    "objectID": "Tidyverse.html#tidy-data",
+    "href": "Tidyverse.html#tidy-data",
+    "title": "1  The Tidyverse",
+    "section": "2.1 Tidy Data",
+    "text": "2.1 Tidy Data\nWe say that a data table is in tidy format if each row represents one observation and columns represent the different variables available for each of these observations. The murders dataset is an example of a tidy data frame.\n\nhead(murders)\n\n       state abb region population total\n1    Alabama  AL  South    4779736   135\n2     Alaska  AK   West     710231    19\n3    Arizona  AZ   West    6392017   232\n4   Arkansas  AR  South    2915918    93\n5 California  CA   West   37253956  1257\n6   Colorado  CO   West    5029196    65\n\n\nEach row represents a state with each of the five columns providing a different variable related to these states: name, abbreviation, region, population, and total murders.",
+    "crumbs": [
+      "R Basics : Introduction to Data Science",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Tidyverse</span>"
+    ]
+  },
+  {
+    "objectID": "Tidyverse.html#manipulating-data-frames",
+    "href": "Tidyverse.html#manipulating-data-frames",
+    "title": "1  The Tidyverse",
+    "section": "2.2 Manipulating Data Frames",
+    "text": "2.2 Manipulating Data Frames\n\n“The dplyr package from the tidyverse introduces functions that perform some of the most common operations when working with data frames and uses names for these functions that are relatively easy to remember. For instance, to change the data table by adding a new column, we use mutate. To filter the data table to a subset of rows, we use filter. Finally, to subset the data by selecting specific columns, we use select.”\n\n\n2.2.1 The mutate function\nThe mutate function is used to add new columns to a data frame or modify existing ones.\n\n# Add a new column 'rate' to the murders data frame\nmurders  &lt;- mutate(murders, rate = total / population * 100000)\n\nNote: to compute the rate, we used total and population columns, which are not defined in the global environment. The mutate function allows us to use the names of the columns directly.\n\n“This is one of dplyr’s main features. Functions in this package, such as mutate, know to look for variables in the data frame provided in the first argument.\nIn the call to mutate above, total will have the values in murders$total. This approach makes the code much more readable and concise.”\n\n\nhead(murders)\n\n       state abb region population total     rate\n1    Alabama  AL  South    4779736   135 2.824424\n2     Alaska  AK   West     710231    19 2.675186\n3    Arizona  AZ   West    6392017   232 3.629527\n4   Arkansas  AR  South    2915918    93 3.189390\n5 California  CA   West   37253956  1257 3.374138\n6   Colorado  CO   West    5029196    65 1.292453\n\n\nNote: the mutate function does not change the original data frame.\n\n“Although we have overwritten the original murders object, this does not change the object that is loaded with data(murders).\nIf we load the murders data again, the original will overwrite our mutated version.”\n\n\n\n2.2.2 Subsetting with filter\nThe filter function is used to subset rows based on logical conditions.\nFilter the murders data frame to include only the entries for which the murder rate is lower than 0.71.\n\n# Syntax : data, conditional statement.\nfilter(murders, rate &lt;= 0.71)\n\n          state abb        region population total      rate\n1        Hawaii  HI          West    1360301     7 0.5145920\n2          Iowa  IA North Central    3046355    21 0.6893484\n3 New Hampshire  NH     Northeast    1316470     5 0.3798036\n4  North Dakota  ND North Central     672591     4 0.5947151\n5       Vermont  VT     Northeast     625741     2 0.3196211\n\n\n\n\n2.2.3 Selecting columns with select\nThe select() function is used to extract specific columns from a data frame.\nIn the example below: - We create a new data frame containing only the columns state, region, and rate. - We then apply filter() to keep only the rows where the murder rate is less than or equal to 0.71.\n\nstate_region_rate_table &lt;- select(murders, state, region, rate)\nfilter(state_region_rate_table, rate &lt;= 0.71)\n\n          state        region      rate\n1        Hawaii          West 0.5145920\n2          Iowa North Central 0.6893484\n3 New Hampshire     Northeast 0.3798036\n4  North Dakota North Central 0.5947151\n5       Vermont     Northeast 0.3196211\n\n\n\n\n2.2.4 Exercises\n\nLoad the dplyr package and the murders dataset.\n\n\nlibrary(dplyr)\nlibrary(dslabs)\ndata(murders)\n\n\nUse the function mutate to add a column rank containing the rank, from highest to lowest murder rate. Make sure you redefine murders so we can keep using this variable.\n\n\nmurders &lt;- mutate(murders, rate = total / population * 10^5)\nmurders &lt;- mutate(murders, rank = rank(-rate))\nmurders %&gt;% head()\n\n       state abb region population total     rate rank\n1    Alabama  AL  South    4779736   135 2.824424   23\n2     Alaska  AK   West     710231    19 2.675186   27\n3    Arizona  AZ   West    6392017   232 3.629527   10\n4   Arkansas  AR  South    2915918    93 3.189390   17\n5 California  CA   West   37253956  1257 3.374138   14\n6   Colorado  CO   West    5029196    65 1.292453   38\n\nselect(murders, state, population) %&gt;% head()\n\n       state population\n1    Alabama    4779736\n2     Alaska     710231\n3    Arizona    6392017\n4   Arkansas    2915918\n5 California   37253956\n6   Colorado    5029196\n\n\nWe can write population rather than murders$population. The function mutate knows we are grabbing columns from murders.\n\nUse select to show the state names and abbreviations in murders. Do not redefine murders, just show the results.\n\n\nselect(murders, state, abb)\n\n                  state abb\n1               Alabama  AL\n2                Alaska  AK\n3               Arizona  AZ\n4              Arkansas  AR\n5            California  CA\n6              Colorado  CO\n7           Connecticut  CT\n8              Delaware  DE\n9  District of Columbia  DC\n10              Florida  FL\n11              Georgia  GA\n12               Hawaii  HI\n13                Idaho  ID\n14             Illinois  IL\n15              Indiana  IN\n16                 Iowa  IA\n17               Kansas  KS\n18             Kentucky  KY\n19            Louisiana  LA\n20                Maine  ME\n21             Maryland  MD\n22        Massachusetts  MA\n23             Michigan  MI\n24            Minnesota  MN\n25          Mississippi  MS\n26             Missouri  MO\n27              Montana  MT\n28             Nebraska  NE\n29               Nevada  NV\n30        New Hampshire  NH\n31           New Jersey  NJ\n32           New Mexico  NM\n33             New York  NY\n34       North Carolina  NC\n35         North Dakota  ND\n36                 Ohio  OH\n37             Oklahoma  OK\n38               Oregon  OR\n39         Pennsylvania  PA\n40         Rhode Island  RI\n41       South Carolina  SC\n42         South Dakota  SD\n43            Tennessee  TN\n44                Texas  TX\n45                 Utah  UT\n46              Vermont  VT\n47             Virginia  VA\n48           Washington  WA\n49        West Virginia  WV\n50            Wisconsin  WI\n51              Wyoming  WY\n\n\n\nUse filter to show the top 5 states with the highest murder rates.\n\n\nfilter(murders,  rank &lt;= 5)\n\n                 state abb        region population total      rate rank\n1 District of Columbia  DC         South     601723    99 16.452753    1\n2            Louisiana  LA         South    4533372   351  7.742581    2\n3             Maryland  MD         South    5773552   293  5.074866    4\n4             Missouri  MO North Central    5988927   321  5.359892    3\n5       South Carolina  SC         South    4625364   207  4.475323    5\n\n\n\nCreate a new data frame called no_south that removes states from the South region. How many states are in this category? You can use the function nrow for this.\n\nNote: We can remove rows using the != operator. For example, to remove Florida, we would do this:\n\nno_florida &lt;- filter(murders, state != \"Florida\")\n\n\n# Create the new data frame without south region\nno_south &lt;- filter(murders, region != \"South\")\n# Compute how many states are not in the south\nselect(no_south, state) %&gt;% nrow()\n\n[1] 34\n\n\nThere are 34 states which are not in the south",
+    "crumbs": [
+      "R Basics : Introduction to Data Science",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Tidyverse</span>"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Course-Notes-R",
+    "title": "Data Science with R",
     "section": "",
     "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
     "crumbs": [
@@ -10,54 +43,13 @@
     ]
   },
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  R Basics",
-    "section": "",
-    "text": "This file follows the course Introduction to Data Science by Rafael A. Irizarry\nCASE STUDY : US murder rates by state",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R Basics</span>"
-    ]
-  },
-  {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "2  Summary",
+    "title": "7  Summary",
     "section": "",
     "text": "In summary, this book has no content whatsoever.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
-    ]
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "References"
-    ]
-  },
-  {
-    "objectID": "intro.html#footnotes",
-    "href": "intro.html#footnotes",
-    "title": "1  R Basics",
-    "section": "",
-    "text": "Source: Introduction to Data Science by Rafael A. Irizarry↩︎",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R Basics</span>"
-    ]
-  },
-  {
-    "objectID": "Tidyverse.html",
-    "href": "Tidyverse.html",
-    "title": "1  The Tidyverse",
-    "section": "",
-    "text": "The tidyverse can be installed with a single line of code : install.packages(“tidyverse”)\nThis command loads the nine “core” packages: dplyr, forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr. These are considered the core of the tidyverse because you’ll use them in almost every analysis : - dplyr : manipulating data frames - forcats : provides tools for dealing with categorical variables - ggplot2 : producing statistical, or data, graphics - lubridate : makes it easier to work with dates and times in R - purr : working with function\n#| label: load-tidyverse #| warning: false #| message: false\n\nlibrary(tidyverse)\n\nWarning: package 'tidyverse' was built under R version 4.4.3\n\n\nWarning: package 'ggplot2' was built under R version 4.4.3\n\n\nWarning: package 'tidyr' was built under R version 4.4.3\n\n\nWarning: package 'readr' was built under R version 4.4.3\n\n\nWarning: package 'purrr' was built under R version 4.4.3\n\n\nWarning: package 'dplyr' was built under R version 4.4.3\n\n\nWarning: package 'forcats' was built under R version 4.4.3\n\n\nWarning: package 'lubridate' was built under R version 4.4.3\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
-    "crumbs": [
-      "R Basics : Introduction to Data Science",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Tidyverse</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Summary</span>"
     ]
   }
 ]

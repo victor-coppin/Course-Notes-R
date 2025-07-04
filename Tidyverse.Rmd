@@ -127,3 +127,35 @@ select(no_south, state) %>% nrow()
 
 *There are 34 states which are not in the south*
 
+### The Pipe `%>%`
+
+>"With dplyr we can perform a series of operations, for example select and then filter, 
+by sending the results of one function to another using what is called the pipe operator: %>%."
+
+$$ \Large \text{original data} \Longrightarrow \text{ select } \Longrightarrow \text{ fitler }$$ 
+
+The pipe sends the result of the left side of the pipe to be the first argument of the function on the right side of the pipe.
+
+```{r}
+16 %>% sqrt()
+16 %>% sqrt() %>% log2()
+```
+
+>"Therefore, when using the pipe with data frames and dplyr, we no longer need to specify 
+the required first argument since the dplyr functions we have described all take the data
+as the first argument. In the code we wrote:"
+
+```{r}
+murders  <- mutate(murders, rate = total / population * 100000)
+murders %>% select(state, region, rate) %>% filter(rate <= 0.71)
+```
+
+The pipe allows to perform operations sequentially without having to define intermediate variables : the following codes are similar : 
+
+```{r}
+data(murders)
+murders <- mutate(murders, rate = total / population * 100000, rank = rank(-rate))  # nolint
+my_state <- filter(murders, region %in% c("Northeast", "West") & rate < 1)
+select
+```
+

@@ -267,8 +267,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#manipulating-data-frames-with-dplyr-and-purrr" id="toc-manipulating-data-frames-with-dplyr-and-purrr" class="nav-link active" data-scroll-target="#manipulating-data-frames-with-dplyr-and-purrr"><span class="header-section-number">2</span> Manipulating Data frames with dplyr and purrr</a>
+  <ul class="collapse">
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="header-section-number">2.1</span> Tidy Data</a></li>
+  <li><a href="#manipulating-data-frames" id="toc-manipulating-data-frames" class="nav-link" data-scroll-target="#manipulating-data-frames"><span class="header-section-number">2.2</span> Manipulating Data Frames</a>
+  <ul class="collapse">
+  <li><a href="#the-mutate-function" id="toc-the-mutate-function" class="nav-link" data-scroll-target="#the-mutate-function"><span class="header-section-number">2.2.1</span> The <code>mutate</code> function</a></li>
+  <li><a href="#subsetting-with-filter" id="toc-subsetting-with-filter" class="nav-link" data-scroll-target="#subsetting-with-filter"><span class="header-section-number">2.2.2</span> Subsetting with <code>filter</code></a></li>
+  <li><a href="#selecting-columns-with-select" id="toc-selecting-columns-with-select" class="nav-link" data-scroll-target="#selecting-columns-with-select"><span class="header-section-number">2.2.3</span> Selecting columns with <code>select</code></a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2.2.4</span> Exercises</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -292,8 +308,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The tidyverse can be installed with a single line of code : install.packages(“tidyverse”)</p>
-<p>This command loads the nine “core” packages: dplyr, forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr. These are considered the core of the tidyverse because you’ll use them in almost every analysis : - dplyr : manipulating data frames - forcats : provides tools for dealing with categorical variables - ggplot2 : producing statistical, or data, graphics - lubridate : makes it easier to work with dates and times in R - purr : working with function</p>
+<p>The Tidyverse can be installed with a single line of code: install.packages(“tidyverse”)</p>
+<p>This command installs the nine core packages of the Tidyverse: dplyr, forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr. These are considered the core of the Tidyverse because you’ll use them in almost every analysis: - dplyr : manipulating data frames<br>
+- forcats : provides tools for dealing with categorical variables<br>
+- ggplot2 : producing statistical, or data, graphics<br>
+- lubridate : makes it easier to work with dates and times in R<br>
+- purr : working with functions and iteration in a functional programming style</p>
 <p>#| label: load-tidyverse #| warning: false #| message: false</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -302,6 +322,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'ggplot2' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.4.3</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'tidyr' was built under R version 4.4.3</code></pre>
@@ -325,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.0.4     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -333,9 +356,234 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dslabs' was built under R version 4.4.3</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(murders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="manipulating-data-frames-with-dplyr-and-purrr" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Manipulating Data frames with dplyr and purrr</h1>
+<section id="tidy-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="tidy-data"><span class="header-section-number">2.1</span> Tidy Data</h2>
+<p>We say that a data table is in <em>tidy</em> format if each row represents one observation and columns represent the different variables available for each of these observations. The murders dataset is an example of a tidy data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(murders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       state abb region population total
+1    Alabama  AL  South    4779736   135
+2     Alaska  AK   West     710231    19
+3    Arizona  AZ   West    6392017   232
+4   Arkansas  AR  South    2915918    93
+5 California  CA   West   37253956  1257
+6   Colorado  CO   West    5029196    65</code></pre>
+</div>
+</div>
+<p>Each row represents a state with each of the five columns providing a different variable related to these states: name, abbreviation, region, population, and total murders.</p>
+</section>
+<section id="manipulating-data-frames" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="manipulating-data-frames"><span class="header-section-number">2.2</span> Manipulating Data Frames</h2>
+<blockquote class="blockquote">
+<p>“The dplyr package from the tidyverse introduces functions that perform some of the most common operations when working with data frames and uses names for these functions that are relatively easy to remember. For instance, to change the data table by adding a new column, we use mutate. To filter the data table to a subset of rows, we use filter. Finally, to subset the data by selecting specific columns, we use select.”</p>
+</blockquote>
+<section id="the-mutate-function" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="the-mutate-function"><span class="header-section-number">2.2.1</span> The <code>mutate</code> function</h3>
+<p>The <code>mutate</code> function is used to add new columns to a data frame or modify existing ones.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a new column 'rate' to the murders data frame</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>murders  <span class="ot">&lt;-</span> <span class="fu">mutate</span>(murders, <span class="at">rate =</span> total <span class="sc">/</span> population <span class="sc">*</span> <span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Note:</strong> to compute the rate, we used <code>total</code> and <code>population</code> columns, which are not defined in the global environment. The <code>mutate</code> function allows us to use the names of the columns directly.</p>
+<blockquote class="blockquote">
+<p>“This is one of dplyr’s main features. Functions in this package, such as mutate, know to look for variables in the data frame provided in the first argument.<br>
+In the call to mutate above, <code>total</code> will have the values in <code>murders$total</code>. This approach makes the code much more readable and concise.”</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(murders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       state abb region population total     rate
+1    Alabama  AL  South    4779736   135 2.824424
+2     Alaska  AK   West     710231    19 2.675186
+3    Arizona  AZ   West    6392017   232 3.629527
+4   Arkansas  AR  South    2915918    93 3.189390
+5 California  CA   West   37253956  1257 3.374138
+6   Colorado  CO   West    5029196    65 1.292453</code></pre>
+</div>
+</div>
+<p><strong>Note</strong>: the <code>mutate</code> function does not change the original data frame.</p>
+<blockquote class="blockquote">
+<p>“Although we have overwritten the original <strong>murders</strong> object, this does not change the object that is loaded with <code>data(murders)</code>.<br>
+If we load the murders data again, the original will overwrite our mutated version.”</p>
+</blockquote>
+</section>
+<section id="subsetting-with-filter" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="subsetting-with-filter"><span class="header-section-number">2.2.2</span> Subsetting with <code>filter</code></h3>
+<p>The <code>filter</code> function is used to subset rows based on logical conditions.</p>
+<p><em>Filter the murders data frame to include only the entries for which the murder rate is lower than 0.71.</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Syntax : data, conditional statement.</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(murders, rate <span class="sc">&lt;=</span> <span class="fl">0.71</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          state abb        region population total      rate
+1        Hawaii  HI          West    1360301     7 0.5145920
+2          Iowa  IA North Central    3046355    21 0.6893484
+3 New Hampshire  NH     Northeast    1316470     5 0.3798036
+4  North Dakota  ND North Central     672591     4 0.5947151
+5       Vermont  VT     Northeast     625741     2 0.3196211</code></pre>
+</div>
+</div>
+</section>
+<section id="selecting-columns-with-select" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="selecting-columns-with-select"><span class="header-section-number">2.2.3</span> Selecting columns with <code>select</code></h3>
+<p>The <code>select()</code> function is used to extract specific columns from a data frame.</p>
+<p>In the example below: - We create a new data frame containing only the columns state, region, and rate. - We then apply <code>filter()</code> to keep only the rows where the murder rate is less than or equal to 0.71.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>state_region_rate_table <span class="ot">&lt;-</span> <span class="fu">select</span>(murders, state, region, rate)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(state_region_rate_table, rate <span class="sc">&lt;=</span> <span class="fl">0.71</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          state        region      rate
+1        Hawaii          West 0.5145920
+2          Iowa North Central 0.6893484
+3 New Hampshire     Northeast 0.3798036
+4  North Dakota North Central 0.5947151
+5       Vermont     Northeast 0.3196211</code></pre>
+</div>
+</div>
+</section>
+<section id="exercises" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.2.4</span> Exercises</h3>
+<ol type="1">
+<li>Load the dplyr package and the murders dataset.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(murders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Use the function mutate to add a column rank containing the rank, from highest to lowest murder rate. Make sure you redefine murders so we can keep using this variable.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>murders <span class="ot">&lt;-</span> <span class="fu">mutate</span>(murders, <span class="at">rate =</span> total <span class="sc">/</span> population <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>murders <span class="ot">&lt;-</span> <span class="fu">mutate</span>(murders, <span class="at">rank =</span> <span class="fu">rank</span>(<span class="sc">-</span>rate))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>murders <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       state abb region population total     rate rank
+1    Alabama  AL  South    4779736   135 2.824424   23
+2     Alaska  AK   West     710231    19 2.675186   27
+3    Arizona  AZ   West    6392017   232 3.629527   10
+4   Arkansas  AR  South    2915918    93 3.189390   17
+5 California  CA   West   37253956  1257 3.374138   14
+6   Colorado  CO   West    5029196    65 1.292453   38</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(murders, state, population) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       state population
+1    Alabama    4779736
+2     Alaska     710231
+3    Arizona    6392017
+4   Arkansas    2915918
+5 California   37253956
+6   Colorado    5029196</code></pre>
+</div>
+</div>
+<p><em>We can write population rather than murders$population. The function mutate knows we are grabbing columns from murders.</em></p>
+<ol start="3" type="1">
+<li>Use <code>select</code> to show the state names and abbreviations in murders. Do not redefine murders, just show the results.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(murders, state, abb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  state abb
+1               Alabama  AL
+2                Alaska  AK
+3               Arizona  AZ
+4              Arkansas  AR
+5            California  CA
+6              Colorado  CO
+7           Connecticut  CT
+8              Delaware  DE
+9  District of Columbia  DC
+10              Florida  FL
+11              Georgia  GA
+12               Hawaii  HI
+13                Idaho  ID
+14             Illinois  IL
+15              Indiana  IN
+16                 Iowa  IA
+17               Kansas  KS
+18             Kentucky  KY
+19            Louisiana  LA
+20                Maine  ME
+21             Maryland  MD
+22        Massachusetts  MA
+23             Michigan  MI
+24            Minnesota  MN
+25          Mississippi  MS
+26             Missouri  MO
+27              Montana  MT
+28             Nebraska  NE
+29               Nevada  NV
+30        New Hampshire  NH
+31           New Jersey  NJ
+32           New Mexico  NM
+33             New York  NY
+34       North Carolina  NC
+35         North Dakota  ND
+36                 Ohio  OH
+37             Oklahoma  OK
+38               Oregon  OR
+39         Pennsylvania  PA
+40         Rhode Island  RI
+41       South Carolina  SC
+42         South Dakota  SD
+43            Tennessee  TN
+44                Texas  TX
+45                 Utah  UT
+46              Vermont  VT
+47             Virginia  VA
+48           Washington  WA
+49        West Virginia  WV
+50            Wisconsin  WI
+51              Wyoming  WY</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Use filter to show the top 5 states with the highest murder rates.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(murders,  rank <span class="sc">&lt;=</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 state abb        region population total      rate rank
+1 District of Columbia  DC         South     601723    99 16.452753    1
+2            Louisiana  LA         South    4533372   351  7.742581    2
+3             Maryland  MD         South    5773552   293  5.074866    4
+4             Missouri  MO North Central    5988927   321  5.359892    3
+5       South Carolina  SC         South    4625364   207  4.475323    5</code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Create a new data frame called no_south that removes states from the South region. How many states are in this category? You can use the function nrow for this.</li>
+</ol>
+<p><strong>Note</strong>: We can remove rows using the != operator. For example, to remove Florida, we would do this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>no_florida <span class="ot">&lt;-</span> <span class="fu">filter</span>(murders, state <span class="sc">!=</span> <span class="st">"Florida"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the new data frame without south region</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>no_south <span class="ot">&lt;-</span> <span class="fu">filter</span>(murders, region <span class="sc">!=</span> <span class="st">"South"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute how many states are not in the south</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(no_south, state) <span class="sc">%&gt;%</span> <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 34</code></pre>
+</div>
+</div>
+<p><em>There are 34 states which are not in the south</em></p>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

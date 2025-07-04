@@ -1,0 +1,700 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Data Science with R},
+  pdfauthor={Victor Coppin},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Data Science with R}
+\author{Victor Coppin}
+\date{2027-05-06}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\bookmarksetup{startatroot}
+
+\chapter*{Preface}\label{preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+\markboth{Preface}{Preface}
+
+This is a Quarto book.
+
+To learn more about Quarto books visit
+\url{https://quarto.org/docs/books}.
+
+\part{R Basics : Introduction to Data Science}
+
+\chapter{The Tidyverse}\label{the-tidyverse}
+
+The Tidyverse can be installed with a single line of code:
+install.packages(``tidyverse'')
+
+This command installs the nine core packages of the Tidyverse: dplyr,
+forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr.
+These are considered the core of the Tidyverse because you'll use them
+in almost every analysis: - dplyr : manipulating data frames\\
+- forcats : provides tools for dealing with categorical variables\\
+- ggplot2 : producing statistical, or data, graphics\\
+- lubridate : makes it easier to work with dates and times in R\\
+- purr : working with functions and iteration in a functional
+programming style
+
+\#\textbar{} label: load-tidyverse \#\textbar{} warning: false
+\#\textbar{} message: false
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: package 'tidyverse' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+Warning: package 'ggplot2' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+Warning: package 'tibble' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+Warning: package 'tidyr' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+Warning: package 'readr' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+Warning: package 'purrr' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+Warning: package 'dplyr' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+Warning: package 'forcats' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+Warning: package 'lubridate' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+-- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+v dplyr     1.1.4     v readr     2.1.5
+v forcats   1.0.0     v stringr   1.5.1
+v ggplot2   3.5.2     v tibble    3.3.0
+v lubridate 1.9.4     v tidyr     1.3.1
+v purrr     1.0.4     
+-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dslabs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: package 'dslabs' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(murders)}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Manipulating Data frames with dplyr and
+purrr}\label{manipulating-data-frames-with-dplyr-and-purrr}
+
+\section{Tidy Data}\label{tidy-data}
+
+We say that a data table is in \emph{tidy} format if each row represents
+one observation and columns represent the different variables available
+for each of these observations. The murders dataset is an example of a
+tidy data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(murders)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       state abb region population total
+1    Alabama  AL  South    4779736   135
+2     Alaska  AK   West     710231    19
+3    Arizona  AZ   West    6392017   232
+4   Arkansas  AR  South    2915918    93
+5 California  CA   West   37253956  1257
+6   Colorado  CO   West    5029196    65
+\end{verbatim}
+
+Each row represents a state with each of the five columns providing a
+different variable related to these states: name, abbreviation, region,
+population, and total murders.
+
+\section{Manipulating Data Frames}\label{manipulating-data-frames}
+
+\begin{quote}
+``The dplyr package from the tidyverse introduces functions that perform
+some of the most common operations when working with data frames and
+uses names for these functions that are relatively easy to remember. For
+instance, to change the data table by adding a new column, we use
+mutate. To filter the data table to a subset of rows, we use filter.
+Finally, to subset the data by selecting specific columns, we use
+select.''
+\end{quote}
+
+\subsection{\texorpdfstring{The \texttt{mutate}
+function}{The mutate function}}\label{the-mutate-function}
+
+The \texttt{mutate} function is used to add new columns to a data frame
+or modify existing ones.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add a new column \textquotesingle{}rate\textquotesingle{} to the murders data frame}
+\NormalTok{murders  }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(murders, }\AttributeTok{rate =}\NormalTok{ total }\SpecialCharTok{/}\NormalTok{ population }\SpecialCharTok{*} \DecValTok{100000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Note:} to compute the rate, we used \texttt{total} and
+\texttt{population} columns, which are not defined in the global
+environment. The \texttt{mutate} function allows us to use the names of
+the columns directly.
+
+\begin{quote}
+``This is one of dplyr's main features. Functions in this package, such
+as mutate, know to look for variables in the data frame provided in the
+first argument.\\
+In the call to mutate above, \texttt{total} will have the values in
+\texttt{murders\$total}. This approach makes the code much more readable
+and concise.''
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(murders)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       state abb region population total     rate
+1    Alabama  AL  South    4779736   135 2.824424
+2     Alaska  AK   West     710231    19 2.675186
+3    Arizona  AZ   West    6392017   232 3.629527
+4   Arkansas  AR  South    2915918    93 3.189390
+5 California  CA   West   37253956  1257 3.374138
+6   Colorado  CO   West    5029196    65 1.292453
+\end{verbatim}
+
+\textbf{Note}: the \texttt{mutate} function does not change the original
+data frame.
+
+\begin{quote}
+``Although we have overwritten the original \textbf{murders} object,
+this does not change the object that is loaded with
+\texttt{data(murders)}.\\
+If we load the murders data again, the original will overwrite our
+mutated version.''
+\end{quote}
+
+\subsection{\texorpdfstring{Subsetting with
+\texttt{filter}}{Subsetting with filter}}\label{subsetting-with-filter}
+
+The \texttt{filter} function is used to subset rows based on logical
+conditions.
+
+\emph{Filter the murders data frame to include only the entries for
+which the murder rate is lower than 0.71.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Syntax : data, conditional statement.}
+\FunctionTok{filter}\NormalTok{(murders, rate }\SpecialCharTok{\textless{}=} \FloatTok{0.71}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+          state abb        region population total      rate
+1        Hawaii  HI          West    1360301     7 0.5145920
+2          Iowa  IA North Central    3046355    21 0.6893484
+3 New Hampshire  NH     Northeast    1316470     5 0.3798036
+4  North Dakota  ND North Central     672591     4 0.5947151
+5       Vermont  VT     Northeast     625741     2 0.3196211
+\end{verbatim}
+
+\subsection{\texorpdfstring{Selecting columns with
+\texttt{select}}{Selecting columns with select}}\label{selecting-columns-with-select}
+
+The \texttt{select()} function is used to extract specific columns from
+a data frame.
+
+In the example below: - We create a new data frame containing only the
+columns state, region, and rate. - We then apply \texttt{filter()} to
+keep only the rows where the murder rate is less than or equal to 0.71.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{state\_region\_rate\_table }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(murders, state, region, rate)}
+\FunctionTok{filter}\NormalTok{(state\_region\_rate\_table, rate }\SpecialCharTok{\textless{}=} \FloatTok{0.71}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+          state        region      rate
+1        Hawaii          West 0.5145920
+2          Iowa North Central 0.6893484
+3 New Hampshire     Northeast 0.3798036
+4  North Dakota North Central 0.5947151
+5       Vermont     Northeast 0.3196211
+\end{verbatim}
+
+\subsection{Exercises}\label{exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Load the dplyr package and the murders dataset.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(dslabs)}
+\FunctionTok{data}\NormalTok{(murders)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Use the function mutate to add a column rank containing the rank, from
+  highest to lowest murder rate. Make sure you redefine murders so we
+  can keep using this variable.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{murders }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(murders, }\AttributeTok{rate =}\NormalTok{ total }\SpecialCharTok{/}\NormalTok{ population }\SpecialCharTok{*} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{5}\NormalTok{)}
+\NormalTok{murders }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(murders, }\AttributeTok{rank =} \FunctionTok{rank}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{rate))}
+\NormalTok{murders }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       state abb region population total     rate rank
+1    Alabama  AL  South    4779736   135 2.824424   23
+2     Alaska  AK   West     710231    19 2.675186   27
+3    Arizona  AZ   West    6392017   232 3.629527   10
+4   Arkansas  AR  South    2915918    93 3.189390   17
+5 California  CA   West   37253956  1257 3.374138   14
+6   Colorado  CO   West    5029196    65 1.292453   38
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{select}\NormalTok{(murders, state, population) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       state population
+1    Alabama    4779736
+2     Alaska     710231
+3    Arizona    6392017
+4   Arkansas    2915918
+5 California   37253956
+6   Colorado    5029196
+\end{verbatim}
+
+\emph{We can write population rather than murders\$population. The
+function mutate knows we are grabbing columns from murders.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Use \texttt{select} to show the state names and abbreviations in
+  murders. Do not redefine murders, just show the results.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{select}\NormalTok{(murders, state, abb)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                  state abb
+1               Alabama  AL
+2                Alaska  AK
+3               Arizona  AZ
+4              Arkansas  AR
+5            California  CA
+6              Colorado  CO
+7           Connecticut  CT
+8              Delaware  DE
+9  District of Columbia  DC
+10              Florida  FL
+11              Georgia  GA
+12               Hawaii  HI
+13                Idaho  ID
+14             Illinois  IL
+15              Indiana  IN
+16                 Iowa  IA
+17               Kansas  KS
+18             Kentucky  KY
+19            Louisiana  LA
+20                Maine  ME
+21             Maryland  MD
+22        Massachusetts  MA
+23             Michigan  MI
+24            Minnesota  MN
+25          Mississippi  MS
+26             Missouri  MO
+27              Montana  MT
+28             Nebraska  NE
+29               Nevada  NV
+30        New Hampshire  NH
+31           New Jersey  NJ
+32           New Mexico  NM
+33             New York  NY
+34       North Carolina  NC
+35         North Dakota  ND
+36                 Ohio  OH
+37             Oklahoma  OK
+38               Oregon  OR
+39         Pennsylvania  PA
+40         Rhode Island  RI
+41       South Carolina  SC
+42         South Dakota  SD
+43            Tennessee  TN
+44                Texas  TX
+45                 Utah  UT
+46              Vermont  VT
+47             Virginia  VA
+48           Washington  WA
+49        West Virginia  WV
+50            Wisconsin  WI
+51              Wyoming  WY
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Use filter to show the top 5 states with the highest murder rates.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(murders,  rank }\SpecialCharTok{\textless{}=} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                 state abb        region population total      rate rank
+1 District of Columbia  DC         South     601723    99 16.452753    1
+2            Louisiana  LA         South    4533372   351  7.742581    2
+3             Maryland  MD         South    5773552   293  5.074866    4
+4             Missouri  MO North Central    5988927   321  5.359892    3
+5       South Carolina  SC         South    4625364   207  4.475323    5
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Create a new data frame called no\_south that removes states from the
+  South region. How many states are in this category? You can use the
+  function nrow for this.
+\end{enumerate}
+
+\textbf{Note}: We can remove rows using the != operator. For example, to
+remove Florida, we would do this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{no\_florida }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(murders, state }\SpecialCharTok{!=} \StringTok{"Florida"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the new data frame without south region}
+\NormalTok{no\_south }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(murders, region }\SpecialCharTok{!=} \StringTok{"South"}\NormalTok{)}
+\CommentTok{\# Compute how many states are not in the south}
+\FunctionTok{select}\NormalTok{(no\_south, state) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 34
+\end{verbatim}
+
+\emph{There are 34 states which are not in the south}
+
+\part{ggplot2: Elegant Graphics for Data Analysis}
+
+\chapter{}\label{section}
+
+\part{Foundations of Statistical Analysis and Machine Learning}
+
+\chapter{}\label{section-1}
+
+\part{Advanced Statistical Analysis and Machine Learning}
+
+\chapter{}\label{section-2}
+
+\part{Time Series Analysis}
+
+\chapter{}\label{section-3}
+
+\part{Statistical Analysis of Massive and High Dimensional Data}
+
+\chapter{}\label{section-4}
+
+\bookmarksetup{startatroot}
+
+\chapter{Summary}\label{summary}
+
+In summary, this book has no content whatsoever.
+
+\bookmarksetup{startatroot}
+
+\chapter*{References}\label{references}
+\addcontentsline{toc}{chapter}{References}
+
+\markboth{References}{References}
+
+\phantomsection\label{refs}
+
+
+
+
+\end{document}

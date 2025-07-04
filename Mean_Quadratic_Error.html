@@ -11,7 +11,7 @@
 
 
 
-<title>Tidyverse.knit</title>
+<title>Mean_Quadratic_Error.knit</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -352,279 +352,66 @@ display: none;
 </div>
 
 
-<div id="the-tidyverse" class="section level1">
-<h1>The Tidyverse</h1>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 4.4.3</code></pre>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.4.3</code></pre>
-<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.4.3</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.4.3</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.4.3</code></pre>
-<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.4.3</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.4.3</code></pre>
-<pre><code>## Warning: package &#39;forcats&#39; was built under R version 4.4.3</code></pre>
-<pre><code>## Warning: package &#39;lubridate&#39; was built under R version 4.4.3</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.4     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(dslabs)</code></pre>
-<pre><code>## Warning: package &#39;dslabs&#39; was built under R version 4.4.3</code></pre>
-<pre class="r"><code>data(murders)</code></pre>
+<div id="mean-quadratic-error" class="section level1">
+<h1>Mean Quadratic Error</h1>
+<p>The MQE is a measure of how close the estimator is to the true
+parameter value.</p>
+<p>To compare estimator we can compute the mean quadratic Eroor, denoted
+by MQE : <span class="math display">\[
+\Large\text{MQE}(\hat{\theta}_{n}) =
+\mathrm{Var}\left(\hat{\theta}_n\right) +
+\left(b_{\theta}\left(\hat{\theta}_n\right)\right)^2\]</span></p>
+<p>where <span class="math inline">\(\beta_{\theta}(\hat{\theta}_{n}) =
+\mathbb{E}\left[\hat{\theta}_n\right] - \large\theta\)</span> is the
+bias of the estimator <span class="math inline">\(\hat{\theta}_n\)</span>.</p>
+<p>We say that <span class="math inline">\(\large\hat{\theta}_{n,1}\)</span> is better than
+<span class="math inline">\(\large\hat{\theta}_{n,2}\)</span> if : <span class="math display">\[\Large\forall n, \;
+\operatorname{MQE}(\hat{\theta}_{n,1})\le
+\operatorname{MQE}(\hat{\theta}_{n,2})\]</span></p>
 </div>
-<div id="manipulating-data-frames-with-dplyr-and-purrr" class="section level1">
-<h1>Manipulating Data frames with dplyr and purrr</h1>
-<div id="tidy-data" class="section level2">
-<h2>Tidy Data</h2>
-<p>We say that a data table is in <em>tidy</em> format if each row
-represents one observation and columns represent the different variables
-available for each of these observations. The murders dataset is an
-example of a tidy data frame.</p>
-<pre class="r"><code>head(murders)</code></pre>
-<pre><code>##        state abb region population total
-## 1    Alabama  AL  South    4779736   135
-## 2     Alaska  AK   West     710231    19
-## 3    Arizona  AZ   West    6392017   232
-## 4   Arkansas  AR  South    2915918    93
-## 5 California  CA   West   37253956  1257
-## 6   Colorado  CO   West    5029196    65</code></pre>
-<p>Each row represents a state with each of the five columns providing a
-different variable related to these states: name, abbreviation, region,
-population, and total murders.</p>
+<div id="example" class="section level1">
+<h1>Example :</h1>
+<p>Let concider :<br />
+- <span class="math inline">\(\hat{\theta}_{n,1} =
+\operatorname{max}(X_k)\)</span> and <span class="math inline">\(\hat{\theta}_{n,4} = \frac{n+1}{n} \cdot
+\hat{\theta}_{n,1}\)</span></p>
+<p>We have :</p>
+<ul>
+<li><p>MQE<span class="math inline">\((\hat{\theta}_{n,1}) =
+\dfrac{2\theta^2}{(n+1)(n+2)}\)</span></p></li>
+<li><p>MQE<span class="math inline">\((\hat{\theta}_{n,4}) =
+\dfrac{\theta^2}{n(n+1)}\)</span></p></li>
+</ul>
+<p><span class="math inline">\(\forall n \geq 2, \;
+MQE(\hat{\theta}_{n,4}) &lt; MQE(\hat{\theta}_{n,1})\)</span></p>
+<p>Thus, we can conclude that <span class="math inline">\(\hat{\theta}_{n,4}\)</span> is better than <span class="math inline">\(\hat{\theta}_{n,1}\)</span></p>
+<p><strong>Remark</strong>: <span class="math inline">\(\hat{\theta}_{n,4}\)</span> is the best among the
+two estimators we have considered. Since <span class="math inline">\(\hat{\theta}_{n,4}\)</span> is unbiased, we know
+that for any unbiased estimator <span class="math inline">\(\hat{\theta}_n\)</span>, we have: <span class="math display">\[ \Large\text{Cramer Rao-Bound } \leq
+\mathrm{Var}\left(\hat{\theta}_n\right)\]</span></p>
+<p>If <span class="math inline">\(\mathrm{Var}\left(\hat{\theta}_{n,4}\right)\)</span>
+equals the Cramer-Rao bound, then the estimator cannot be improved;
+otherwise, improvement is possible.</p>
 </div>
-<div id="manipulating-data-frames" class="section level2">
-<h2>Manipulating Data Frames</h2>
-<blockquote>
-<p>“The dplyr package from the tidyverse introduces functions that
-perform some of the most common operations when working with data frames
-and uses names for these functions that are relatively easy to remember.
-For instance, to change the data table by adding a new column, we use
-mutate. To filter the data table to a subset of rows, we use filter.
-Finally, to subset the data by selecting specific columns, we use
-select.”</p>
-</blockquote>
-<div id="the-mutate-function" class="section level3">
-<h3>The <code>mutate</code> function</h3>
-<p>The <code>mutate</code> function is used to add new columns to a data
-frame or modify existing ones.</p>
-<pre class="r"><code># Add a new column &#39;rate&#39; to the murders data frame
-murders  &lt;- mutate(murders, rate = total / population * 100000)</code></pre>
-<p><strong>Note:</strong> to compute the rate, we used
-<code>total</code> and <code>population</code> columns, which are not
-defined in the global environment. The <code>mutate</code> function
-allows us to use the names of the columns directly.</p>
-<blockquote>
-<p>“This is one of dplyr’s main features. Functions in this package,
-such as mutate, know to look for variables in th data frame provided in
-the first argument.<br />
-In the call to mutate above, <code>total</code> will have the values in
-<code>murders$total</code>. This approach makes the code much more
-readable and concise.”</p>
-</blockquote>
-<pre class="r"><code>head(murders)</code></pre>
-<pre><code>##        state abb region population total     rate
-## 1    Alabama  AL  South    4779736   135 2.824424
-## 2     Alaska  AK   West     710231    19 2.675186
-## 3    Arizona  AZ   West    6392017   232 3.629527
-## 4   Arkansas  AR  South    2915918    93 3.189390
-## 5 California  CA   West   37253956  1257 3.374138
-## 6   Colorado  CO   West    5029196    65 1.292453</code></pre>
-<p><strong>Note</strong>: the <code>mutate</code> function does not
-change the original data frame.</p>
-<blockquote>
-<p>“Although we have overwritten the original <strong>murders</strong>
-object, this does not change the object that is loaded with
-<code>data(murders)</code>.<br />
-If we load the murders data again, the original will overwritte our
-mutated version.”</p>
-</blockquote>
-</div>
-<div id="subsetting-with-filter" class="section level3">
-<h3>Subsetting with <code>filter</code></h3>
-<p>The <code>filter</code> function is used to subset rows based on
-logical conditions.</p>
-<p><em>Filter the murders data frame to include only the entries for
-which the murder rate is lower than 0.71.</em></p>
-<pre class="r"><code># Syntax : data, conditional statement.
-filter(murders, rate &lt;= 0.71)</code></pre>
-<pre><code>##           state abb        region population total      rate
-## 1        Hawaii  HI          West    1360301     7 0.5145920
-## 2          Iowa  IA North Central    3046355    21 0.6893484
-## 3 New Hampshire  NH     Northeast    1316470     5 0.3798036
-## 4  North Dakota  ND North Central     672591     4 0.5947151
-## 5       Vermont  VT     Northeast     625741     2 0.3196211</code></pre>
-</div>
-<div id="selecting-columns-with-select" class="section level3">
-<h3>Selecting columns with <code>select</code></h3>
-<p>The <code>select()</code> function is used to extract specific
-columns from a data frame.</p>
-<p>In the example below: - We create a new data frame containing only
-the columns state, region, and rate. - We then apply
-<code>filter()</code> to keep only the rows where the murder rate is
-less than or equal to 0.71.</p>
-<pre class="r"><code>state_region_rate_table &lt;- select(murders, state, region, rate)
-filter(state_region_rate_table, rate &lt;= 0.71)</code></pre>
-<pre><code>##           state        region      rate
-## 1        Hawaii          West 0.5145920
-## 2          Iowa North Central 0.6893484
-## 3 New Hampshire     Northeast 0.3798036
-## 4  North Dakota North Central 0.5947151
-## 5       Vermont     Northeast 0.3196211</code></pre>
-</div>
-<div id="exercises" class="section level3">
-<h3>Exercises</h3>
-<ol style="list-style-type: decimal">
-<li>Load the dplyr package and the murders dataset.</li>
-</ol>
-<pre class="r"><code>library(dplyr)
-library(dslabs)
-data(murders)</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Use the function mutate to add a column rank containing the
-rank,from highest to lowest murder rate.<br />
-Make sure you redefine murders so we can keep using this variable.</li>
-</ol>
-<pre class="r"><code>murders &lt;- mutate(murders, rate = total / population * 10^5)
-murders &lt;- mutate(murders, rank = rank(-rate))
-murders %&gt;% head()</code></pre>
-<pre><code>##        state abb region population total     rate rank
-## 1    Alabama  AL  South    4779736   135 2.824424   23
-## 2     Alaska  AK   West     710231    19 2.675186   27
-## 3    Arizona  AZ   West    6392017   232 3.629527   10
-## 4   Arkansas  AR  South    2915918    93 3.189390   17
-## 5 California  CA   West   37253956  1257 3.374138   14
-## 6   Colorado  CO   West    5029196    65 1.292453   38</code></pre>
-<pre class="r"><code>select(murders, state, population) %&gt;% head()</code></pre>
-<pre><code>##        state population
-## 1    Alabama    4779736
-## 2     Alaska     710231
-## 3    Arizona    6392017
-## 4   Arkansas    2915918
-## 5 California   37253956
-## 6   Colorado    5029196</code></pre>
-<p><em>We can write population rather than murders$population. The
-function mutate knows we are grabbing columns from murders.</em></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Use <code>Select</code> to show the state names and abbreviations in
-murders. Do not redefine murders, just show the results.</li>
-</ol>
-<pre class="r"><code>select(murders, state, abb)</code></pre>
-<pre><code>##                   state abb
-## 1               Alabama  AL
-## 2                Alaska  AK
-## 3               Arizona  AZ
-## 4              Arkansas  AR
-## 5            California  CA
-## 6              Colorado  CO
-## 7           Connecticut  CT
-## 8              Delaware  DE
-## 9  District of Columbia  DC
-## 10              Florida  FL
-## 11              Georgia  GA
-## 12               Hawaii  HI
-## 13                Idaho  ID
-## 14             Illinois  IL
-## 15              Indiana  IN
-## 16                 Iowa  IA
-## 17               Kansas  KS
-## 18             Kentucky  KY
-## 19            Louisiana  LA
-## 20                Maine  ME
-## 21             Maryland  MD
-## 22        Massachusetts  MA
-## 23             Michigan  MI
-## 24            Minnesota  MN
-## 25          Mississippi  MS
-## 26             Missouri  MO
-## 27              Montana  MT
-## 28             Nebraska  NE
-## 29               Nevada  NV
-## 30        New Hampshire  NH
-## 31           New Jersey  NJ
-## 32           New Mexico  NM
-## 33             New York  NY
-## 34       North Carolina  NC
-## 35         North Dakota  ND
-## 36                 Ohio  OH
-## 37             Oklahoma  OK
-## 38               Oregon  OR
-## 39         Pennsylvania  PA
-## 40         Rhode Island  RI
-## 41       South Carolina  SC
-## 42         South Dakota  SD
-## 43            Tennessee  TN
-## 44                Texas  TX
-## 45                 Utah  UT
-## 46              Vermont  VT
-## 47             Virginia  VA
-## 48           Washington  WA
-## 49        West Virginia  WV
-## 50            Wisconsin  WI
-## 51              Wyoming  WY</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Use filter to show the top 5 states with the highest murder
-rates.</li>
-</ol>
-<pre class="r"><code>filter(murders,  rank &lt;= 5)</code></pre>
-<pre><code>##                  state abb        region population total      rate rank
-## 1 District of Columbia  DC         South     601723    99 16.452753    1
-## 2            Louisiana  LA         South    4533372   351  7.742581    2
-## 3             Maryland  MD         South    5773552   293  5.074866    4
-## 4             Missouri  MO North Central    5988927   321  5.359892    3
-## 5       South Carolina  SC         South    4625364   207  4.475323    5</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Create a new data frame called no_south that removes states from the
-South region. How many states are in this category? You can use the
-function nrow for this.</li>
-</ol>
-<p><strong>Note</strong>: We can remove rows using the != operator. For
-example, to remove Florida, we would do this:</p>
-<pre class="r"><code>no_florida &lt;- filter(murders, state != &quot;Florida&quot;)</code></pre>
-<pre class="r"><code># Create the new data frame without south region
-no_south &lt;- filter(murders, region != &quot;South&quot;)
-# Compute how many states are not in the south
-select(no_south, state) %&gt;% nrow()</code></pre>
-<pre><code>## [1] 34</code></pre>
-<p><em>There are 34 states which are not in the south</em></p>
-</div>
-<div id="the-pipe" class="section level3">
-<h3>The Pipe <code>%&gt;%</code></h3>
-<blockquote>
-<p>“With dplyr we can perform a series of operations, for example select
-and then filter, by sending the results of one function to another using
-what is called the pipe operator: %&gt;%.”</p>
-</blockquote>
-<p><span class="math display">\[ \Large \text{original data}
-\Longrightarrow \text{ select } \Longrightarrow \text{ fitler
-}\]</span></p>
-<p>The pipe sends the result of the left side of the pipe to be the
-first argument of the function on the right side of the pipe.</p>
-<pre class="r"><code>16 %&gt;% sqrt()</code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre class="r"><code>16 %&gt;% sqrt() %&gt;% log2()</code></pre>
-<pre><code>## [1] 2</code></pre>
-<blockquote>
-<p>“Therefore, when using the pipe with data frames and dplyr, we no
-longer need to specify the required first argument since the dplyr
-functions we have described all take the data as the first argument. In
-the code we wrote:”</p>
-</blockquote>
-<pre class="r"><code>murders  &lt;- mutate(murders, rate = total / population * 100000)
-murders %&gt;% select(state, region, rate) %&gt;% filter(rate &lt;= 0.71)</code></pre>
-<pre><code>##           state        region      rate
-## 1        Hawaii          West 0.5145920
-## 2          Iowa North Central 0.6893484
-## 3 New Hampshire     Northeast 0.3798036
-## 4  North Dakota North Central 0.5947151
-## 5       Vermont     Northeast 0.3196211</code></pre>
-</div>
-</div>
+<div id="convergence-illustration-in-r" class="section level1">
+<h1>Convergence Illustration in R</h1>
+<pre class="r"><code>theta &lt;- 2 # assumed true value of the parameter
+# MQE or Variance of the estimators
+mqe1 &lt;- 2 * theta^2 / ((2:50 + 1) * (2:50 + 2))
+mqe4 &lt;- theta^2 / (2:50 * (2:50 + 1))
+plot(mqe4, type = &quot;l&quot;, col = &quot;red&quot;)
+lines(mqe1, col = &quot;blue&quot;)
+legend(&quot;topright&quot;,
+       legend = c(&quot;Estimator 4 (unbiased)&quot;, &quot;Estimator 1 (max)&quot;),
+       col = c(&quot;red&quot;, &quot;blue&quot;), lty = 1)</code></pre>
+<p><img role="img" src="data:image/png;base64,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" width="672" /></p>
+<p>This plot shows that the unbiased estimator <span class="math inline">\(\hat{\theta}{n,4}\)</span> consistently
+outperforms the maximum estimator <span class="math inline">\(\hat{\theta}{n,1}\)</span> in terms of MQE, even
+for relatively small sample sizes (e.g., <span class="math inline">\(n =
+10\)</span>). However, as the sample size increases, the MQEs of both
+estimators get closer, meaning the performance gap narrows — although
+<span class="math inline">\(\hat{\theta}_{n,4}\)</span> remains superior
+for all <span class="math inline">\(n\)</span>.</p>
 </div>
 
 
