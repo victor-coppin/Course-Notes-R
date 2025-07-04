@@ -20,7 +20,8 @@ book:
      
     - part: "Foundations of Statistical Analysis and Machine Learning"
       chapters:
-        - FSML-introduction.qmd    
+        - FSML-introduction.qmd
+        - FSML-MQE.qmd    
 
 
     - part: "Advanced Statistical Analysis and Machine Learning"

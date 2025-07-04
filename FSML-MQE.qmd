@@ -1,0 +1,49 @@
+# Mean Quadratic Error 
+
+The MQE is a measure of how close the estimator is to the true parameter value.
+
+To compare estimator we can compute the mean quadratic Eroor, denoted by MQE : 
+$$ \Large\text{MQE}(\hat{\theta}_{n}) = \mathrm{Var}\left(\hat{\theta}_n\right) + \left(b_{\theta}\left(\hat{\theta}_n\right)\right)^2$$
+
+where $\beta_{\theta}(\hat{\theta}_{n}) = \mathbb{E}\left[\hat{\theta}_n\right] - \large\theta$ is the bias of the estimator $\hat{\theta}_n$.
+
+We say that $\large\hat{\theta}_{n,1}$ is better than $\large\hat{\theta}_{n,2}$ if : 
+$$\Large\forall n, \; \operatorname{MQE}(\hat{\theta}_{n,1})\le \operatorname{MQE}(\hat{\theta}_{n,2})$$
+
+# Example : 
+Let concider :  
+ - $\hat{\theta}_{n,1} = \operatorname{max}(X_k)$  and $\hat{\theta}_{n,4} = \frac{n+1}{n} \cdot \hat{\theta}_{n,1}$
+
+We have : 
+
+ - MQE$(\hat{\theta}_{n,1}) = \dfrac{2\theta^2}{(n+1)(n+2)}$ 
+   
+ - MQE$(\hat{\theta}_{n,4}) = \dfrac{\theta^2}{n(n+1)}$ 
+
+
+$\forall n \geq 2, \; MQE(\hat{\theta}_{n,4}) < MQE(\hat{\theta}_{n,1})$
+
+Thus, we can conclude that $\hat{\theta}_{n,4}$ is better than $\hat{\theta}_{n,1}$ 
+
+**Remark**: 
+$\hat{\theta}_{n,4}$ is the best among the two estimators we have considered.
+Since $\hat{\theta}_{n,4}$ is unbiased, we know that for any unbiased estimator $\hat{\theta}_n$, we have:
+$$ \Large\text{Cramer Rao-Bound } \leq \mathrm{Var}\left(\hat{\theta}_n\right)$$ 
+
+If $\mathrm{Var}\left(\hat{\theta}_{n,4}\right)$ equals the Cramer-Rao bound, then the estimator cannot be improved; otherwise, improvement is possible.
+
+# Convergence Illustration in R
+
+```{r}
+theta <- 2 # assumed true value of the parameter
+# MQE or Variance of the estimators
+mqe1 <- 2 * theta^2 / ((2:50 + 1) * (2:50 + 2))
+mqe4 <- theta^2 / (2:50 * (2:50 + 1))
+plot(mqe4, type = "l", col = "red")
+lines(mqe1, col = "blue")
+legend("topright",
+       legend = c("Estimator 4 (unbiased)", "Estimator 1 (max)"),
+       col = c("red", "blue"), lty = 1)
+```
+
+This plot shows that the unbiased estimator $\hat{\theta}{n,4}$ consistently outperforms the maximum estimator $\hat{\theta}{n,1}$ in terms of MQE, even for relatively small sample sizes (e.g., $n = 10$). However, as the sample size increases, the MQEs of both estimators get closer, meaning the performance gap narrows — although $\hat{\theta}_{n,4}$ remains superior for all $n$.

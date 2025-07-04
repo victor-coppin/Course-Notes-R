@@ -1,0 +1,161 @@
+# The Tidyverse
+
+```{r}
+library(tidyverse)
+library(dslabs)
+data(murders)
+```
+
+# Manipulating Data frames with dplyr and purrr
+
+## Tidy Data
+
+We say that a data table is in *tidy* format if each row represents one observation and columns
+represent the different variables available for each of these observations.
+The murders dataset is an example of a tidy data frame.
+
+```{r}
+head(murders)
+```
+
+Each row represents a state with each of the five columns providing a different variable related
+to these states: name, abbreviation, region, population, and total murders.
+
+## Manipulating Data Frames
+
+>"The dplyr package from the tidyverse introduces functions that perform some of the most
+common operations when working with data frames and uses names for these functions that
+are relatively easy to remember. For instance, to change the data table by adding a new
+column, we use mutate. To filter the data table to a subset of rows, we use filter. Finally,
+to subset the data by selecting specific columns, we use select."
+
+
+### The `mutate` function
+The `mutate` function is used to add new columns to a data frame or modify existing ones.
+
+```{r}
+# Add a new column 'rate' to the murders data frame
+murders  <- mutate(murders, rate = total / population * 100000)
+```
+
+**Note:** to compute the rate, we used `total` and `population` columns, which are not defined in the
+global environment. The `mutate` function allows us to use the names of the columns directly.
+
+>"This is one of dplyr's main features. Functions in this package, such as mutate, know to look for variables in th data frame provided in the first argument.  
+In the call to mutate above, `total` will have the values in `murders$total`. This approach makes the code much more readable and concise."
+
+
+```{r}
+head(murders)
+```
+
+**Note**: the `mutate` function does not change the original data frame.  
+
+>"Although we have overwritten the original **murders** object, this does not change the object that is loaded with `data(murders)`.  
+If we load the murders data again, the original will overwritte our mutated version."
+
+### Subsetting with `filter`
+The `filter` function is used to subset rows based on logical conditions.
+
+*Filter the murders data frame to include only the entries for which the murder rate is lower than 0.71.*
+
+```{r}
+# Syntax : data, conditional statement.
+filter(murders, rate <= 0.71)
+```
+
+### Selecting columns with `select`
+
+The `select()` function is used to extract specific columns from a data frame.
+
+In the example below:
+- We create a new data frame containing only the columns state, region, and rate.
+- We then apply `filter()` to keep only the rows where the murder rate is less than or equal to 0.71.
+
+```{r}
+state_region_rate_table <- select(murders, state, region, rate)
+filter(state_region_rate_table, rate <= 0.71)
+```
+
+### Exercises
+
+1. Load the dplyr package and the murders dataset.
+```{r}
+library(dplyr)
+library(dslabs)
+data(murders)
+```
+
+2. Use the function mutate to add a column rank containing the rank,from highest to lowest murder rate.  
+Make sure you redefine murders so we can keep using this variable.
+```{r}
+murders <- mutate(murders, rate = total / population * 10^5)
+murders <- mutate(murders, rank = rank(-rate))
+murders %>% head()
+select(murders, state, population) %>% head()
+```
+*We can write population rather than murders$population. The function mutate knows we are grabbing columns from murders.*
+
+
+3. Use `Select` to show the state names and abbreviations in murders. Do not redefine murders, just show the results.
+
+```{r}
+select(murders, state, abb)
+```
+
+4. Use filter to show the top 5 states with the highest murder rates.
+
+```{r}
+filter(murders,  rank <= 5)
+```
+
+5. Create a new data frame called no_south that removes states from the South region. How
+many states are in this category? You can use the function nrow for this.
+
+**Note**: We can remove rows using the != operator. For example, to remove Florida, we would do
+this:
+```{r}
+no_florida <- filter(murders, state != "Florida")
+```
+
+```{r}
+# Create the new data frame without south region
+no_south <- filter(murders, region != "South")
+# Compute how many states are not in the south
+select(no_south, state) %>% nrow()
+```
+
+*There are 34 states which are not in the south*
+
+### The Pipe `%>%`
+
+>"With dplyr we can perform a series of operations, for example select and then filter, 
+by sending the results of one function to another using what is called the pipe operator: %>%."
+
+$$ \Large \text{original data} \Longrightarrow \text{ select } \Longrightarrow \text{ fitler }$$ 
+
+The pipe sends the result of the left side of the pipe to be the first argument of the function on the right side of the pipe.
+
+```{r}
+16 %>% sqrt()
+16 %>% sqrt() %>% log2()
+```
+
+>"Therefore, when using the pipe with data frames and dplyr, we no longer need to specify 
+the required first argument since the dplyr functions we have described all take the data
+as the first argument. In the code we wrote:"
+
+```{r}
+murders  <- mutate(murders, rate = total / population * 100000)
+murders %>% select(state, region, rate) %>% filter(rate <= 0.71)
+```
+
+The pipe allows to perform operations sequentially without having to define intermediate variables : the following codes are similar : 
+
+```{r}
+data(murders)
+murders <- mutate(murders, rate = total / population * 100000, rank = rank(-rate))  # nolint
+my_state <- filter(murders, region %in% c("Northeast", "West") & rate < 1)
+select
+```
+
