@@ -95,5 +95,49 @@
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Summary</span>"
     ]
+  },
+  {
+    "objectID": "Construction_of_estimators.html",
+    "href": "Construction_of_estimators.html",
+    "title": "6  Construction of Estimators",
+    "section": "",
+    "text": "There are two main approaches to constructing estimators in statistics:\n\nThe Method of Moments\nMaximum Likelihood Estimation\n\nThe method of moments is often the most familiar and straightforward technique. It is especially useful when you need to estimate a single parameter associated with a known distribution. The method involves equating sample moments (such as the mean or variance) to their theoretical counterparts and solving for the unknown parameters. Its main advantages are simplicity and broad applicability, making it an accessible introduction to parameter estimation. However, it can be less efficient than other methods and may not always use all the information available in the data.\nMaximum likelihood estimation (MLE) is a more powerful and general approach. It involves finding the parameter values that maximize the likelihood function, i.e., the values that make the observed data most probable under the assumed model. While MLE often requires solving an optimization problem and can be more computationally intensive, it is widely used in practice due to its desirable statistical properties, such as efficiency and consistency, especially as sample size increases. MLE is particularly important in more complex models, including those with multiple parameters.\nWhen we move to linear models, we will encounter the least squares method, which is closely related to maximum likelihood. In fact, for linear regression with normally distributed errors, the least squares estimator is also the maximum likelihood estimator. This connection highlights the central role of MLE in statistical modeling.\n\n\n\n\n\n\nProfessor’s insight\n\n\n\n“The method of moments is the most useful in practice because it is the one that almost everyone knows. Maximum likelihood, while more complex due to its optimization requirements, becomes especially valuable when we deal with models involving several parameters, such as linear models. In those cases, we will see that the least squares method and maximum likelihood are closely related and sometimes even equivalent.”",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Construction of Estimators</span>"
+    ]
+  },
+  {
+    "objectID": "Methods_of_Moments.html",
+    "href": "Methods_of_Moments.html",
+    "title": "7  Method of moments",
+    "section": "",
+    "text": "7.1 Raw moments:\nLet us consider \\(X_1, \\cdots, X_n\\)  i.i.d random variables whose density depends on an unknown parameter. Consider \\(\\large\\theta\\) a function of this unknown parameter.\nRemark: We specify “a function of this unknown parameter” because, in practice, we may not always be interested in estimating the parameter itself. Instead, we might be interested in estimating a function of it. For example, if \\(X \\sim E(\\lambda)\\), we might be interested in estimating \\(\\theta = 1/\\lambda\\)\nIn the following methods, the \\(k\\) determines the moment we are using:\nLet \\(\\large k\\) an integer \\(\\ge 1\\) such that there exists a \\(\\large g\\) function with : \\[\\large\\mathbb{E}\\left[X_{1}^k\\right] = g(\\theta)\\]\nNote: the moment of order \\(\\large k\\) is a function of the unknown parameter \\(\\large\\theta\\)\nThen, an estimator \\(\\large\\hat{\\theta}_n\\) for \\(\\large\\theta\\) is solution of : \\[\\Large g(\\hat{\\theta}_n) = \\frac{1}{n}\\sum_{i=1}^n X_{i}^{k}\\]",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Method of moments</span>"
+    ]
+  },
+  {
+    "objectID": "Methods_of_Moments.html#raw-moments",
+    "href": "Methods_of_Moments.html#raw-moments",
+    "title": "7  Method of moments",
+    "section": "",
+    "text": "“In constructing estimators using the method of moments, we seek moments that depend on the unknown parameter we wish to estimate.”\n\n\n\n7.1.1 Example\nLet us consider \\(X_1, \\cdots, X_n\\) i.i.d random variables \\(\\sim\\mathcal{U}(\\left[0;\\theta\\right])\\)\n\n“we seek moments that depend on the unknown parameter”:\n\nWe know that since the random variables follow a uniform law defined on \\(\\left[0;\\theta\\right]\\), the expectation is \\(\\dfrac{\\theta}{2}\\) , so we know the first moment \\(k = 1\\).\nTherefore we could apply the method of moments :\n\\[\\mathbb{E}\\left[X_{1}\\right] = \\dfrac{\\theta}{2}= g(\\theta)\\]\nWith $ g(x) = $ the function of the unknown parameter.\nHere, we use the notation \\(\\hat{\\theta}_{n,1}\\) to indicate that this estimator is based on the first moment (\\(k=1\\)).\n\\[\ng(\\hat{\\theta}_n) = \\frac{1}{n}\\sum_{i=1}^n X_{i}^{k}\n\\]\n\\[\ng(\\hat{\\theta}_{n,1}) =  \\dfrac{\\hat{\\theta}_{n,1}}{2} = \\frac{1}{n}\\sum_{i=1}^n X_{i} = \\overline{X}_n\n\\]\n\\[\n\\boxed{\\hat{\\theta}_{n,1}=2\\cdot \\overline{X}_n}\n\\]",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Method of moments</span>"
+    ]
+  },
+  {
+    "objectID": "Methods_of_Moments.html#centered-moment",
+    "href": "Methods_of_Moments.html#centered-moment",
+    "title": "7  Method of moments",
+    "section": "7.2 Centered Moment",
+    "text": "7.2 Centered Moment\nLet \\(\\large k\\) an integer \\(\\ge 2\\) such that there exists a \\(\\large h\\) function with : \\[\\large\\mathbb{E}\\left[(X_1 - \\mathbb{E}\\left[X_{1}\\right])^k\\right] = h(\\theta)\\] Then, an estimator \\(\\large\\hat{\\theta}_n\\) for \\(\\large\\theta\\) is solution of :\n\\[\\large h(\\hat{\\theta}_n) = \\frac{1}{n}\\sum_{i=1}^n (X_{i}-\\overline{X}_n)^{k}\\] with \\[\\large\\overline{X}_n = \\frac{1}{n}\\sum_{i=1}^n X_{i}\\]\nNote: “The use of centered moments in method of moments is rare in practice because centered moments depend on the expectation, which is itself a function of the parameter and must also be estimated.”\nWarning: “These methods allow the construction of estimators for \\(\\theta\\). These estimators are not guaranteed to be unbiased, but they are consistent under general conditions.”",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Method of moments</span>"
+    ]
   }
 ]

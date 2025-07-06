@@ -1,0 +1,84 @@
+# Method of moments
+
+> "The method of moments is fundamentally a consequence of the law of large numbers. While the law of large numbers is usually stated for the sample mean of random variables $X_1,\cdots,X_n$, t can also be applied to functions of these variables, such as their powers  $X_{1}^k$.
+This means the law of large numbers can be generalized not just for the $X_i$ themselves, but also for functions of $X_i$ including their moments. This generalization forms the basis of the method of moments.
+
+Let us consider $X_1, \cdots, X_n$  _i.i.d_ random variables whose density depends on an unknown parameter. 
+Consider $\large\theta$ a function of this unknown parameter.
+
+**Remark**:
+We specify "a function of this unknown parameter" because, in practice, we may not always be interested in estimating the parameter itself. Instead, we might be interested in estimating a function of it. For example, if $X \sim E(\lambda)$, we might be interested in estimating $\theta = 1/\lambda$
+
+In the following methods, the $k$ determines the moment we are using:
+
+- $k=1$: Use the first moment, *i.e.*, the mean $\mathbb{E}[X]$.
+- $k=2$: Use the second moment, $\mathbb{E}[X^2]$.
+- $k=3$: Use the third moment, $\mathbb{E}[X^3]$; the third **central** moment, $\mathbb{E}[(X-\mu)^3]$, is used to compute skewness.
+$\cdots$
+
+## Raw moments:  
+Let $\large k$ an integer $\ge 1$ such that there exists a $\large g$ function with :
+$$\large\mathbb{E}\left[X_{1}^k\right] = g(\theta)$$
+
+**Note:** the moment of order $\large k$ is a function of the unknown parameter $\large\theta$
+
+> "In constructing estimators using the method of moments, we seek moments that depend on the unknown parameter we wish to estimate."
+
+Then, an estimator $\large\hat{\theta}_n$ for $\large\theta$ is solution of : 
+$$\Large g(\hat{\theta}_n) = \frac{1}{n}\sum_{i=1}^n X_{i}^{k}$$
+
+### Example 
+
+Let us consider $X_1, \cdots, X_n$ *i.i.d* random variables $\sim\mathcal{U}(\left[0;\theta\right])$
+
+>"*we seek moments that depend on the unknown parameter*": 
+
+We know that since the random variables follow a uniform law defined on $\left[0;\theta\right]$, the expectation is $\dfrac{\theta}{2}$ , so we know the first moment $k = 1$.
+
+Therefore we could apply the method of moments : 
+
+$$\mathbb{E}\left[X_{1}\right] = \dfrac{\theta}{2}= g(\theta)$$
+
+With $g(x) = \dfrac{x}{2}$ the function of the unknown parameter.
+
+Here, we use the notation $\hat{\theta}_{n,1}$ to indicate that this estimator is based on the first moment ($k=1$).
+
+$$
+ g(\hat{\theta}_n) = \frac{1}{n}\sum_{i=1}^n X_{i}^{k}
+$$
+
+$$
+ g(\hat{\theta}_{n,1}) =  \dfrac{\hat{\theta}_{n,1}}{2} = \frac{1}{n}\sum_{i=1}^n X_{i} = \overline{X}_n
+$$
+
+$$
+\boxed{\hat{\theta}_{n,1}=2\cdot \overline{X}_n}
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Centered Moment 
+Let $\large k$ an integer $\ge 2$ such that there exists a $\large h$ function with :
+$$\large\mathbb{E}\left[(X_1 - \mathbb{E}\left[X_{1}\right])^k\right] = h(\theta)$$
+Then, an estimator $\large\hat{\theta}_n$ for $\large\theta$ is solution of : 
+
+$$\large h(\hat{\theta}_n) = \frac{1}{n}\sum_{i=1}^n (X_{i}-\overline{X}_n)^{k}$$
+with $$\large\overline{X}_n = \frac{1}{n}\sum_{i=1}^n X_{i}$$
+
+
+**Note**: 
+“The use of centered moments in method of moments is rare in practice because **centered moments depend on the expectation**, which is itself a function of the parameter and must also be estimated.”
+
+**Warning:** 
+"These methods allow the construction of estimators for $\theta$. **These estimators are not guaranteed to be unbiased**, but they are consistent under general conditions."

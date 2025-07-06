@@ -22,7 +22,10 @@ book:
       chapters:
         - FSML-introduction.qmd
         - FSML-MQE.qmd
-        - Inverse_Transform_Sampling.qmd    
+        - Inverse_Transform_Sampling.qmd
+        - Construction_of_estimators.qmd
+        - Methods_of_Moments.qmd
+        - Maximum_Likelihood_Estimation.qmd
 
 
     - part: "Advanced Statistical Analysis and Machine Learning"

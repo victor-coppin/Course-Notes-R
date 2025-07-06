@@ -1,0 +1,17 @@
+
+# Construction of Estimators
+There are two main approaches to constructing estimators in statistics:
+
+- The Method of Moments
+
+- Maximum Likelihood Estimation
+
+**The method of moments** is a commonly used and straightforward technique in statistics. It is especially useful when you need to estimate a single parameter associated with a known distribution. The method involves equating sample moments (such as the mean or variance) to their theoretical counterparts and solving for the unknown parameters. Its main advantages are simplicity and broad applicability, making it an accessible introduction to parameter estimation. However, it can be less efficient than other methods and may not always use all the information available in the data.
+
+**Maximum likelihood estimation** (MLE) is a more powerful and general approach. It involves finding the parameter values that maximize the likelihood function, i.e., the values that make the observed data most probable under the assumed model. While MLE often requires solving an optimization problem and can be more computationally intensive, it is widely used in practice due to its desirable statistical properties, such as efficiency and consistency, especially as sample size increases. MLE is particularly important in more complex models, including those with multiple parameters.
+
+When we move to linear models, we will encounter the least squares method, which is closely related to maximum likelihood. In fact, for linear regression with normally distributed errors, the least squares estimator is also the maximum likelihood estimator. This connection highlights the central role of MLE in statistical modeling.
+
+::: {.callout-note title="Professor’s insight"}
+“The method of moments is the most useful in practice because it is the one that almost everyone knows. Maximum likelihood, while more complex due to its optimization requirements, becomes especially valuable when we deal with models involving several parameters, such as linear models. In those cases, we will see that the least squares method and maximum likelihood are closely related and sometimes even equivalent.”
+:::

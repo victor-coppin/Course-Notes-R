@@ -34,5 +34,14 @@
   },
   "Inverse_Transform_Sampling.qmd": {
     "Inverse_Transform_Sampling.html": "8fe3e2d3"
+  },
+  "Construction_of_estimators.qmd": {
+    "Construction_of_estimators.html": "b6d61104"
+  },
+  "Methods_of_Moments.qmd": {
+    "Methods_of_Moments.html": "b18be27c"
+  },
+  "Maximum_Likelihood_Estimation.qmd": {
+    "Maximum_Likelihood_Estimation.html": "540d27c8"
   }
 }
