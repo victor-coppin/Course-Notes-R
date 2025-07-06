@@ -21,7 +21,8 @@ book:
     - part: "Foundations of Statistical Analysis and Machine Learning"
       chapters:
         - FSML-introduction.qmd
-        - FSML-MQE.qmd    
+        - FSML-MQE.qmd
+        - Inverse_Transform_Sampling.qmd    
 
 
     - part: "Advanced Statistical Analysis and Machine Learning"

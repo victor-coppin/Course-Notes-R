@@ -28,5 +28,11 @@
   },
   "massive-data-introduction.qmd": {
     "massive-data-introduction.html": "5cb95167"
+  },
+  "FSML-MQE.qmd": {
+    "FSML-MQE.html": "2c27d0f5"
+  },
+  "Inverse_Transform_Sampling.qmd": {
+    "Inverse_Transform_Sampling.html": "8fe3e2d3"
   }
 }

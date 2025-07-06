@@ -1,0 +1,81 @@
+# Inverse Transform Sampling
+
+From FSML2 exercice we get the following CFD from the graph below
+
+::: {.cell}
+![](images/TriangularDistribution.png){fig-align="center" width="60%"}
+:::
+
+
+
+
+$$
+F_X(t) = 
+\begin{cases}
+0 & \text{if } t < 0 \\\\
+\frac{t^2}{2\theta^2} & \text{if } t \in [0, \theta] \\\\
+-\frac{t^2}{2\theta^2} + \frac{2t}{2\theta} - 1 & \text{if } t \in (\theta, 2\theta) \\\\
+1 & \text{if } t \geq 2\theta
+\end{cases}
+$$
+
+The computation of the inverse function, $F_X(t)^{-1}$ give us : 
+
+$$
+F_X^{-1} : [0, 1] \rightarrow [0, 2\theta]
+$$
+
+
+
+$$
+F_X^{-1}(t) = 
+\begin{cases}
+\sqrt{2\theta^2 \cdot t} & \text{if } t \in [0, \tfrac{1}{2}] \\\\
+2\theta - \sqrt{2\theta^2 \cdot (1 - t)} & \text{if } t \in (\tfrac{1}{2}, 1]
+\end{cases}
+$$
+
+Which could be written as a sum with indicator functions as:
+
+$$F_X^{-1}(t) = \sqrt{2\theta^2 \cdot t}\upharpoonleft\!\!\!\vert_{t \in[0, \tfrac{1}{2}]} + 2\theta - \sqrt{2\theta^2 \cdot (1 - t)} \upharpoonleft\!\!\!\vert_{t \in ]\tfrac{1}{2}, 1]}$$
+
+**Note**: becareful to count just one time the value $tfrac{1}{2}$ 
+
+## Inverse density function with R 
+
+Thanks to the last equation form, we can write $F_X^{-1}(t)$ in R easily :  
+
+The logical expressions like (t <= 1/2) and (t > 1/2) act as "indicator functions".  
+In R, TRUE is treated as 1 and FALSE as 0 in arithmetic operations. This means only the correct formula is applied for each value of t.  
+For example, if t = 0.3, (t <= 1/2) is TRUE (1), so the first formula is used.
+If t = 0.7, (t > 1/2) is TRUE (1), so the second formula is used.
+
+```{r}
+# Generate 10,000 random numbers uniformly distributed between 0 and 1
+A <- runif(10000)
+
+# Define the inverse transform function
+invFX <- function(t, theta) {
+# Logical expressions act as indicators (see explanation above)
+  sqrt(2 * t * theta^2) * (0 <= t) * (t <= 1 / 2) +
+    (2 * theta - sqrt(2 * theta^2 * (1 - t))) * (t > 1 / 2) * (t <= 1)
+}
+
+theta <- 2  # Set the parameter theta
+X <- invFX(A, theta)   # Apply the inverse transform to the uniform random numbers
+head(X)  # Display the first few values
+```
+
+**Remark**: In R, you do not need to use 'return()' if the value to return is the last line of the function. This is a common style in R, especially for simple functions.
+
+
+## Display the value of X 
+
+```{r}
+hist(X,freq=FALSE)
+```
+
+
+
+## Simulation of a density function thanks to uniform random variable
+> "We recognize the function $f$. To generate samples from a random variable $X$ with an unknown density function, it is sufficient to know the inverse of its cumulative distribution function (i.e., $F_X^{-1}(t)$). By applying this inverse to samples from a uniform distribution, we can simulate values from $X$." 
