@@ -300,7 +300,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">7.1.1</span> Example</a></li>
   </ul></li>
-  <li><a href="#centered-moment" id="toc-centered-moment" class="nav-link" data-scroll-target="#centered-moment"><span class="header-section-number">7.2</span> Centered Moment</a></li>
+  <li><a href="#centered-moment" id="toc-centered-moment" class="nav-link" data-scroll-target="#centered-moment"><span class="header-section-number">7.2</span> Centered Moment</a>
+  <ul class="collapse">
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="header-section-number">7.2.1</span> Example</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -327,7 +330,7 @@ window.Quarto = {
 
 
 <blockquote class="blockquote">
-<p>“The method of moments is fundamentally a consequence of the law of large numbers. While the law of large numbers is usually stated for the sample mean of random variables <span class="math inline">\(X_1,\cdots,X_n\)</span>, t can also be applied to functions of these variables, such as their powers <span class="math inline">\(X_{1}^k\)</span>. This means the law of large numbers can be generalized not just for the <span class="math inline">\(X_i\)</span> themselves, but also for functions of <span class="math inline">\(X_i\)</span> including their moments. This generalization forms the basis of the method of moments.</p>
+<p>“The method of moments is fundamentally a consequence of the law of large numbers. While the law of large numbers is usually stated for the sample mean of random variables <span class="math inline">\(X_1,\cdots,X_n\)</span>, it can also be applied to functions of these variables, such as their powers <span class="math inline">\(X_{1}^k\)</span>. This means the law of large numbers can be generalized not just for the <span class="math inline">\(X_i\)</span> themselves, but also for functions of <span class="math inline">\(X_i\)</span> including their moments. This generalization forms the basis of the method of moments.</p>
 </blockquote>
 <p>Let us consider&nbsp;<span class="math inline">\(X_1, \cdots, X_n\)</span> &nbsp;<em>i.i.d</em>&nbsp;random variables whose density depends on an unknown parameter. Consider <span class="math inline">\(\large\theta\)</span> a function of this unknown parameter.</p>
 <p><strong>Remark</strong>: We specify “a function of this unknown parameter” because, in practice, we may not always be interested in estimating the parameter itself. Instead, we might be interested in estimating a function of it. For example, if <span class="math inline">\(X \sim E(\lambda)\)</span>, we might be interested in estimating <span class="math inline">\(\theta = 1/\lambda\)</span></p>
@@ -339,12 +342,12 @@ window.Quarto = {
 </ul>
 <section id="raw-moments" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="raw-moments"><span class="header-section-number">7.1</span> Raw moments:</h2>
-<p>Let <span class="math inline">\(\large k\)</span> an integer <span class="math inline">\(\ge 1\)</span> such that there exists a <span class="math inline">\(\large g\)</span> function with : <span class="math display">\[\large\mathbb{E}\left[X_{1}^k\right] = g(\theta)\]</span></p>
+<p>Let <span class="math inline">\(k\)</span> be an integer <span class="math inline">\(\ge 1\)</span> such that there exists a <span class="math inline">\(\large g\)</span> function with : <span class="math display">\[\large\mathbb{E}\left[X_{1}^k\right] = g(\theta)\]</span></p>
 <p><strong>Note:</strong> the moment of order <span class="math inline">\(\large k\)</span> is a function of the unknown parameter <span class="math inline">\(\large\theta\)</span></p>
 <blockquote class="blockquote">
 <p>“In constructing estimators using the method of moments, we seek moments that depend on the unknown parameter we wish to estimate.”</p>
 </blockquote>
-<p>Then, an estimator <span class="math inline">\(\large\hat{\theta}_n\)</span> for <span class="math inline">\(\large\theta\)</span> is solution of : <span class="math display">\[\Large g(\hat{\theta}_n) = \frac{1}{n}\sum_{i=1}^n X_{i}^{k}\]</span></p>
+<p>Then, an estimator <span class="math inline">\(\hat{\theta}_n\)</span> for <span class="math inline">\(\theta\)</span> is the solution of: <span class="math display">\[\Large g(\hat{\theta}_n) = \frac{1}{n}\sum_{i=1}^n X_{i}^{k}\]</span></p>
 <section id="example" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="example"><span class="header-section-number">7.1.1</span> Example</h3>
 <p>Let us consider <span class="math inline">\(X_1, \cdots, X_n\)</span> <em>i.i.d</em> random variables <span class="math inline">\(\sim\mathcal{U}(\left[0;\theta\right])\)</span></p>
@@ -369,12 +372,28 @@ g(\hat{\theta}_{n,1}) =  \dfrac{\hat{\theta}_{n,1}}{2} = \frac{1}{n}\sum_{i=1}^n
 </section>
 <section id="centered-moment" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="centered-moment"><span class="header-section-number">7.2</span> Centered Moment</h2>
-<p>Let <span class="math inline">\(\large k\)</span> an integer <span class="math inline">\(\ge 2\)</span> such that there exists a <span class="math inline">\(\large h\)</span> function with : <span class="math display">\[\large\mathbb{E}\left[(X_1 - \mathbb{E}\left[X_{1}\right])^k\right] = h(\theta)\]</span> Then, an estimator <span class="math inline">\(\large\hat{\theta}_n\)</span> for <span class="math inline">\(\large\theta\)</span> is solution of :</p>
+<p>Let <span class="math inline">\(k\)</span> be an integer <span class="math inline">\(\ge 2\)</span> such that there exists a function <span class="math inline">\(h\)</span> satisfying: <span class="math display">\[\large\mathbb{E}\left[(X_1 - \mathbb{E}\left[X_{1}\right])^k\right] = h(\theta)\]</span> Then, an estimator <span class="math inline">\(\large\hat{\theta}_n\)</span> for <span class="math inline">\(\large\theta\)</span> is solution of :</p>
 <p><span class="math display">\[\large h(\hat{\theta}_n) = \frac{1}{n}\sum_{i=1}^n (X_{i}-\overline{X}_n)^{k}\]</span> with <span class="math display">\[\large\overline{X}_n = \frac{1}{n}\sum_{i=1}^n X_{i}\]</span></p>
 <p><strong>Note</strong>: “The use of centered moments in method of moments is rare in practice because <strong>centered moments depend on the expectation</strong>, which is itself a function of the parameter and must also be estimated.”</p>
 <p><strong>Warning:</strong> “These methods allow the construction of estimators for <span class="math inline">\(\theta\)</span>. <strong>These estimators are not guaranteed to be unbiased</strong>, but they are consistent under general conditions.”</p>
+<section id="example-1" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="example-1"><span class="header-section-number">7.2.1</span> Example</h3>
+<p>Following the previous example, we could also use the centered moment of order 2, that is to say the second centered moment :</p>
+<p><span class="math inline">\(\operatorname{Var}(X_1) = \dfrac{\theta^2}{12} = h(\theta)\)</span></p>
+<p>with <span class="math inline">\(h(x) = \frac{x^2}{12}\)</span></p>
+<p>Another estimator <span class="math inline">\(\hat{\theta}_{n,2}\)</span> for <span class="math inline">\(\theta\)</span> is solution of : <span class="math display">\[
+h(\hat{\theta}_{n,2}) = \frac{1}{n}\sum_{i=1}^n (X_{i}-\overline{X}_n)^{2}
+\]</span></p>
+<p><span class="math display">\[
+\dfrac{(\hat{\theta}_{n,2})^2}{12} = \frac{1}{n}\sum_{i=1}^n (X_{i}-\overline{X}_n)^{2}
+\]</span></p>
+<p>We obtain :</p>
+<p><span class="math display">\[
+\boxed{\hat{\theta}_{n,2} =\sqrt{\dfrac{12}{n}\sum_{i=1}^n (X_{i}-\overline{X}_n)^{2}}}
+\]</span></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
