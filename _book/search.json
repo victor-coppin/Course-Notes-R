@@ -14,7 +14,7 @@
     "href": "Tidyverse.html",
     "title": "1  The Tidyverse",
     "section": "",
-    "text": "2 Manipulating Data frames with dplyr and purrr\nThe Tidyverse can be installed with a single line of code: install.packages(“tidyverse”)\nThis command installs the nine core packages of the Tidyverse: dplyr, forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr. These are considered the core of the Tidyverse because you’ll use them in almost every analysis: - dplyr : manipulating data frames\n- forcats : provides tools for dealing with categorical variables\n- ggplot2 : producing statistical, or data, graphics\n- lubridate : makes it easier to work with dates and times in R\n- purr : working with functions and iteration in a functional programming style\n#| label: load-tidyverse #| warning: false #| message: false",
+    "text": "2 Manipulating Data frames with dplyr and purrr\nThe Tidyverse can be installed with a single line of code: install.packages(“tidyverse”)\nThis command installs the nine core packages of the Tidyverse: dplyr, forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr. These are considered the core of the Tidyverse because you’ll use them in almost every analysis: - dplyr : manipulating data frames\n- forcats : provides tools for dealing with categorical variables\n- ggplot2 : producing statistical, or data, graphics\n- lubridate : makes it easier to work with dates and times in R\n- purr : working with functions and iteration in a functional programming style\n#| label: load-tidyverse #| warning = FALSE #| message = FALSE",
     "crumbs": [
       "R Basics : Introduction to Data Science",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Tidyverse</span>"
@@ -43,101 +43,254 @@
     ]
   },
   {
+    "objectID": "data-exploration.html",
+    "href": "data-exploration.html",
+    "title": "2  data-exploration",
+    "section": "",
+    "text": "2.1 help\nShows the help page with a description of the dataset and its variables\n?mpg  # for quick help lookup\nhelp(mgp) # detailed help",
+    "crumbs": [
+      "R Basics : Introduction to Data Science",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>data-exploration</span>"
+    ]
+  },
+  {
+    "objectID": "data-exploration.html#class",
+    "href": "data-exploration.html#class",
+    "title": "2  data-exploration",
+    "section": "2.2 Class",
+    "text": "2.2 Class\n\nclass(mpg) \n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"",
+    "crumbs": [
+      "R Basics : Introduction to Data Science",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>data-exploration</span>"
+    ]
+  },
+  {
+    "objectID": "data-exploration.html#str",
+    "href": "data-exploration.html#str",
+    "title": "2  data-exploration",
+    "section": "2.3 str",
+    "text": "2.3 str\n\nstr(mpg)\n\ntibble [234 × 11] (S3: tbl_df/tbl/data.frame)\n $ manufacturer: chr [1:234] \"audi\" \"audi\" \"audi\" \"audi\" ...\n $ model       : chr [1:234] \"a4\" \"a4\" \"a4\" \"a4\" ...\n $ displ       : num [1:234] 1.8 1.8 2 2 2.8 2.8 3.1 1.8 1.8 2 ...\n $ year        : int [1:234] 1999 1999 2008 2008 1999 1999 2008 1999 1999 2008 ...\n $ cyl         : int [1:234] 4 4 4 4 6 6 6 4 4 4 ...\n $ trans       : chr [1:234] \"auto(l5)\" \"manual(m5)\" \"manual(m6)\" \"auto(av)\" ...\n $ drv         : chr [1:234] \"f\" \"f\" \"f\" \"f\" ...\n $ cty         : int [1:234] 18 21 20 21 16 18 18 18 16 20 ...\n $ hwy         : int [1:234] 29 29 31 30 26 26 27 26 25 28 ...\n $ fl          : chr [1:234] \"p\" \"p\" \"p\" \"p\" ...\n $ class       : chr [1:234] \"compact\" \"compact\" \"compact\" \"compact\" ...",
+    "crumbs": [
+      "R Basics : Introduction to Data Science",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>data-exploration</span>"
+    ]
+  },
+  {
+    "objectID": "data-exploration.html#glimpse",
+    "href": "data-exploration.html#glimpse",
+    "title": "2  data-exploration",
+    "section": "2.4 glimpse",
+    "text": "2.4 glimpse\nglimpse() (dplyr package) provides an overview of the data set/a transposed version of the data, showing the number of observations, variable names, data types, and a sample of the data stored in each variable\n\nglimpse(mpg)\n\nRows: 234\nColumns: 11\n$ manufacturer &lt;chr&gt; \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"…\n$ model        &lt;chr&gt; \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4 quattro\", \"…\n$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…\n$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…\n$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …\n$ trans        &lt;chr&gt; \"auto(l5)\", \"manual(m5)\", \"manual(m6)\", \"auto(av)\", \"auto…\n$ drv          &lt;chr&gt; \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"4\", \"4\", \"4\", \"4\", \"4…\n$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…\n$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…\n$ fl           &lt;chr&gt; \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p…\n$ class        &lt;chr&gt; \"compact\", \"compact\", \"compact\", \"compact\", \"compact\", \"c…",
+    "crumbs": [
+      "R Basics : Introduction to Data Science",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>data-exploration</span>"
+    ]
+  },
+  {
+    "objectID": "data-exploration.html#summary",
+    "href": "data-exploration.html#summary",
+    "title": "2  data-exploration",
+    "section": "2.5 summary",
+    "text": "2.5 summary\n\nsummary(mpg)\n\n manufacturer          model               displ            year     \n Length:234         Length:234         Min.   :1.600   Min.   :1999  \n Class :character   Class :character   1st Qu.:2.400   1st Qu.:1999  \n Mode  :character   Mode  :character   Median :3.300   Median :2004  \n                                       Mean   :3.472   Mean   :2004  \n                                       3rd Qu.:4.600   3rd Qu.:2008  \n                                       Max.   :7.000   Max.   :2008  \n      cyl           trans               drv                 cty       \n Min.   :4.000   Length:234         Length:234         Min.   : 9.00  \n 1st Qu.:4.000   Class :character   Class :character   1st Qu.:14.00  \n Median :6.000   Mode  :character   Mode  :character   Median :17.00  \n Mean   :5.889                                         Mean   :16.86  \n 3rd Qu.:8.000                                         3rd Qu.:19.00  \n Max.   :8.000                                         Max.   :35.00  \n      hwy             fl               class          \n Min.   :12.00   Length:234         Length:234        \n 1st Qu.:18.00   Class :character   Class :character  \n Median :24.00   Mode  :character   Mode  :character  \n Mean   :23.44                                        \n 3rd Qu.:27.00                                        \n Max.   :44.00",
+    "crumbs": [
+      "R Basics : Introduction to Data Science",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>data-exploration</span>"
+    ]
+  },
+  {
+    "objectID": "ggplot2-introduction.html",
+    "href": "ggplot2-introduction.html",
+    "title": "3  Elegant Graphics for Data Analysis",
+    "section": "",
+    "text": "The following content is provided from the book ggplot2: Elegant Graphics for Data Analysis written by Hadley Wickham, Danielle Navarro, and Thomas Lin Pedersen.ggplot2-book.org\nggplot2 is one of the core packages of the tidyverse library, designed for producing statistical (data) graphics. This package is based on the Grammar of Graphics (Wilkinson, 2005), which allows users to compose graphs by combining independent components.\nggplot2 is designed to work iteratively, layer by layer.\n\n4 Grammar of Graphics\nCreated by Wilkinson in 2005, the Grammar of Graphics aims to “describe the fundamental features that underlie all statistical graphics.”\n\n“In brief, the grammar tells us that a graphic maps the data to the aesthetic attributes of geometric objects. The plot may also include statistical transformations of the data and information about the plot’s coordinate system. Facetting can be used to plot for different subsets of the data. The combination of these independent components is what makes up a graphic.” (Wickham, Navarro, & Pedersen, 2023)\n\nResources - The built-in documentation\n- cheatsheets",
+    "crumbs": [
+      "ggplot2: Elegant Graphics for Data Analysis",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Elegant Graphics for Data Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "Fist-Steps-in-ggplot2.html",
+    "href": "Fist-Steps-in-ggplot2.html",
+    "title": "4  Key components",
+    "section": "",
+    "text": "4.1 Aesthetic attributes : colour, size, shape\nThe data set : “Fuel economy data”\nThe mpg dataset is introduced in @wickham2023ggplot2 for early plotting examples. It includes information about the fuel economy of popular car models in 1999 and 2008, collected by the US Environmental Protection Agency.\nSee Chapter 2 to have a look at the different ways to discover this dataset.\nThree key components:\nFor instance  The code bellow call the data mpg and the aesthetic aes() that link :\n- x to displ (engine displacement, in litres)\n- y to hwy (highway miles per gallon)\nThen a layer geom_point() is added on with + to create scatterplots.\nTips &gt;“Almost every plot maps a variable to x and y, so naming these aesthetics is tedious, so the first two unnamed arguments to aes() will be mapped to x and y. This means that the following code is identical to the example above:”[@wickham2023ggplot2]\nWe can add options or parameters to the aes() functions : aes(disply, hwy, colour = class) : map the variable class for each (x,y) to a colour aes(disply, hwy, size = cyl) : geom_points size will be mapped to the cyl variable. aes(disply, hwy, shape = drv) : the shape aesthetic controls the symbols of points\nggplot(mpg, aes(displ,hwy, shape = class)) +\n    geom_point()\n\nWarning: The shape palette can deal with a maximum of 6 discrete values because more\nthan 6 becomes difficult to discriminate\nℹ you have requested 7 values. Consider specifying shapes manually if you need\n  that many of them.\n\n\nWarning: Removed 62 rows containing missing values or values outside the scale range\n(`geom_point()`).\nTo set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of aes(). Compare the following two plots:",
+    "crumbs": [
+      "ggplot2: Elegant Graphics for Data Analysis",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Key components</span>"
+    ]
+  },
+  {
     "objectID": "FSML-MQE.html",
     "href": "FSML-MQE.html",
-    "title": "4  Mean Quadratic Error",
+    "title": "6  Mean Quadratic Error",
     "section": "",
-    "text": "The MQE is a measure of how close the estimator is to the true parameter value.\nTo compare estimator we can compute the mean quadratic Eroor, denoted by MQE : \\[ \\Large\\text{MQE}(\\hat{\\theta}_{n}) = \\mathrm{Var}\\left(\\hat{\\theta}_n\\right) + \\left(b_{\\theta}\\left(\\hat{\\theta}_n\\right)\\right)^2\\]\nwhere \\(\\beta_{\\theta}(\\hat{\\theta}_{n}) = \\mathbb{E}\\left[\\hat{\\theta}_n\\right] - \\large\\theta\\) is the bias of the estimator \\(\\hat{\\theta}_n\\).\nWe say that \\(\\large\\hat{\\theta}_{n,1}\\) is better than \\(\\large\\hat{\\theta}_{n,2}\\) if : \\[\\Large\\forall n, \\; \\operatorname{MQE}(\\hat{\\theta}_{n,1})\\le \\operatorname{MQE}(\\hat{\\theta}_{n,2})\\]\n\n5 Example :\nLet concider :\n- \\(\\hat{\\theta}_{n,1} = \\operatorname{max}(X_k)\\) and \\(\\hat{\\theta}_{n,4} = \\frac{n+1}{n} \\cdot \\hat{\\theta}_{n,1}\\)\nWe have :\n\nMQE\\((\\hat{\\theta}_{n,1}) = \\dfrac{2\\theta^2}{(n+1)(n+2)}\\)\nMQE\\((\\hat{\\theta}_{n,4}) = \\dfrac{\\theta^2}{n(n+1)}\\)\n\n\\(\\forall n \\geq 2, \\; MQE(\\hat{\\theta}_{n,4}) &lt; MQE(\\hat{\\theta}_{n,1})\\)\nThus, we can conclude that \\(\\hat{\\theta}_{n,4}\\) is better than \\(\\hat{\\theta}_{n,1}\\)\nRemark: \\(\\hat{\\theta}_{n,4}\\) is the best among the two estimators we have considered. Since \\(\\hat{\\theta}_{n,4}\\) is unbiased, we know that for any unbiased estimator \\(\\hat{\\theta}_n\\), we have: \\[ \\Large\\text{Cramer Rao-Bound } \\leq \\mathrm{Var}\\left(\\hat{\\theta}_n\\right)\\]\nIf \\(\\mathrm{Var}\\left(\\hat{\\theta}_{n,4}\\right)\\) equals the Cramer-Rao bound, then the estimator cannot be improved; otherwise, improvement is possible.\n\n\n6 Convergence Illustration in R\n\ntheta &lt;- 2 # assumed true value of the parameter\n# MQE or Variance of the estimators\nmqe1 &lt;- 2 * theta^2 / ((2:50 + 1) * (2:50 + 2))\nmqe4 &lt;- theta^2 / (2:50 * (2:50 + 1))\nplot(mqe4, type = \"l\", col = \"red\")\nlines(mqe1, col = \"blue\")\nlegend(\"topright\",\n       legend = c(\"Estimator 4 (unbiased)\", \"Estimator 1 (max)\"),\n       col = c(\"red\", \"blue\"), lty = 1)\n\n\n\n\n\n\n\n\nThis plot shows that the unbiased estimator \\(\\hat{\\theta}{n,4}\\) consistently outperforms the maximum estimator \\(\\hat{\\theta}{n,1}\\) in terms of MQE, even for relatively small sample sizes (e.g., \\(n = 10\\)). However, as the sample size increases, the MQEs of both estimators get closer, meaning the performance gap narrows — although \\(\\hat{\\theta}_{n,4}\\) remains superior for all \\(n\\).",
+    "text": "The MQE is a measure of how close the estimator is to the true parameter value.\nTo compare estimator we can compute the mean quadratic Eroor, denoted by MQE : \\[ \\Large\\text{MQE}(\\hat{\\theta}_{n}) = \\mathrm{Var}\\left(\\hat{\\theta}_n\\right) + \\left(b_{\\theta}\\left(\\hat{\\theta}_n\\right)\\right)^2\\]\nwhere \\(\\beta_{\\theta}(\\hat{\\theta}_{n}) = \\mathbb{E}\\left[\\hat{\\theta}_n\\right] - \\large\\theta\\) is the bias of the estimator \\(\\hat{\\theta}_n\\).\nWe say that \\(\\large\\hat{\\theta}_{n,1}\\) is better than \\(\\large\\hat{\\theta}_{n,2}\\) if : \\[\\Large\\forall n, \\; \\operatorname{MQE}(\\hat{\\theta}_{n,1})\\le \\operatorname{MQE}(\\hat{\\theta}_{n,2})\\]\n\n7 Example :\nLet concider :\n- \\(\\hat{\\theta}_{n,1} = \\operatorname{max}(X_k)\\) and \\(\\hat{\\theta}_{n,4} = \\frac{n+1}{n} \\cdot \\hat{\\theta}_{n,1}\\)\nWe have :\n\nMQE\\((\\hat{\\theta}_{n,1}) = \\dfrac{2\\theta^2}{(n+1)(n+2)}\\)\nMQE\\((\\hat{\\theta}_{n,4}) = \\dfrac{\\theta^2}{n(n+1)}\\)\n\n\\(\\forall n \\geq 2, \\; MQE(\\hat{\\theta}_{n,4}) &lt; MQE(\\hat{\\theta}_{n,1})\\)\nThus, we can conclude that \\(\\hat{\\theta}_{n,4}\\) is better than \\(\\hat{\\theta}_{n,1}\\)\nRemark: \\(\\hat{\\theta}_{n,4}\\) is the best among the two estimators we have considered. Since \\(\\hat{\\theta}_{n,4}\\) is unbiased, we know that for any unbiased estimator \\(\\hat{\\theta}_n\\), we have: \\[ \\Large\\text{Cramer Rao-Bound } \\leq \\mathrm{Var}\\left(\\hat{\\theta}_n\\right)\\]\nIf \\(\\mathrm{Var}\\left(\\hat{\\theta}_{n,4}\\right)\\) equals the Cramer-Rao bound, then the estimator cannot be improved; otherwise, improvement is possible.\n\n\n8 Convergence Illustration in R\n\ntheta &lt;- 2 # assumed true value of the parameter\n# MQE or Variance of the estimators\nmqe1 &lt;- 2 * theta^2 / ((2:50 + 1) * (2:50 + 2))\nmqe4 &lt;- theta^2 / (2:50 * (2:50 + 1))\nplot(mqe4, type = \"l\", col = \"red\")\nlines(mqe1, col = \"blue\")\nlegend(\"topright\",\n       legend = c(\"Estimator 4 (unbiased)\", \"Estimator 1 (max)\"),\n       col = c(\"red\", \"blue\"), lty = 1)\n\n\n\n\n\n\n\n\nThis plot shows that the unbiased estimator \\(\\hat{\\theta}{n,4}\\) consistently outperforms the maximum estimator \\(\\hat{\\theta}{n,1}\\) in terms of MQE, even for relatively small sample sizes (e.g., \\(n = 10\\)). However, as the sample size increases, the MQEs of both estimators get closer, meaning the performance gap narrows — although \\(\\hat{\\theta}_{n,4}\\) remains superior for all \\(n\\).",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Mean Quadratic Error</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Mean Quadratic Error</span>"
+    ]
+  },
+  {
+    "objectID": "The_normal_distribution.html",
+    "href": "The_normal_distribution.html",
+    "title": "7  The Normal distribution",
+    "section": "",
+    "text": "7.1 rnorm()\n\\(\\Large X \\sim \\mathcal{N}(\\mu, \\sigma^2)\\)\nPDF of a Normal distribution \\(\\large \\forall t \\in \\mathbb{R}, \\quad\n\\LARGE f_X(t) = \\frac{1}{\\sqrt{2\\pi}\\sigma} e^{-(t-\\mu)^2/2\\sigma^2}\\)\nThe rnorm function create a vector of random numbers that follow a ‘bell-shaped’ distribution Parameters: - n the number of random value to generate - mean the center of the distribution (0 by default) - sd the spread of the distriburion (1 by default)\n# normal  distribution with 50 random values, a mean of 0 and a standard deviation of 1 \nrandom_values &lt;- rnorm(50, mean = 0, sd = 1)\nhead(random_values)\n\n[1] -0.2056865  0.3173570  0.2662543  0.8896068  1.1414760 -0.9064495\nRemark:",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The Normal distribution</span>"
+    ]
+  },
+  {
+    "objectID": "The_normal_distribution.html#rnorm",
+    "href": "The_normal_distribution.html#rnorm",
+    "title": "7  The Normal distribution",
+    "section": "",
+    "text": "“rnorm generates random deviates.”\nIn probability and statistics, a random variate (or simply variate) is a particular outcome or realization of a random variable.\nOther outcomes of the same random variable might yield different values — often referred to as random numbers [@wikipedia-random-variate].",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The Normal distribution</span>"
     ]
   },
   {
     "objectID": "Inverse_Transform_Sampling.html",
     "href": "Inverse_Transform_Sampling.html",
-    "title": "5  Inverse Transform Sampling",
+    "title": "8  Inverse Transform Sampling",
     "section": "",
-    "text": "5.1 Inverse density function with R\nFrom FSML2 exercice we get the following CFD from the graph below\n\\[\nF_X(t) =\n\\begin{cases}\n0 & \\text{if } t &lt; 0 \\\\\\\\\n\\frac{t^2}{2\\theta^2} & \\text{if } t \\in [0, \\theta] \\\\\\\\\n-\\frac{t^2}{2\\theta^2} + \\frac{2t}{2\\theta} - 1 & \\text{if } t \\in (\\theta, 2\\theta) \\\\\\\\\n1 & \\text{if } t \\geq 2\\theta\n\\end{cases}\n\\]\nThe computation of the inverse function, \\(F_X(t)^{-1}\\) give us :\n\\[\nF_X^{-1} : [0, 1] \\rightarrow [0, 2\\theta]\n\\]\n\\[\nF_X^{-1}(t) =\n\\begin{cases}\n\\sqrt{2\\theta^2 \\cdot t} & \\text{if } t \\in [0, \\tfrac{1}{2}] \\\\\\\\\n2\\theta - \\sqrt{2\\theta^2 \\cdot (1 - t)} & \\text{if } t \\in (\\tfrac{1}{2}, 1]\n\\end{cases}\n\\]\nWhich could be written as a sum with indicator functions as:\n\\[F_X^{-1}(t) = \\sqrt{2\\theta^2 \\cdot t}\\upharpoonleft\\!\\!\\!\\vert_{t \\in[0, \\tfrac{1}{2}]} + 2\\theta - \\sqrt{2\\theta^2 \\cdot (1 - t)} \\upharpoonleft\\!\\!\\!\\vert_{t \\in ]\\tfrac{1}{2}, 1]}\\]\nNote: becareful to count just one time the value \\(tfrac{1}{2}\\)\nThanks to the last equation form, we can write \\(F_X^{-1}(t)\\) in R easily :\nThe logical expressions like (t &lt;= 1/2) and (t &gt; 1/2) act as “indicator functions”.\nIn R, TRUE is treated as 1 and FALSE as 0 in arithmetic operations. This means only the correct formula is applied for each value of t.\nFor example, if t = 0.3, (t &lt;= 1/2) is TRUE (1), so the first formula is used. If t = 0.7, (t &gt; 1/2) is TRUE (1), so the second formula is used.\n# Generate 10,000 random numbers uniformly distributed between 0 and 1\nA &lt;- runif(10000)\n\n# Define the inverse transform function\ninvFX &lt;- function(t, theta) {\n# Logical expressions act as indicators (see explanation above)\n  sqrt(2 * t * theta^2) * (0 &lt;= t) * (t &lt;= 1 / 2) +\n    (2 * theta - sqrt(2 * theta^2 * (1 - t))) * (t &gt; 1 / 2) * (t &lt;= 1)\n}\n\ntheta &lt;- 2  # Set the parameter theta\nX &lt;- invFX(A, theta)   # Apply the inverse transform to the uniform random numbers\nhead(X)  # Display the first few values\n\n[1] 2.4212967 3.0195982 2.4546096 0.3872544 2.9336624 1.8484409\nRemark: In R, you do not need to use ‘return()’ if the value to return is the last line of the function. This is a common style in R, especially for simple functions.",
+    "text": "8.1 Inverse density function with R\nFrom FSML2 exercice we get the following CFD from the graph below\n\\[\nF_X(t) =\n\\begin{cases}\n0 & \\text{if } t &lt; 0 \\\\\\\\\n\\frac{t^2}{2\\theta^2} & \\text{if } t \\in [0, \\theta] \\\\\\\\\n-\\frac{t^2}{2\\theta^2} + \\frac{2t}{2\\theta} - 1 & \\text{if } t \\in (\\theta, 2\\theta) \\\\\\\\\n1 & \\text{if } t \\geq 2\\theta\n\\end{cases}\n\\]\nThe computation of the inverse function, \\(F_X(t)^{-1}\\) give us :\n\\[\nF_X^{-1} : [0, 1] \\rightarrow [0, 2\\theta]\n\\]\n\\[\nF_X^{-1}(t) =\n\\begin{cases}\n\\sqrt{2\\theta^2 \\cdot t} & \\text{if } t \\in [0, \\tfrac{1}{2}] \\\\\\\\\n2\\theta - \\sqrt{2\\theta^2 \\cdot (1 - t)} & \\text{if } t \\in (\\tfrac{1}{2}, 1]\n\\end{cases}\n\\]\nWhich could be written as a sum with indicator functions as:\n\\[F_X^{-1}(t) = \\sqrt{2\\theta^2 \\cdot t}\\upharpoonleft\\!\\!\\!\\vert_{t \\in[0, \\tfrac{1}{2}]} + 2\\theta - \\sqrt{2\\theta^2 \\cdot (1 - t)} \\upharpoonleft\\!\\!\\!\\vert_{t \\in ]\\tfrac{1}{2}, 1]}\\]\nNote: becareful to count just one time the value \\(tfrac{1}{2}\\)\nThanks to the last equation form, we can write \\(F_X^{-1}(t)\\) in R easily :\nThe logical expressions like (t &lt;= 1/2) and (t &gt; 1/2) act as “indicator functions”.\nIn R, TRUE is treated as 1 and FALSE as 0 in arithmetic operations. This means only the correct formula is applied for each value of t.\nFor example, if t = 0.3, (t &lt;= 1/2) is TRUE (1), so the first formula is used. If t = 0.7, (t &gt; 1/2) is TRUE (1), so the second formula is used.\n# Generate 10,000 random numbers uniformly distributed between 0 and 1\nA &lt;- runif(10000)\n\n# Define the inverse transform function\ninvFX &lt;- function(t, theta) {\n# Logical expressions act as indicators (see explanation above)\n  sqrt(2 * t * theta^2) * (0 &lt;= t) * (t &lt;= 1 / 2) +\n    (2 * theta - sqrt(2 * theta^2 * (1 - t))) * (t &gt; 1 / 2) * (t &lt;= 1)\n}\n\ntheta &lt;- 2  # Set the parameter theta\nX &lt;- invFX(A, theta)   # Apply the inverse transform to the uniform random numbers\nhead(X)  # Display the first few values\n\n[1] 1.990070 1.401274 2.220769 1.621102 1.887976 1.588765\nRemark: In R, you do not need to use ‘return()’ if the value to return is the last line of the function. This is a common style in R, especially for simple functions.",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Inverse Transform Sampling</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inverse Transform Sampling</span>"
     ]
   },
   {
     "objectID": "Inverse_Transform_Sampling.html#display-the-value-of-x",
     "href": "Inverse_Transform_Sampling.html#display-the-value-of-x",
-    "title": "5  Inverse Transform Sampling",
-    "section": "5.2 Display the value of X",
-    "text": "5.2 Display the value of X\n\nhist(X,freq=FALSE)",
+    "title": "8  Inverse Transform Sampling",
+    "section": "8.2 Display the value of X",
+    "text": "8.2 Display the value of X\n\nhist(X,freq=FALSE)",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Inverse Transform Sampling</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inverse Transform Sampling</span>"
     ]
   },
   {
     "objectID": "Inverse_Transform_Sampling.html#simulation-of-a-density-function-thanks-to-uniform-random-variable",
     "href": "Inverse_Transform_Sampling.html#simulation-of-a-density-function-thanks-to-uniform-random-variable",
-    "title": "5  Inverse Transform Sampling",
-    "section": "5.3 Simulation of a density function thanks to uniform random variable",
-    "text": "5.3 Simulation of a density function thanks to uniform random variable\n\n“We recognize the function \\(f\\). To generate samples from a random variable \\(X\\) with an unknown density function, it is sufficient to know the inverse of its cumulative distribution function (i.e., \\(F_X^{-1}(t)\\)). By applying this inverse to samples from a uniform distribution, we can simulate values from \\(X\\).”",
+    "title": "8  Inverse Transform Sampling",
+    "section": "8.3 Simulation of a density function thanks to uniform random variable",
+    "text": "8.3 Simulation of a density function thanks to uniform random variable\n\n“We recognize the function \\(f\\). To generate samples from a random variable \\(X\\) with an unknown density function, it is sufficient to know the inverse of its cumulative distribution function (i.e., \\(F_X^{-1}(t)\\)). By applying this inverse to samples from a uniform distribution, we can simulate values from \\(X\\).”",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Inverse Transform Sampling</span>"
-    ]
-  },
-  {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "9  Summary",
-    "section": "",
-    "text": "In summary, this book has no content whatsoever.",
-    "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Summary</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inverse Transform Sampling</span>"
     ]
   },
   {
     "objectID": "Construction_of_estimators.html",
     "href": "Construction_of_estimators.html",
-    "title": "6  Construction of Estimators",
+    "title": "9  Construction of Estimators",
     "section": "",
-    "text": "There are two main approaches to constructing estimators in statistics:\n\nThe Method of Moments\nMaximum Likelihood Estimation\n\nThe method of moments is often the most familiar and straightforward technique. It is especially useful when you need to estimate a single parameter associated with a known distribution. The method involves equating sample moments (such as the mean or variance) to their theoretical counterparts and solving for the unknown parameters. Its main advantages are simplicity and broad applicability, making it an accessible introduction to parameter estimation. However, it can be less efficient than other methods and may not always use all the information available in the data.\nMaximum likelihood estimation (MLE) is a more powerful and general approach. It involves finding the parameter values that maximize the likelihood function, i.e., the values that make the observed data most probable under the assumed model. While MLE often requires solving an optimization problem and can be more computationally intensive, it is widely used in practice due to its desirable statistical properties, such as efficiency and consistency, especially as sample size increases. MLE is particularly important in more complex models, including those with multiple parameters.\nWhen we move to linear models, we will encounter the least squares method, which is closely related to maximum likelihood. In fact, for linear regression with normally distributed errors, the least squares estimator is also the maximum likelihood estimator. This connection highlights the central role of MLE in statistical modeling.\n\n\n\n\n\n\nProfessor’s insight\n\n\n\n“The method of moments is the most useful in practice because it is the one that almost everyone knows. Maximum likelihood, while more complex due to its optimization requirements, becomes especially valuable when we deal with models involving several parameters, such as linear models. In those cases, we will see that the least squares method and maximum likelihood are closely related and sometimes even equivalent.”",
+    "text": "There are two main approaches to constructing estimators in statistics:\n\nThe Method of Moments\nMaximum Likelihood Estimation\n\nThe method of moments is a commonly used and straightforward technique in statistics. It is especially useful when you need to estimate a single parameter associated with a known distribution. The method involves equating sample moments (such as the mean or variance) to their theoretical counterparts and solving for the unknown parameters. Its main advantages are simplicity and broad applicability, making it an accessible introduction to parameter estimation. However, it can be less efficient than other methods and may not always use all the information available in the data.\nMaximum likelihood estimation (MLE) is a more powerful and general approach. It involves finding the parameter values that maximize the likelihood function, i.e., the values that make the observed data most probable under the assumed model. While MLE often requires solving an optimization problem and can be more computationally intensive, it is widely used in practice due to its desirable statistical properties, such as efficiency and consistency, especially as sample size increases. MLE is particularly important in more complex models, including those with multiple parameters.\nWhen we move to linear models, we will encounter the least squares method, which is closely related to maximum likelihood. In fact, for linear regression with normally distributed errors, the least squares estimator is also the maximum likelihood estimator. This connection highlights the central role of MLE in statistical modeling.\n\n\n\n\n\n\nProfessor’s insight\n\n\n\n“The method of moments is the most useful in practice because it is the one that almost everyone knows. Maximum likelihood, while more complex due to its optimization requirements, becomes especially valuable when we deal with models involving several parameters, such as linear models. In those cases, we will see that the least squares method and maximum likelihood are closely related and sometimes even equivalent.”",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Construction of Estimators</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Construction of Estimators</span>"
     ]
   },
   {
     "objectID": "Methods_of_Moments.html",
     "href": "Methods_of_Moments.html",
-    "title": "7  Method of moments",
+    "title": "10  Method of moments",
     "section": "",
-    "text": "7.1 Raw moments:\nLet us consider \\(X_1, \\cdots, X_n\\)  i.i.d random variables whose density depends on an unknown parameter. Consider \\(\\large\\theta\\) a function of this unknown parameter.\nRemark: We specify “a function of this unknown parameter” because, in practice, we may not always be interested in estimating the parameter itself. Instead, we might be interested in estimating a function of it. For example, if \\(X \\sim E(\\lambda)\\), we might be interested in estimating \\(\\theta = 1/\\lambda\\)\nIn the following methods, the \\(k\\) determines the moment we are using:\nLet \\(k\\) be an integer \\(\\ge 1\\) such that there exists a \\(\\large g\\) function with : \\[\\large\\mathbb{E}\\left[X_{1}^k\\right] = g(\\theta)\\]\nNote: the moment of order \\(\\large k\\) is a function of the unknown parameter \\(\\large\\theta\\)\nThen, an estimator \\(\\hat{\\theta}_n\\) for \\(\\theta\\) is the solution of: \\[\\Large g(\\hat{\\theta}_n) = \\frac{1}{n}\\sum_{i=1}^n X_{i}^{k}\\]",
+    "text": "10.1 Raw moments:\nLet us consider \\(X_1, \\cdots, X_n\\)  i.i.d random variables whose density depends on an unknown parameter. Consider \\(\\large\\theta\\) a function of this unknown parameter.\nRemark: We specify “a function of this unknown parameter” because, in practice, we may not always be interested in estimating the parameter itself. Instead, we might be interested in estimating a function of it. For example, if \\(X \\sim E(\\lambda)\\), we might be interested in estimating \\(\\theta = 1/\\lambda\\)\nIn the following methods, the \\(k\\) determines the moment we are using:\nLet \\(k\\) be an integer \\(\\ge 1\\) such that there exists a \\(\\large g\\) function with : \\[\\large\\mathbb{E}\\left[X_{1}^k\\right] = g(\\theta)\\]\nNote: the moment of order \\(\\large k\\) is a function of the unknown parameter \\(\\large\\theta\\)\nThen, an estimator \\(\\hat{\\theta}_n\\) for \\(\\theta\\) is the solution of: \\[\\Large g(\\hat{\\theta}_n) = \\frac{1}{n}\\sum_{i=1}^n X_{i}^{k}\\]",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Method of moments</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Method of moments</span>"
     ]
   },
   {
     "objectID": "Methods_of_Moments.html#raw-moments",
     "href": "Methods_of_Moments.html#raw-moments",
-    "title": "7  Method of moments",
+    "title": "10  Method of moments",
     "section": "",
-    "text": "“In constructing estimators using the method of moments, we seek moments that depend on the unknown parameter we wish to estimate.”\n\n\n\n7.1.1 Example\nLet us consider \\(X_1, \\cdots, X_n\\) i.i.d random variables \\(\\sim\\mathcal{U}(\\left[0;\\theta\\right])\\)\n\n“we seek moments that depend on the unknown parameter”:\n\nWe know that since the random variables follow a uniform law defined on \\(\\left[0;\\theta\\right]\\), the expectation is \\(\\dfrac{\\theta}{2}\\) , so we know the first moment \\(k = 1\\).\nTherefore we could apply the method of moments :\n\\[\\mathbb{E}\\left[X_{1}\\right] = \\dfrac{\\theta}{2}= g(\\theta)\\]\nWith $ g(x) = $ the function of the unknown parameter.\nHere, we use the notation \\(\\hat{\\theta}_{n,1}\\) to indicate that this estimator is based on the first moment (\\(k=1\\)).\n\\[\ng(\\hat{\\theta}_n) = \\frac{1}{n}\\sum_{i=1}^n X_{i}^{k}\n\\]\n\\[\ng(\\hat{\\theta}_{n,1}) =  \\dfrac{\\hat{\\theta}_{n,1}}{2} = \\frac{1}{n}\\sum_{i=1}^n X_{i} = \\overline{X}_n\n\\]\n\\[\n\\boxed{\\hat{\\theta}_{n,1}=2\\cdot \\overline{X}_n}\n\\]",
+    "text": "“In constructing estimators using the method of moments, we seek moments that depend on the unknown parameter we wish to estimate.”\n\n\n\n10.1.1 Example\nLet us consider \\(X_1, \\cdots, X_n\\) i.i.d random variables \\(\\sim\\mathcal{U}(\\left[0;\\theta\\right])\\)\n\n“we seek moments that depend on the unknown parameter”:\n\nWe know that since the random variables follow a uniform law defined on \\(\\left[0;\\theta\\right]\\), the expectation is \\(\\dfrac{\\theta}{2}\\) , so we know the first moment \\(k = 1\\).\nTherefore we could apply the method of moments :\n\\(\\mathbb{E}\\left[X_{1}\\right] = \\dfrac{\\theta}{2}= g(\\theta)\\)\nWith \\(g(x) = \\dfrac{x}{2}\\) the function of the unknown parameter.\nHere, we use the notation \\(\\hat{\\theta}_{n,1}\\) to indicate that this estimator is based on the first moment (\\(k=1\\)).\n\\[\ng(\\hat{\\theta}_n) = \\frac{1}{n}\\sum_{i=1}^n X_{i}^{k}\n\\]\n\\[\ng(\\hat{\\theta}_{n,1}) =  \\dfrac{\\hat{\\theta}_{n,1}}{2} = \\frac{1}{n}\\sum_{i=1}^n X_{i} = \\overline{X}_n\n\\]\n\\[\n\\boxed{\\hat{\\theta}_{n,1}=2\\cdot \\overline{X}_n}\n\\]",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Method of moments</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Method of moments</span>"
     ]
   },
   {
     "objectID": "Methods_of_Moments.html#centered-moment",
     "href": "Methods_of_Moments.html#centered-moment",
-    "title": "7  Method of moments",
-    "section": "7.2 Centered Moment",
-    "text": "7.2 Centered Moment\nLet \\(k\\) be an integer \\(\\ge 2\\) such that there exists a function \\(h\\) satisfying: \\[\\large\\mathbb{E}\\left[(X_1 - \\mathbb{E}\\left[X_{1}\\right])^k\\right] = h(\\theta)\\] Then, an estimator \\(\\large\\hat{\\theta}_n\\) for \\(\\large\\theta\\) is solution of :\n\\[\\large h(\\hat{\\theta}_n) = \\frac{1}{n}\\sum_{i=1}^n (X_{i}-\\overline{X}_n)^{k}\\] with \\[\\large\\overline{X}_n = \\frac{1}{n}\\sum_{i=1}^n X_{i}\\]\nNote: “The use of centered moments in method of moments is rare in practice because centered moments depend on the expectation, which is itself a function of the parameter and must also be estimated.”\nWarning: “These methods allow the construction of estimators for \\(\\theta\\). These estimators are not guaranteed to be unbiased, but they are consistent under general conditions.”\n\n7.2.1 Example\nFollowing the previous example, we could also use the centered moment of order 2, that is to say the second centered moment :\n\\(\\operatorname{Var}(X_1) = \\dfrac{\\theta^2}{12} = h(\\theta)\\)\nwith \\(h(x) = \\frac{x^2}{12}\\)\nAnother estimator \\(\\hat{\\theta}_{n,2}\\) for \\(\\theta\\) is solution of : \\[\nh(\\hat{\\theta}_{n,2}) = \\frac{1}{n}\\sum_{i=1}^n (X_{i}-\\overline{X}_n)^{2}\n\\]\n\\[\n\\dfrac{(\\hat{\\theta}_{n,2})^2}{12} = \\frac{1}{n}\\sum_{i=1}^n (X_{i}-\\overline{X}_n)^{2}\n\\]\nWe obtain :\n\\[\n\\boxed{\\hat{\\theta}_{n,2} =\\sqrt{\\dfrac{12}{n}\\sum_{i=1}^n (X_{i}-\\overline{X}_n)^{2}}}\n\\]",
+    "title": "10  Method of moments",
+    "section": "10.2 Centered Moment",
+    "text": "10.2 Centered Moment\nLet \\(k\\) be an integer \\(\\ge 2\\) such that there exists a function \\(h\\) satisfying: \\[\\large\\mathbb{E}\\left[(X_1 - \\mathbb{E}\\left[X_{1}\\right])^k\\right] = h(\\theta)\\] Then, an estimator \\(\\large\\hat{\\theta}_n\\) for \\(\\large\\theta\\) is solution of :\n\\[\\large h(\\hat{\\theta}_n) = \\frac{1}{n}\\sum_{i=1}^n (X_{i}-\\overline{X}_n)^{k}\\] with \\[\\large\\overline{X}_n = \\frac{1}{n}\\sum_{i=1}^n X_{i}\\]\nNote: “The use of centered moments in method of moments is rare in practice because centered moments depend on the expectation, which is itself a function of the parameter and must also be estimated.”\nWarning: “These methods allow the construction of estimators for \\(\\theta\\). These estimators are not guaranteed to be unbiased, but they are consistent under general conditions.”\n\n10.2.1 Example\nFollowing the previous example, we could also use the centered moment of order 2, that is to say the second centered moment :\n\\(\\operatorname{Var}(X_1) = \\dfrac{\\theta^2}{12} = h(\\theta)\\)\nwith \\(h(x) = \\frac{x^2}{12}\\)\nAnother estimator \\(\\hat{\\theta}_{n,2}\\) for \\(\\theta\\) is solution of : \\[\nh(\\hat{\\theta}_{n,2}) = \\frac{1}{n}\\sum_{i=1}^n (X_{i}-\\overline{X}_n)^{2}\n\\]\n\\[\n\\dfrac{(\\hat{\\theta}_{n,2})^2}{12} = \\frac{1}{n}\\sum_{i=1}^n (X_{i}-\\overline{X}_n)^{2}\n\\]\nWe obtain :\n\\[\n\\boxed{\\hat{\\theta}_{n,2} =\\sqrt{\\dfrac{12}{n}\\sum_{i=1}^n (X_{i}-\\overline{X}_n)^{2}}}\n\\]",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Method of moments</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Method of moments</span>"
+    ]
+  },
+  {
+    "objectID": "Maximum_Likelihood_Estimation.html",
+    "href": "Maximum_Likelihood_Estimation.html",
+    "title": "11  Maximum likelihood",
+    "section": "",
+    "text": "Let us consider \\(X_1, \\cdots, X_n\\)  i.i.d random variables whose density depends on an unknown parameter \\(\\large\\theta\\) .\nIn this context, the likelihood is defined by :\n\\[\n\\Large\n\\mathcal{L}(x_1, \\cdots, x_n;\\, \\theta) =\n\\begin{cases}\n\\displaystyle\\prod_{k=1}^{n} \\mathbb{P}(X_k = x_k) & \\to \\text{discrete case} \\\\[2.5ex]\n\\displaystyle\\prod_{k=1}^{n} f(x_k) & \\to  \\text{continuous case}\n\\end{cases}\n\\]\nAn estimator \\(\\Large\\hat{\\theta}_n\\) for \\(\\Large\\theta\\) is such that :\n\\[\n\\large\\mathcal{L}(x_1, \\cdots, x_n; \\hat{\\theta}_n) = \\max_{a \\in \\mathbb{R}} \\mathcal{L}(x_1, \\cdots, x_n; a)\n\\]",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Maximum likelihood</span>"
+    ]
+  },
+  {
+    "objectID": "Motivation.html",
+    "href": "Motivation.html",
+    "title": "12  Motivation for confidence interval",
+    "section": "",
+    "text": "Let us consider a Gaussian distribution with mean 0 and variance 2:\n\\[\n  X \\sim \\mathcal{N}(0,2)\n\\]\nSimulating the sample mean of a Gaussian distribution multiple times \nSee the rnorm section\n\nM &lt;- c() # initialize an empty vector to store the means\n\n# Loop over three different sample sizes: 50, 500, and 5,000 \nfor (k in c(50,500,5000)) \n{\n    for (i in 1:50)             # simulate the sample mean 50 times    \n    {\n        A &lt;- rnorm(k,0,sqrt(2)) # generate k observations with mean = 0, variance = 2\n        m &lt;- mean(A)\n        M &lt;- c(M,m)\n    }\n}\n\nWe now create a data frame D with:\n- a column mean containing the 150 sample means (50 for each sample size), and\n- a column label indicating the corresponding sample size.\n\nD &lt;- data.frame(mean = M, label = rep(c('50','500','5000'), each = 50))  # 'rep(..., each = 50)' aligns labels with sample sizes\nboxplot(D$mean ~ D$label,\n        main = \"Distribution of Sample Means by Sample Size\",\n        xlab = \"Sample Size\", ylab = \"Sample Mean\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProfessor’s Insight: Accuracy and Sample Size\n\n\n\nAs we can see in the boxplot:\n- For a sample size of 50, the sample means fluctuate roughly between -0.4 and 0.4. - With 500 observations, the range narrows to around -0.2 to 0.1. - And for 5,000 observations, the fluctuation becomes minimal, between -0.08 and 0.05.\nThis illustrates that as the sample size increases, the accuracy of the sample mean improves, because the fluctuations (i.e., variance) decrease. The quality of the estimation improves at a rate proportional to 1/√n.",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Motivation for confidence interval</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "16  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Summary</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Wickham, Hadley, Danielle Navarro, and Thomas Lin Pedersen. 2023.\nGgplot2: Elegant Graphics for Data Analysis. https://ggplot2-book.org.\n\n\nWikipedia contributors. 2025. “Random Variate —\nWikipedia, the Free Encyclopedia.” https://en.wikipedia.org/wiki/Random_variate. https://en.wikipedia.org/wiki/Random_variate.",
+    "crumbs": [
+      "References"
+    ]
+  },
+  {
+    "objectID": "The_normal_distribution.html#sec-rnorm-function",
+    "href": "The_normal_distribution.html#sec-rnorm-function",
+    "title": "7  The Normal distribution",
+    "section": "",
+    "text": "“rnorm generates random deviates.”\nIn probability and statistics, a random variate (or simply variate) is a particular outcome or realization of a random variable.\nOther outcomes of the same random variable might yield different values — often referred to as random numbers [@wikipedia-random-variate].",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The Normal distribution</span>"
+    ]
+  },
+  {
+    "objectID": "The_normal_distribution.html#references",
+    "href": "The_normal_distribution.html#references",
+    "title": "7  The Normal distribution",
+    "section": "7.2 References",
+    "text": "7.2 References\n\n\nWickham, Hadley, Danielle Navarro, and Thomas Lin Pedersen. 2023.\nGgplot2: Elegant Graphics for Data Analysis. https://ggplot2-book.org.\n\n\nWikipedia contributors. 2025. “Random Variate —\nWikipedia, the Free Encyclopedia.” https://en.wikipedia.org/wiki/Random_variate. https://en.wikipedia.org/wiki/Random_variate.",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The Normal distribution</span>"
     ]
   }
 ]

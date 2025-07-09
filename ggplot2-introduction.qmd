@@ -1,0 +1,21 @@
+# Elegant Graphics for Data Analysis
+
+The following content is provided from the book ggplot2: Elegant Graphics for Data Analysis written by Hadley Wickham, Danielle Navarro, and Thomas Lin Pedersen.ggplot2-book.org
+
+ggplot2 is one of the core packages of the tidyverse library, designed for producing statistical (data) graphics. This package is based on the Grammar of Graphics (Wilkinson, 2005), which allows users to compose graphs by combining independent components.
+
+ggplot2 is designed to work iteratively, layer by layer.
+
+# Grammar of Graphics
+
+Created by Wilkinson in 2005, the Grammar of Graphics aims to "describe the fundamental features that underlie all statistical graphics."
+
+> "In brief, the grammar tells us that a graphic maps the data to the aesthetic attributes of geometric objects. The plot may also include statistical transformations of the data and information about the plot's coordinate system. Facetting can be used to plot for different subsets of the data. The combination of these independent components is what makes up a graphic."
+(Wickham, Navarro, & Pedersen, 2023)
+
+Resources
+- [The built-in documentation](https://ggplot2.tidyverse.org/reference/index.html)  
+- [cheatsheets](https://rstudio.github.io/cheatsheets/html/data-visualization.html?)
+
+
+

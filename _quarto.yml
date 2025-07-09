@@ -1,6 +1,10 @@
 project:
   type: book
 
+bibliography: references.bib
+cite-method: biblatex
+
+
 book:
   title: "Data Science with R"
   author: "Victor Coppin"
@@ -12,21 +16,23 @@ book:
       chapters:
 
         - Tidyverse.qmd
-    
+        - data-exploration.qmd
     - part: "ggplot2: Elegant Graphics for Data Analysis"
       chapters:
         - ggplot2-introduction.qmd
+        - Fist-Steps-in-ggplot2.qmd
 
      
     - part: "Foundations of Statistical Analysis and Machine Learning"
       chapters:
         - FSML-introduction.qmd
         - FSML-MQE.qmd
+        - The_normal_distribution.qmd
         - Inverse_Transform_Sampling.qmd
         - Construction_of_estimators.qmd
         - Methods_of_Moments.qmd
         - Maximum_Likelihood_Estimation.qmd
-
+        - Confidence_interval.qmd
 
     - part: "Advanced Statistical Analysis and Machine Learning"
       chapters:
@@ -45,6 +51,7 @@ book:
 
     - summary.qmd
     - references.qmd
+
 
 format:
   html:

@@ -1,0 +1,39 @@
+# The Normal distribution 
+
+$\Large X \sim \mathcal{N}(\mu, \sigma^2)$
+
+[**PDF of a Normal distribution**]{.lead}
+$\large \forall t \in \mathbb{R}, \quad
+\LARGE f_X(t) = \frac{1}{\sqrt{2\pi}\sigma} e^{-(t-\mu)^2/2\sigma^2}$
+
+
+## rnorm() {#sec-rnorm-function}
+The `rnorm` function create a vector of random numbers that follow a 'bell-shaped' distribution 
+**Parameters**:
+- `n` the number of random value to generate
+- `mean` the center of the distribution (0 by default)
+- `sd` the spread of the distriburion (1 by default) 
+
+```{r}
+# normal  distribution with 50 random values, a mean of 0 and a standard deviation of 1 
+random_values <- rnorm(50, mean = 0, sd = 1)
+head(random_values)
+```
+
+**Remark**:
+
+> “rnorm generates random deviates.”
+>
+> In probability and statistics, a *random variate* (or simply *variate*) is a particular outcome or realization of a random variable.  
+> Other outcomes of the same random variable might yield different values — often referred to as random numbers [@wikipedia-random-variate].
+
+
+
+## References
+::: {#refs}
+:::
+
+
+
+
+

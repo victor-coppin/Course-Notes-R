@@ -1,0 +1,43 @@
+# data-exploration {#sec-data-exploration}
+
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+suppressPackageStartupMessages({
+  library(ggplot2)
+  library(dplyr)
+})
+```
+
+## help {#sec-help-function}
+Shows the help page with a description of the dataset and its variables
+```{r}
+#| eval: false
+?mpg  # for quick help lookup
+help(mgp) # detailed help  
+```
+
+## Class 
+```{r}
+class(mpg) 
+```
+
+
+## str 
+```{r}
+str(mpg)
+```
+
+## glimpse
+`glimpse()`  (dplyr package) provides an overview of the data set/a transposed version of the data, showing the number of observations, variable names, data types, and a sample of the data stored in each variable
+
+```{r}
+glimpse(mpg)
+```
+
+## summary
+```{r}
+summary(mpg)
+```

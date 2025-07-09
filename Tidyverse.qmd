@@ -13,8 +13,8 @@ These are considered the core of the Tidyverse because you’ll use them in almo
 - purr : working with functions and iteration in a functional programming style 
 
 #| label: load-tidyverse
-#| warning: false
-#| message: false
+#| warning = FALSE
+#| message = FALSE
 
 ```{r}
 library(tidyverse)

@@ -1,0 +1,61 @@
+# Key components
+
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+suppressPackageStartupMessages({
+  library(ggplot2)
+  library(dplyr)
+})
+```
+
+**The data set : "Fuel economy data"**
+
+The `mpg` dataset is introduced in @wickham2023ggplot2 for early plotting examples. It includes information about the fuel economy of popular car models in 1999 and 2008, collected by the US Environmental Protection Agency. 
+
+See @sec-data-exploration to have a look at the different ways to discover this dataset.
+
+[**Three key components:**]{.lead}
+
+- data
+
+- a set of aesthetic mappings between variables in the data and visual properties
+
+- at least one layer which describes how to render each observation. Layers are usually created with a geom function.
+
+**For instance ** 
+The code bellow call the data `mpg` and the aesthetic `aes()` that link :  
+- x to displ (engine displacement, in litres)  
+- y to hwy (highway miles per gallon)  
+Then a layer `geom_point()` is added on with `+` to create scatterplots.
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+    geom_point()
+```
+
+**Tips**
+>"Almost every plot maps a variable to x and y, so naming these aesthetics is tedious, so the first two unnamed arguments to aes() will be mapped to x and y. This means that the following code is identical to the example above:"[@wickham2023ggplot2]
+
+```{r}
+#| eval: false 
+ggplot(mpg, aes(displ,hwy)) +
+    geom_point()
+```
+
+
+## Aesthetic attributes : colour, size, shape
+
+We can add options or parameters to the aes() functions : 
+`aes(disply, hwy, colour = class)` : map the variable class for each (x,y) to a colour
+`aes(disply, hwy, size = cyl)` : geom_points size will be mapped to the cyl variable.
+`aes(disply, hwy, shape = drv)` : the shape aesthetic controls the symbols of points 
+
+```{r}
+ggplot(mpg, aes(displ,hwy, shape = class)) +
+    geom_point()
+```
+
+To set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of aes(). Compare the following two plots:

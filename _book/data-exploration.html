@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>fsml-introduction – Data Science with R</title>
+<title>2&nbsp; data-exploration – Data Science with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./FSML-MQE.html" rel="next">
-<link href="./Fist-Steps-in-ggplot2.html" rel="prev">
+<link href="./ggplot2-introduction.html" rel="next">
+<link href="./Tidyverse.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -73,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating fullcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -82,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./FSML-introduction.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FSML-introduction.html</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Tidyverse.html">R Basics : Introduction to Data Science</a></li><li class="breadcrumb-item"><a href="./data-exploration.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">data-exploration</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-exploration.html" class="sidebar-item-text sidebar-link">
+  <a href="./data-exploration.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">data-exploration</span></span></a>
   </div>
 </li>
@@ -170,7 +205,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./FSML-introduction.html" class="sidebar-item-text sidebar-link active">
+  <a href="./FSML-introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FSML-introduction.html</span></span></a>
   </div>
 </li>
@@ -286,15 +321,131 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-help-function" id="toc-sec-help-function" class="nav-link active" data-scroll-target="#sec-help-function"><span class="header-section-number">2.1</span> help</a></li>
+  <li><a href="#class" id="toc-class" class="nav-link" data-scroll-target="#class"><span class="header-section-number">2.2</span> Class</a></li>
+  <li><a href="#str" id="toc-str" class="nav-link" data-scroll-target="#str"><span class="header-section-number">2.3</span> str</a></li>
+  <li><a href="#glimpse" id="toc-glimpse" class="nav-link" data-scroll-target="#glimpse"><span class="header-section-number">2.4</span> glimpse</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">2.5</span> summary</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./FSML-introduction.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FSML-introduction.html</span></a></li></ol></nav></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Tidyverse.html">R Basics : Introduction to Data Science</a></li><li class="breadcrumb-item"><a href="./data-exploration.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">data-exploration</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-data-exploration" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">data-exploration</span></span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
+
+<section id="sec-help-function" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-help-function"><span class="header-section-number">2.1</span> help</h2>
+<p>Shows the help page with a description of the dataset and its variables</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>?mpg  <span class="co"># for quick help lookup</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mgp) <span class="co"># detailed help  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="class" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="class"><span class="header-section-number">2.2</span> Class</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mpg) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+</section>
+<section id="str" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="str"><span class="header-section-number">2.3</span> str</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [234 × 11] (S3: tbl_df/tbl/data.frame)
+ $ manufacturer: chr [1:234] "audi" "audi" "audi" "audi" ...
+ $ model       : chr [1:234] "a4" "a4" "a4" "a4" ...
+ $ displ       : num [1:234] 1.8 1.8 2 2 2.8 2.8 3.1 1.8 1.8 2 ...
+ $ year        : int [1:234] 1999 1999 2008 2008 1999 1999 2008 1999 1999 2008 ...
+ $ cyl         : int [1:234] 4 4 4 4 6 6 6 4 4 4 ...
+ $ trans       : chr [1:234] "auto(l5)" "manual(m5)" "manual(m6)" "auto(av)" ...
+ $ drv         : chr [1:234] "f" "f" "f" "f" ...
+ $ cty         : int [1:234] 18 21 20 21 16 18 18 18 16 20 ...
+ $ hwy         : int [1:234] 29 29 31 30 26 26 27 26 25 28 ...
+ $ fl          : chr [1:234] "p" "p" "p" "p" ...
+ $ class       : chr [1:234] "compact" "compact" "compact" "compact" ...</code></pre>
+</div>
+</div>
+</section>
+<section id="glimpse" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="glimpse"><span class="header-section-number">2.4</span> glimpse</h2>
+<p><code>glimpse()</code> (dplyr package) provides an overview of the data set/a transposed version of the data, showing the number of observations, variable names, data types, and a sample of the data stored in each variable</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 234
+Columns: 11
+$ manufacturer &lt;chr&gt; "audi", "audi", "audi", "audi", "audi", "audi", "audi", "…
+$ model        &lt;chr&gt; "a4", "a4", "a4", "a4", "a4", "a4", "a4", "a4 quattro", "…
+$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…
+$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…
+$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …
+$ trans        &lt;chr&gt; "auto(l5)", "manual(m5)", "manual(m6)", "auto(av)", "auto…
+$ drv          &lt;chr&gt; "f", "f", "f", "f", "f", "f", "f", "4", "4", "4", "4", "4…
+$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…
+$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…
+$ fl           &lt;chr&gt; "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p…
+$ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact", "c…</code></pre>
+</div>
+</div>
+</section>
+<section id="summary" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">2.5</span> summary</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> manufacturer          model               displ            year     
+ Length:234         Length:234         Min.   :1.600   Min.   :1999  
+ Class :character   Class :character   1st Qu.:2.400   1st Qu.:1999  
+ Mode  :character   Mode  :character   Median :3.300   Median :2004  
+                                       Mean   :3.472   Mean   :2004  
+                                       3rd Qu.:4.600   3rd Qu.:2008  
+                                       Max.   :7.000   Max.   :2008  
+      cyl           trans               drv                 cty       
+ Min.   :4.000   Length:234         Length:234         Min.   : 9.00  
+ 1st Qu.:4.000   Class :character   Class :character   1st Qu.:14.00  
+ Median :6.000   Mode  :character   Mode  :character   Median :17.00  
+ Mean   :5.889                                         Mean   :16.86  
+ 3rd Qu.:8.000                                         3rd Qu.:19.00  
+ Max.   :8.000                                         Max.   :35.00  
+      hwy             fl               class          
+ Min.   :12.00   Length:234         Length:234        
+ 1st Qu.:18.00   Class :character   Class :character  
+ Median :24.00   Mode  :character   Mode  :character  
+ Mean   :23.44                                        
+ 3rd Qu.:27.00                                        
+ Max.   :44.00                                        </code></pre>
+</div>
+</div>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -698,13 +849,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Fist-Steps-in-ggplot2.html" class="pagination-link" aria-label="Key components">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Key components</span></span>
+      <a href="./Tidyverse.html" class="pagination-link" aria-label="The Tidyverse">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Tidyverse</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./FSML-MQE.html" class="pagination-link" aria-label="Mean Quadratic Error">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ggplot2-introduction.html" class="pagination-link" aria-label="Elegant Graphics for Data Analysis">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Elegant Graphics for Data Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

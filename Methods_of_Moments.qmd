@@ -37,9 +37,9 @@ We know that since the random variables follow a uniform law defined on $\left[0
 
 Therefore we could apply the method of moments : 
 
-$$\mathbb{E}\left[X_{1}\right] = \dfrac{\theta}{2}= g(\theta)$$
+$\mathbb{E}\left[X_{1}\right] = \dfrac{\theta}{2}= g(\theta)$
 
-With $ g(x) = \dfrac{x}{2}$ the function of the unknown parameter.
+With $g(x) = \dfrac{x}{2}$ the function of the unknown parameter.
 
 Here, we use the notation $\hat{\theta}_{n,1}$ to indicate that this estimator is based on the first moment ($k=1$).
 

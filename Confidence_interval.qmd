@@ -1,0 +1,46 @@
+# Motivation for confidence interval
+
+Let us consider a Gaussian distribution with mean 0 and variance 2:  
+$$
+  X \sim \mathcal{N}(0,2)
+$$
+
+[**Simulating the sample mean of a Gaussian distribution multiple times **]{.lead}  
+[See the rnorm section](The_normal_distribution.qmd#sec-rnorm-function)
+```{r}
+
+M <- c() # initialize an empty vector to store the means
+
+# Loop over three different sample sizes: 50, 500, and 5,000 
+for (k in c(50,500,5000)) 
+{
+    for (i in 1:50)             # simulate the sample mean 50 times    
+    {
+        A <- rnorm(k,0,sqrt(2)) # generate k observations with mean = 0, variance = 2
+        m <- mean(A)
+        M <- c(M,m)
+    }
+}
+```
+
+We now create a data frame D with:  
+- a column **mean** containing the 150 sample means (50 for each sample size), and  
+- a column **label** indicating the corresponding sample size.  
+
+```{r}
+D <- data.frame(mean = M, label = rep(c('50','500','5000'), each = 50))  # 'rep(..., each = 50)' aligns labels with sample sizes
+boxplot(D$mean ~ D$label,
+        main = "Distribution of Sample Means by Sample Size",
+        xlab = "Sample Size", ylab = "Sample Mean")
+```
+
+::: {.callout-note title="Professor's Insight: Accuracy and Sample Size"}
+As we can see in the boxplot:  
+- For a sample size of 50, the sample means fluctuate roughly between -0.4 and 0.4.
+- With 500 observations, the range narrows to around -0.2 to 0.1.
+- And for 5,000 observations, the fluctuation becomes minimal, between -0.08 and 0.05.
+
+**This illustrates that as the sample size increases, the accuracy of the sample mean improves**, because the fluctuations (i.e., variance) decrease.
+The quality of the estimation improves at a rate proportional to 1/√n.
+:::
+

@@ -43,5 +43,17 @@
   },
   "Maximum_Likelihood_Estimation.qmd": {
     "Maximum_Likelihood_Estimation.html": "540d27c8"
+  },
+  "Fist-Steps-in-ggplot2.qmd": {
+    "Fist-Steps-in-ggplot2.html": "0c66caf5"
+  },
+  "data-exploration.qmd": {
+    "data-exploration.html": "63cae0b3"
+  },
+  "The_normal_distribution.qmd": {
+    "The_normal_distribution.html": "96153b27"
+  },
+  "Motivation.qmd": {
+    "Motivation.html": "a884f07f"
   }
 }

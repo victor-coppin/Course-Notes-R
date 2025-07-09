@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Inverse Transform Sampling – Data Science with R</title>
+<title>8&nbsp; Inverse Transform Sampling – Data Science with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ASML-introduction.html" rel="next">
-<link href="./FSML-MQE.html" rel="prev">
+<link href="./Construction_of_estimators.html" rel="next">
+<link href="./The_normal_distribution.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./Inverse_Transform_Sampling.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./Inverse_Transform_Sampling.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -192,6 +192,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Tidyverse</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">data-exploration</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -206,7 +212,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">ggplot2-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Elegant Graphics for Data Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Fist-Steps-in-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Key components</span></span></a>
   </div>
 </li>
       </ul>
@@ -223,19 +235,49 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./FSML-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">FSML-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FSML-introduction.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./FSML-MQE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./The_normal_distribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Normal distribution</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Inverse_Transform_Sampling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Construction_of_estimators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Construction of Estimators</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Methods_of_Moments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Method of moments</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Maximum_Likelihood_Estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Maximum likelihood</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Motivation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Motivation for confidence interval</span></span></a>
   </div>
 </li>
       </ul>
@@ -252,7 +294,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ASML-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ASML-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ASML-introduction.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -269,7 +311,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./TimeSeries-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">TimeSeries-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">TimeSeries-introduction.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -286,7 +328,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./massive-data-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">massive-data-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">massive-data-introduction.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -294,7 +336,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -313,18 +355,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#inverse-density-function-with-r" id="toc-inverse-density-function-with-r" class="nav-link active" data-scroll-target="#inverse-density-function-with-r"><span class="header-section-number">5.1</span> Inverse density function with R</a></li>
-  <li><a href="#display-the-value-of-x" id="toc-display-the-value-of-x" class="nav-link" data-scroll-target="#display-the-value-of-x"><span class="header-section-number">5.2</span> Display the value of X</a></li>
-  <li><a href="#simulation-of-a-density-function-thanks-to-uniform-random-variable" id="toc-simulation-of-a-density-function-thanks-to-uniform-random-variable" class="nav-link" data-scroll-target="#simulation-of-a-density-function-thanks-to-uniform-random-variable"><span class="header-section-number">5.3</span> Simulation of a density function thanks to uniform random variable</a></li>
+  <li><a href="#inverse-density-function-with-r" id="toc-inverse-density-function-with-r" class="nav-link active" data-scroll-target="#inverse-density-function-with-r"><span class="header-section-number">8.1</span> Inverse density function with R</a></li>
+  <li><a href="#display-the-value-of-x" id="toc-display-the-value-of-x" class="nav-link" data-scroll-target="#display-the-value-of-x"><span class="header-section-number">8.2</span> Display the value of X</a></li>
+  <li><a href="#simulation-of-a-density-function-thanks-to-uniform-random-variable" id="toc-simulation-of-a-density-function-thanks-to-uniform-random-variable" class="nav-link" data-scroll-target="#simulation-of-a-density-function-thanks-to-uniform-random-variable"><span class="header-section-number">8.3</span> Simulation of a density function thanks to uniform random variable</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./Inverse_Transform_Sampling.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./Inverse_Transform_Sampling.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></h1>
 </div>
 
 
@@ -372,8 +414,8 @@ F_X^{-1}(t) =
 <p>Which could be written as a sum with indicator functions as:</p>
 <p><span class="math display">\[F_X^{-1}(t) = \sqrt{2\theta^2 \cdot t}\upharpoonleft\!\!\!\vert_{t \in[0, \tfrac{1}{2}]} + 2\theta - \sqrt{2\theta^2 \cdot (1 - t)} \upharpoonleft\!\!\!\vert_{t \in ]\tfrac{1}{2}, 1]}\]</span></p>
 <p><strong>Note</strong>: becareful to count just one time the value <span class="math inline">\(tfrac{1}{2}\)</span></p>
-<section id="inverse-density-function-with-r" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="inverse-density-function-with-r"><span class="header-section-number">5.1</span> Inverse density function with R</h2>
+<section id="inverse-density-function-with-r" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="inverse-density-function-with-r"><span class="header-section-number">8.1</span> Inverse density function with R</h2>
 <p>Thanks to the last equation form, we can write <span class="math inline">\(F_X^{-1}(t)\)</span> in R easily :</p>
 <p>The logical expressions like (t &lt;= 1/2) and (t &gt; 1/2) act as “indicator functions”.<br>
 In R, TRUE is treated as 1 and FALSE as 0 in arithmetic operations. This means only the correct formula is applied for each value of t.<br>
@@ -393,13 +435,13 @@ For example, if t = 0.3, (t &lt;= 1/2) is TRUE (1), so the first formula is used
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">invFX</span>(A, theta)   <span class="co"># Apply the inverse transform to the uniform random numbers</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X)  <span class="co"># Display the first few values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.4212967 3.0195982 2.4546096 0.3872544 2.9336624 1.8484409</code></pre>
+<pre><code>[1] 1.990070 1.401274 2.220769 1.621102 1.887976 1.588765</code></pre>
 </div>
 </div>
 <p><strong>Remark</strong>: In R, you do not need to use ‘return()’ if the value to return is the last line of the function. This is a common style in R, especially for simple functions.</p>
 </section>
-<section id="display-the-value-of-x" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="display-the-value-of-x"><span class="header-section-number">5.2</span> Display the value of X</h2>
+<section id="display-the-value-of-x" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="display-the-value-of-x"><span class="header-section-number">8.2</span> Display the value of X</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(X,<span class="at">freq=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -411,8 +453,8 @@ For example, if t = 0.3, (t &lt;= 1/2) is TRUE (1), so the first formula is used
 </div>
 </div>
 </section>
-<section id="simulation-of-a-density-function-thanks-to-uniform-random-variable" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="simulation-of-a-density-function-thanks-to-uniform-random-variable"><span class="header-section-number">5.3</span> Simulation of a density function thanks to uniform random variable</h2>
+<section id="simulation-of-a-density-function-thanks-to-uniform-random-variable" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="simulation-of-a-density-function-thanks-to-uniform-random-variable"><span class="header-section-number">8.3</span> Simulation of a density function thanks to uniform random variable</h2>
 <blockquote class="blockquote">
 <p>“We recognize the function <span class="math inline">\(f\)</span>. To generate samples from a random variable <span class="math inline">\(X\)</span> with an unknown density function, it is sufficient to know the inverse of its cumulative distribution function (i.e., <span class="math inline">\(F_X^{-1}(t)\)</span>). By applying this inverse to samples from a uniform distribution, we can simulate values from <span class="math inline">\(X\)</span>.”</p>
 </blockquote>
@@ -822,13 +864,13 @@ For example, if t = 0.3, (t &lt;= 1/2) is TRUE (1), so the first formula is used
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./FSML-MQE.html" class="pagination-link" aria-label="Mean Quadratic Error">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></span>
+      <a href="./The_normal_distribution.html" class="pagination-link" aria-label="The Normal distribution">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Normal distribution</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ASML-introduction.html" class="pagination-link" aria-label="ASML-introduction.html">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ASML-introduction.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Construction_of_estimators.html" class="pagination-link" aria-label="Construction of Estimators">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Construction of Estimators</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

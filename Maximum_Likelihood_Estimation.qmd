@@ -1,1 +1,22 @@
-# MLE
+# Maximum likelihood
+
+Let us consider $X_1, \cdots, X_n$  _i.i.d_ random variables whose density depends on an unknown parameter  $\large\theta$ .
+
+In this context, the likelihood is defined by : 
+
+$$
+\Large
+\mathcal{L}(x_1, \cdots, x_n;\, \theta) =
+\begin{cases}
+\displaystyle\prod_{k=1}^{n} \mathbb{P}(X_k = x_k) & \to \text{discrete case} \\[2.5ex]
+\displaystyle\prod_{k=1}^{n} f(x_k) & \to  \text{continuous case}
+\end{cases}
+$$
+
+
+An estimator $\Large\hat{\theta}_n$ for $\Large\theta$ is such that : 
+
+$$
+\large\mathcal{L}(x_1, \cdots, x_n; \hat{\theta}_n) = \max_{a \in \mathbb{R}} \mathcal{L}(x_1, \cdots, x_n; a)
+$$
+

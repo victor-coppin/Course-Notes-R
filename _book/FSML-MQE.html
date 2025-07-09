@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Mean Quadratic Error – Data Science with R</title>
+<title>6&nbsp; Mean Quadratic Error – Data Science with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Inverse_Transform_Sampling.html" rel="next">
+<link href="./The_normal_distribution.html" rel="next">
 <link href="./FSML-introduction.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./FSML-MQE.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./FSML-MQE.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -192,6 +192,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Tidyverse</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">data-exploration</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -206,7 +212,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">ggplot2-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Elegant Graphics for Data Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Fist-Steps-in-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Key components</span></span></a>
   </div>
 </li>
       </ul>
@@ -223,19 +235,49 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./FSML-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">FSML-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FSML-introduction.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./FSML-MQE.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./The_normal_distribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Normal distribution</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Inverse_Transform_Sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Construction_of_estimators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Construction of Estimators</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Methods_of_Moments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Method of moments</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Maximum_Likelihood_Estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Maximum likelihood</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Motivation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Motivation for confidence interval</span></span></a>
   </div>
 </li>
       </ul>
@@ -252,7 +294,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ASML-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ASML-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ASML-introduction.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -269,7 +311,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./TimeSeries-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">TimeSeries-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">TimeSeries-introduction.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -286,7 +328,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./massive-data-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">massive-data-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">massive-data-introduction.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -294,7 +336,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -313,17 +355,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#example" id="toc-example" class="nav-link active" data-scroll-target="#example"><span class="header-section-number">5</span> Example :</a></li>
-  <li><a href="#convergence-illustration-in-r" id="toc-convergence-illustration-in-r" class="nav-link" data-scroll-target="#convergence-illustration-in-r"><span class="header-section-number">6</span> Convergence Illustration in R</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link active" data-scroll-target="#example"><span class="header-section-number">7</span> Example :</a></li>
+  <li><a href="#convergence-illustration-in-r" id="toc-convergence-illustration-in-r" class="nav-link" data-scroll-target="#convergence-illustration-in-r"><span class="header-section-number">8</span> Convergence Illustration in R</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./FSML-MQE.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./FSML-MQE.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></h1>
 </div>
 
 
@@ -344,8 +386,8 @@ window.Quarto = {
 <p>To compare estimator we can compute the mean quadratic Eroor, denoted by MQE : <span class="math display">\[ \Large\text{MQE}(\hat{\theta}_{n}) = \mathrm{Var}\left(\hat{\theta}_n\right) + \left(b_{\theta}\left(\hat{\theta}_n\right)\right)^2\]</span></p>
 <p>where <span class="math inline">\(\beta_{\theta}(\hat{\theta}_{n}) = \mathbb{E}\left[\hat{\theta}_n\right] - \large\theta\)</span> is the bias of the estimator <span class="math inline">\(\hat{\theta}_n\)</span>.</p>
 <p>We say that <span class="math inline">\(\large\hat{\theta}_{n,1}\)</span> is better than <span class="math inline">\(\large\hat{\theta}_{n,2}\)</span> if : <span class="math display">\[\Large\forall n, \; \operatorname{MQE}(\hat{\theta}_{n,1})\le \operatorname{MQE}(\hat{\theta}_{n,2})\]</span></p>
-<section id="example" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Example :</h1>
+<section id="example" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Example :</h1>
 <p>Let concider :<br>
 - <span class="math inline">\(\hat{\theta}_{n,1} = \operatorname{max}(X_k)\)</span> and <span class="math inline">\(\hat{\theta}_{n,4} = \frac{n+1}{n} \cdot \hat{\theta}_{n,1}\)</span></p>
 <p>We have :</p>
@@ -358,8 +400,8 @@ window.Quarto = {
 <p><strong>Remark</strong>: <span class="math inline">\(\hat{\theta}_{n,4}\)</span> is the best among the two estimators we have considered. Since <span class="math inline">\(\hat{\theta}_{n,4}\)</span> is unbiased, we know that for any unbiased estimator <span class="math inline">\(\hat{\theta}_n\)</span>, we have: <span class="math display">\[ \Large\text{Cramer Rao-Bound } \leq \mathrm{Var}\left(\hat{\theta}_n\right)\]</span></p>
 <p>If <span class="math inline">\(\mathrm{Var}\left(\hat{\theta}_{n,4}\right)\)</span> equals the Cramer-Rao bound, then the estimator cannot be improved; otherwise, improvement is possible.</p>
 </section>
-<section id="convergence-illustration-in-r" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Convergence Illustration in R</h1>
+<section id="convergence-illustration-in-r" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Convergence Illustration in R</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># assumed true value of the parameter</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MQE or Variance of the estimators</span></span>
@@ -786,12 +828,12 @@ window.Quarto = {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./FSML-introduction.html" class="pagination-link" aria-label="FSML-introduction.html">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">FSML-introduction.html</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FSML-introduction.html</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Inverse_Transform_Sampling.html" class="pagination-link" aria-label="Inverse Transform Sampling">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./The_normal_distribution.html" class="pagination-link" aria-label="The Normal distribution">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Normal distribution</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
