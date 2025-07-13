@@ -336,5 +336,16 @@
       "Foundations of Statistical Analysis and Machine Learning",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Confidence interval</span>"
     ]
+  },
+  {
+    "objectID": "Simple_Linear_Regression.html",
+    "href": "Simple_Linear_Regression.html",
+    "title": "13  Simple Linear Regression",
+    "section": "",
+    "text": "with simulated dataset :\n\n# Creation of variables for two variables \n# X as 100 observation from -7 to 10 that follow uniform law \nX &lt;- runif(100,-7,10)\n# Y linearly 'connected' to X + some gaussian noise\nY &lt;- - 4 + 2 * X + rnorm(100,0,2)\n# Plot of the cloud of point\nplot(X,Y)\n\n\n\n\n\n\n\n\n\nL &lt;- lm(Y~X) # perform a linea model \nplot(X,Y)\n# create a red line that fit the linear regression\nabline(L,col='red') # equal abline(reg= L, col='red'\n\n\n\n\n\n\n\n\nThe red line in the plot above represents the fitted simple linear regression model (Y ~ X).\nIt shows the best linear relationship between X and Y based on the simulated data.\nwe create a linear link as\n\\[\nY= -4 + 2 \\times X + \\mathcal{N}(0;2)\n\\]\nThus we expect a coefficient director of 2 and an intercept at 4 :\n\nprint(L)\n\n\nCall:\nlm(formula = Y ~ X)\n\nCoefficients:\n(Intercept)            X  \n     -4.053        1.991  \n\n\n\nThe equation of L is \\(-3.686 + 1.962X\\) because it is estimation thanks to observations, we are not going to be able to exactly get the theoritical model, but an estimation.",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Simple Linear Regression</span>"
+    ]
   }
 ]
