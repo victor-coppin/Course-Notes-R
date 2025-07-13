@@ -17,6 +17,7 @@ book:
 
         - Tidyverse.qmd
         - data-exploration.qmd
+
     - part: "ggplot2: Elegant Graphics for Data Analysis"
       chapters:
         - ggplot2-introduction.qmd
@@ -33,6 +34,7 @@ book:
         - Methods_of_Moments.qmd
         - Maximum_Likelihood_Estimation.qmd
         - Confidence_interval.qmd
+        - Simple_Linear_Regression.qmd
 
     - part: "Advanced Statistical Analysis and Machine Learning"
       chapters:

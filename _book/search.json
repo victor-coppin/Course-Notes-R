@@ -135,7 +135,7 @@
     "href": "The_normal_distribution.html",
     "title": "7  The Normal distribution",
     "section": "",
-    "text": "7.1 rnorm()\n\\(\\Large X \\sim \\mathcal{N}(\\mu, \\sigma^2)\\)\nPDF of a Normal distribution \\(\\large \\forall t \\in \\mathbb{R}, \\quad\n\\LARGE f_X(t) = \\frac{1}{\\sqrt{2\\pi}\\sigma} e^{-(t-\\mu)^2/2\\sigma^2}\\)\nThe rnorm function create a vector of random numbers that follow a ‘bell-shaped’ distribution Parameters: - n the number of random value to generate - mean the center of the distribution (0 by default) - sd the spread of the distriburion (1 by default)\n# normal  distribution with 50 random values, a mean of 0 and a standard deviation of 1 \nrandom_values &lt;- rnorm(50, mean = 0, sd = 1)\nhead(random_values)\n\n[1] -0.2056865  0.3173570  0.2662543  0.8896068  1.1414760 -0.9064495\nRemark:",
+    "text": "7.1 rnorm()\n\\(\\Large X \\sim \\mathcal{N}(\\mu, \\sigma^2)\\)\nPDF of a Normal distribution \\(\\large \\forall t \\in \\mathbb{R}, \\quad\n\\LARGE f_X(t) = \\frac{1}{\\sqrt{2\\pi}\\sigma} e^{-(t-\\mu)^2/2\\sigma^2}\\)\nThe rnorm function create a vector of random numbers that follow a ‘bell-shaped’ distribution Parameters: - n the number of random value to generate - mean the center of the distribution (0 by default) - sd the spread of the distriburion (1 by default)\n# normal  distribution with 50 random values, a mean of 0 and a standard deviation of 1 \nrandom_values &lt;- rnorm(50, mean = 0, sd = 1)\nhead(random_values)\n\n[1]  0.01050730  0.27205325  0.05998468  1.21702870 -0.47757773  2.31030220\nRemark:",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>The Normal distribution</span>"
@@ -286,11 +286,55 @@
     "objectID": "The_normal_distribution.html#references",
     "href": "The_normal_distribution.html#references",
     "title": "7  The Normal distribution",
-    "section": "7.2 References",
-    "text": "7.2 References\n\n\nWickham, Hadley, Danielle Navarro, and Thomas Lin Pedersen. 2023.\nGgplot2: Elegant Graphics for Data Analysis. https://ggplot2-book.org.\n\n\nWikipedia contributors. 2025. “Random Variate —\nWikipedia, the Free Encyclopedia.” https://en.wikipedia.org/wiki/Random_variate. https://en.wikipedia.org/wiki/Random_variate.",
+    "section": "7.3 References",
+    "text": "7.3 References\n\n\nWickham, Hadley, Danielle Navarro, and Thomas Lin Pedersen. 2023.\nGgplot2: Elegant Graphics for Data Analysis. https://ggplot2-book.org.\n\n\nWikipedia contributors. 2025. “Random Variate —\nWikipedia, the Free Encyclopedia.” https://en.wikipedia.org/wiki/Random_variate. https://en.wikipedia.org/wiki/Random_variate.",
     "crumbs": [
       "Foundations of Statistical Analysis and Machine Learning",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>The Normal distribution</span>"
+    ]
+  },
+  {
+    "objectID": "Confidence_interval.html",
+    "href": "Confidence_interval.html",
+    "title": "12  Confidence interval",
+    "section": "",
+    "text": "12.1 Definition\nThe value of an estimator varies across samples. A confidence interval aims to quantify the uncertainty of this estimation.\nLet us consider:\n- \\(X_1, \\cdots, X_n\\) i.i.d random variables\n- \\(\\theta\\) an unknown parameter\n- \\(\\alpha \\in [0,1]\\), the risk level\nA confidence interval for \\(\\theta\\), with confidence level \\(1−\\alpha\\) (\\(100 \\cdot (1-\\alpha)\\%\\) ) is an interval \\([A_n,B_n]\\) such that the probability that \\(\\theta\\) lies within it is \\(1−\\alpha\\).\n\\(A_n\\) and \\(B_n\\) are functions of the sample data \\(X_1, \\cdots, X_n\\), so that : \\[\n\\large\\mathbb{P}(\\theta \\in [A_n,B_n]) = 1-\\alpha\n\\]",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Confidence interval</span>"
+    ]
+  },
+  {
+    "objectID": "Confidence_interval.html#motivation",
+    "href": "Confidence_interval.html#motivation",
+    "title": "12  Confidence interval",
+    "section": "12.2 Motivation",
+    "text": "12.2 Motivation\nLet us consider a Gaussian distribution with mean 0 and variance 2:\n\\[\n  X \\sim \\mathcal{N}(0,2)\n\\]\nSimulating the sample mean of a Gaussian distribution multiple times\nSee the rnorm section\n\nM &lt;- c() # initialize an empty vector to store the means\n\n# Loop over three different sample sizes: 50, 500, and 5,000 \nfor (k in c(50,500,5000)) \n{\n    for (i in 1:50)             # simulate the sample mean 50 times    \n    {\n        A &lt;- rnorm(k,0,sqrt(2)) # generate k observations with mean = 0, variance = 2\n        m &lt;- mean(A)\n        M &lt;- c(M,m)\n    }\n}\n\nWe now create a data frame D with:\n- a column mean containing the 150 sample means (50 for each sample size), and\n- a column label indicating the corresponding sample size.\n\nD &lt;- data.frame(mean = M, label = rep(c('50','500','5000'), each = 50))  # 'rep(..., each = 50)' aligns labels with sample sizes\nboxplot(D$mean ~ D$label,\n        main = \"Distribution of Sample Means by Sample Size\", # Main title of the boxplot\n        xlab = \"Sample Size\", ylab = \"Sample Mean\") #Label for the x-axis and the the y-axis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProfessor’s Insight: Accuracy and Sample Size\n\n\n\nAs we can see in the boxplot:\n- For a sample size of 50, the sample means fluctuate roughly between -0.4 and 0.4. - With 500 observations, the range narrows to around -0.2 to 0.1. - And for 5,000 observations, the fluctuation becomes minimal, between -0.08 and 0.05.\nThis illustrates that as the sample size increases, the accuracy of the sample mean improves, because the fluctuations (i.e., variance) decrease. The quality of the estimation improves at a rate proportional to 1/√n.\n\n\nEffect of variance on estimation accuracy\nWe now study how variance affects the fluctuation of the sample mean, using the same logic as before but fixing the sample size at 500. We consider three different variances: \\[\nX \\sim \\mathcal{N}(0, 0.1)\n\\] \\[\nX \\sim \\mathcal{N}(0, 1)\n\\] \\[\nX \\sim \\mathcal{N}(0, 10)\n\\]\n\nM &lt;- c() \n\n# Loop over three different variances\nfor (k in c(0.1, 1, 10)) {\n  for (i in 1:50) {\n    A &lt;- rnorm(500, 0, sqrt(k))  \n    m &lt;- mean(A)\n    M &lt;- c(M, m)\n  }\n}\n\nD &lt;- data.frame(mean = M, label = rep(c(\"0.1\", \"1\", \"10\"), each = 50))\n\n# Boxplot of the means by variance group\nboxplot(D$mean ~ D$label,\n        main = \"Distribution of Sample Means by Variance\",\n        xlab = \"Variance\", ylab = \"Sample Mean\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProfessor’s Insight: Sample Size vs Variance\n\n\n\nThese two experiments highlight two distinct effects on the accuracy of the sample mean:\n\nWhen you increase the sample size, you improve the precision of your estimate. The fluctuations around the true mean become smaller, which makes your estimation more reliable.\nIn contrast, when the variance of the distribution increases, the quality of your estimation decreases. The sample mean fluctuates more widely, even with the same number of observations.\n\nSo these two effects move in opposite directions:\n➤ Increasing sample size improves accuracy\n➤ Increasing variance reduces accuracy\n\n\nThese simulations show that the precision of an estimator (like the sample mean) is influenced by two key parameters:\n\nThe sample size \\(n\\): as \\(n\\) increases, the estimation becomes more precise ​\nThe variance \\(\\sigma^2\\) of the underlying distribution: as it increases, the estimate becomes more volatile\n\nSo, the confidence interval, which is used to quantify the uncertainty around an estimate, will depend on both of these factors. Specifically, it depends on a term of the form: \\[\n\\dfrac{\\sigma}{\\sqrt{n}}\n\\]\n\n\n\n\n\n\nProfessor’s Warning: Plug-in Estimators Are Not Harmless\n\n\n\nWhen replacing an unknown parameter (like variance) with an estimator, you apply what’s called a plug-in method. While this is often necessary, it can alter the distribution of your statistic.\nFor example: - If the true variance \\(\\large\\sigma^2\\;\\) were known (which it never is in practice), then the standardized sample mean would follow a normal distribution. - In reality, since \\(\\large\\sigma^2\\;\\) is unknown, we estimate it with the sample variance.\nWhen we do this, the standardized statistic follows a Student’s t-distribution instead.\n\nThis shift in distribution is not trivial — it must be accounted for in confidence intervals.\n\nPractitioners often ignore this and proceed as if nothing changed. But this is not statistically correct:\nEvery plug-in introduces an approximation step, and chaining them carelessly can make your final inference unreliable.\nTo use plug-in methods correctly, you need supporting results (e.g., convergence in distribution).\nWithout them, the theoretical properties of your inference may no longer hold.\n\nIf you only have data, you never have access to the true parameter — only an estimate. Always be aware of how that impacts your conclusions.",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Confidence interval</span>"
+    ]
+  },
+  {
+    "objectID": "The_normal_distribution.html#sec-qnorm-function",
+    "href": "The_normal_distribution.html#sec-qnorm-function",
+    "title": "7  The Normal distribution",
+    "section": "7.2 qnorm()",
+    "text": "7.2 qnorm()\nThe qnorm function returns the quantile (e.g. the inverse of the CDF).\nParameters:\n- p vector of probabilities\n- mean the center of the distribution (0 by default)\n- sd standard deviation of the distribution(1 by default)\nqnorm return the value \\(z\\) such that \\(\\mathbb{P}(Z \\le z) = p\\) where \\(Z \\sim \\mathcal{N}(0,1)\\)\n\nalpha &lt;- c(0.01, 0.05, 0.1)\nq &lt;- qnorm(1 - alpha / 2) \nq\n\n[1] 2.575829 1.959964 1.644854\n\n\nThese are the z-values for:\n- 99% CI (α = 0.01)\n- 95% CI (α = 0.05)\n- 90% CI (α = 0.10)\n\n7.2.1 Definition\nLet us consider : \\(\\mathbb{N} \\sim \\mathbfcal{N}(0;1)\\)\nThe quantile of order \\(p\\) for \\(\\mathbb{N}\\), denoted \\(Z_p\\) is given by : \\[\nF_N(Z_p) = p \\Leftrightarrow z_p = F_N^{-1}(p)\n\\]\n\nalpha &lt;- 0.05\np     &lt;- 1 - alpha/2    \nz_p   &lt;- qnorm(p)      \ncurveX &lt;- seq(-3, 3, length.out = 400) # define the plotting window (–3 to 3)\n\nggplot(data.frame(t = curveX), aes(t)) +\n  stat_function(fun = pnorm, linewidth = 1, colour = \"steelblue\") +  # CDF\n  geom_hline(yintercept = p,  linetype = \"dashed\", colour = \"darkgreen\") +\n  geom_vline(xintercept = z_p, linetype = \"dashed\", colour = \"darkgreen\") +\n  annotate(\"text\", x = -2,   y = p + 0.03, label = \"1 - alpha/2\", size = 6, \n            parse = TRUE, colour = \"darkgreen\")+\n  annotate(\"text\", x = z_p, y = -0.05,  label = expression(z[p]), size = 6,\n           colour = \"darkgreen\") +\n  labs(x = \"t\", y = expression(F[N](t))) +\n  theme_minimal(base_size = 14)",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The Normal distribution</span>"
+    ]
+  },
+  {
+    "objectID": "Confidence_interval.html#confidence-level-effect-of-alpha",
+    "href": "Confidence_interval.html#confidence-level-effect-of-alpha",
+    "title": "12  Confidence interval",
+    "section": "12.3 Confidence level : effect of alpha",
+    "text": "12.3 Confidence level : effect of alpha\nSee the qnorm section\n\n# we create a vector of 3 different values for alpha\nalpha &lt;- c(0.01, 0.05, 0.1) \n# compute the z-values associated with the alpha above \nq &lt;- qnorm(1-alpha/2) # will return the quantile, the z-values\nvar &lt;-2\n# we create a data set with a sample of 1000 obs that follow a gaussian law\ndataset &lt;- rnorm(1000,0,sqrt(var)) \n# computation of the lower and upper bound. \nlowerBound &lt;- mean(dataset) - sqrt(var)/sqrt(1000) * q\nupperBound &lt;- mean(dataset) + sqrt(var)/sqrt(1000) * q\nprint(alpha)\n\n[1] 0.01 0.05 0.10\n\nprint(lowerBound)\n\n[1] -0.1940503 -0.1665080 -0.1524158\n\nprint(upperBound)\n\n[1]  0.036338857  0.008796523 -0.005295641\n\n\nFor alpha = 0.01, the confidence interval will be between [-0.076 ; 0.155]. for alpha = 0.1 CI \\(\\in\\) [-0.034;0.113] So, as alpha is increasing, the confidence interval become smaller.",
+    "crumbs": [
+      "Foundations of Statistical Analysis and Machine Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Confidence interval</span>"
     ]
   }
 ]

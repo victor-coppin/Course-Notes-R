@@ -1,11 +1,31 @@
-# Motivation for confidence interval
+# Confidence interval
+
+The value of an estimator varies across samples. A confidence interval aims to quantify the uncertainty of this estimation.
+
+## Definition 
+
+Let us consider:    
+-  $X_1, \cdots, X_n$ *i.i.d* random variables  
+-  $\theta$ an unknown parameter  
+-   $\alpha \in [0,1]$, the risk level  
+
+A confidence interval for $\theta$, with confidence level  $1−\alpha$ ($100 \cdot (1-\alpha)\%$ ) is an interval $[A_n,B_n]$ such that the probability that $\theta$ lies within it is $1−\alpha$.   
+$A_n$ and $B_n$ are functions of the sample data $X_1, \cdots, X_n$, so that : 
+$$
+\large\mathbb{P}(\theta \in [A_n,B_n]) = 1-\alpha
+$$
+
+
+
+
+## Motivation
 
 Let us consider a Gaussian distribution with mean 0 and variance 2:  
 $$
   X \sim \mathcal{N}(0,2)
 $$
 
-[**Simulating the sample mean of a Gaussian distribution multiple times **]{.lead}  
+[**Simulating the sample mean of a Gaussian distribution multiple times**]{.lead}  
 [See the rnorm section](The_normal_distribution.qmd#sec-rnorm-function)
 ```{r}
 
@@ -30,8 +50,8 @@ We now create a data frame D with:
 ```{r}
 D <- data.frame(mean = M, label = rep(c('50','500','5000'), each = 50))  # 'rep(..., each = 50)' aligns labels with sample sizes
 boxplot(D$mean ~ D$label,
-        main = "Distribution of Sample Means by Sample Size",
-        xlab = "Sample Size", ylab = "Sample Mean")
+        main = "Distribution of Sample Means by Sample Size", # Main title of the boxplot
+        xlab = "Sample Size", ylab = "Sample Mean") #Label for the x-axis and the the y-axis
 ```
 
 ::: {.callout-note title="Professor's Insight: Accuracy and Sample Size"}
@@ -44,3 +64,102 @@ As we can see in the boxplot:
 The quality of the estimation improves at a rate proportional to 1/√n.
 :::
 
+[**Effect of variance on estimation accuracy**]{.lead}  
+
+We now study how **variance** affects the **fluctuation of the sample mean**, using the same logic as before but fixing the **sample size** at 500. We consider three different variances:
+$$
+X \sim \mathcal{N}(0, 0.1)
+$$
+$$
+X \sim \mathcal{N}(0, 1)
+$$
+$$
+X \sim \mathcal{N}(0, 10)
+$$
+
+```{r}
+M <- c() 
+
+# Loop over three different variances
+for (k in c(0.1, 1, 10)) {
+  for (i in 1:50) {
+    A <- rnorm(500, 0, sqrt(k))  
+    m <- mean(A)
+    M <- c(M, m)
+  }
+}
+
+D <- data.frame(mean = M, label = rep(c("0.1", "1", "10"), each = 50))
+
+# Boxplot of the means by variance group
+boxplot(D$mean ~ D$label,
+        main = "Distribution of Sample Means by Variance",
+        xlab = "Variance", ylab = "Sample Mean")
+```
+
+::: {.callout-note title="Professor's Insight: Sample Size vs Variance"}
+These two experiments highlight two distinct effects on the accuracy of the sample mean:
+
+- When you **increase the sample size**, you **improve the precision** of your estimate. The fluctuations around the true mean become smaller, which makes your estimation more reliable.
+
+- In contrast, when the **variance of the distribution increases**, the **quality of your estimation decreases**. The sample mean fluctuates more widely, even with the same number of observations.
+
+So these two effects move in **opposite directions**:  
+➤ Increasing **sample size** improves accuracy  
+➤ Increasing **variance** reduces accuracy
+:::
+
+[**These simulations show that the precision of an estimator (like the sample mean) is influenced by two key parameters:**]{.lead}  
+
+- **The sample size** $n$: as $n$ increases, the estimation becomes more precise ​
+- **The variance** $\sigma^2$ of the underlying distribution: as it increases, the estimate becomes more volatile
+
+So, **the confidence interval**, which is used to quantify the uncertainty around an estimate, **will depend on both of these factors**. Specifically, it depends on a term of the form:
+$$
+\dfrac{\sigma}{\sqrt{n}}
+$$
+ 
+
+::: {.callout-warning title="Professor’s Warning: Plug-in Estimators Are Not Harmless"}
+
+When replacing an unknown parameter (like variance) with an estimator, you apply what's called a **plug-in method**. While this is often necessary, it **can alter the distribution** of your statistic.
+
+For example:
+- If the **true variance** $\large\sigma^2\;$ were known (which it never is in practice), then the standardized sample mean would follow a **normal distribution**.
+- In reality, since $\large\sigma^2\;$ is unknown, we estimate it with the sample variance.
+  
+When we do this, the standardized statistic follows a **Student’s t-distribution** instead.
+
+> This shift in distribution is not trivial — it must be accounted for in confidence intervals.
+
+**Practitioners often ignore this and proceed as if nothing changed.** But this is not statistically correct:  
+Every plug-in introduces an **approximation step**, and chaining them carelessly can make your final inference **unreliable**.
+
+To use plug-in methods correctly, you need supporting results (e.g., convergence in distribution).  
+Without them, the theoretical properties of your inference may no longer hold.
+
+> *If you only have data, you never have access to the true parameter — only an estimate. Always be aware of how that impacts your conclusions.*
+:::
+
+
+## Confidence level : effect of alpha
+
+[See the qnorm section](The_normal_distribution.qmd#sec-qnorm-function)
+```{r}
+# we create a vector of 3 different values for alpha
+alpha <- c(0.01, 0.05, 0.1) 
+# compute the z-values associated with the alpha above 
+q <- qnorm(1-alpha/2) # will return the quantile, the z-values
+var <-2
+# we create a data set with a sample of 1000 obs that follow a gaussian law
+dataset <- rnorm(1000,0,sqrt(var)) 
+# computation of the lower and upper bound. 
+lowerBound <- mean(dataset) - sqrt(var)/sqrt(1000) * q
+upperBound <- mean(dataset) + sqrt(var)/sqrt(1000) * q
+print(alpha)
+print(lowerBound)
+print(upperBound)
+```
+
+For alpha = 0.01, the confidence interval will be between [-0.076 ; 0.155].  for alpha = 0.1 CI $\in$ [-0.034;0.113]
+So, as alpha is increasing, the confidence interval become smaller. 

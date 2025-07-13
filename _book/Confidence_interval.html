@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; The Normal distribution – Data Science with R</title>
+<title>12&nbsp; Confidence interval – Data Science with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,26 +55,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -84,8 +65,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Inverse_Transform_Sampling.html" rel="next">
-<link href="./FSML-MQE.html" rel="prev">
+<link href="./ASML-introduction.html" rel="next">
+<link href="./Maximum_Likelihood_Estimation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -165,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./The_normal_distribution.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Normal distribution</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./Confidence_interval.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Confidence interval</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -265,7 +246,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./The_normal_distribution.html" class="sidebar-item-text sidebar-link active">
+  <a href="./The_normal_distribution.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Normal distribution</span></span></a>
   </div>
 </li>
@@ -295,7 +276,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Confidence_interval.html" class="sidebar-item-text sidebar-link">
+  <a href="./Confidence_interval.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Confidence interval</span></span></a>
   </div>
 </li>
@@ -374,21 +355,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-rnorm-function" id="toc-sec-rnorm-function" class="nav-link active" data-scroll-target="#sec-rnorm-function"><span class="header-section-number">7.1</span> rnorm()</a></li>
-  <li><a href="#sec-qnorm-function" id="toc-sec-qnorm-function" class="nav-link" data-scroll-target="#sec-qnorm-function"><span class="header-section-number">7.2</span> qnorm()</a>
-  <ul class="collapse">
-  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">7.2.1</span> Definition</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7.3</span> References</a></li>
+  <li><a href="#definition" id="toc-definition" class="nav-link active" data-scroll-target="#definition"><span class="header-section-number">12.1</span> Definition</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="header-section-number">12.2</span> Motivation</a></li>
+  <li><a href="#confidence-level-effect-of-alpha" id="toc-confidence-level-effect-of-alpha" class="nav-link" data-scroll-target="#confidence-level-effect-of-alpha"><span class="header-section-number">12.3</span> Confidence level : effect of alpha</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./The_normal_distribution.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Normal distribution</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./FSML-introduction.html">Foundations of Statistical Analysis and Machine Learning</a></li><li class="breadcrumb-item"><a href="./Confidence_interval.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Confidence interval</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Normal distribution</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Confidence interval</span></h1>
 </div>
 
 
@@ -405,91 +383,187 @@ window.Quarto = {
 </header>
 
 
-<p><span class="math inline">\(\Large X \sim \mathcal{N}(\mu, \sigma^2)\)</span></p>
-<p><span class="lead"><strong>PDF of a Normal distribution</strong></span> <span class="math inline">\(\large \forall t \in \mathbb{R}, \quad
-\LARGE f_X(t) = \frac{1}{\sqrt{2\pi}\sigma} e^{-(t-\mu)^2/2\sigma^2}\)</span></p>
-<section id="sec-rnorm-function" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="sec-rnorm-function"><span class="header-section-number">7.1</span> rnorm()</h2>
-<p>The <code>rnorm</code> function create a vector of random numbers that follow a ‘bell-shaped’ distribution <strong>Parameters</strong>: - <code>n</code> the number of random value to generate - <code>mean</code> the center of the distribution (0 by default) - <code>sd</code> the spread of the distriburion (1 by default)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># normal  distribution with 50 random values, a mean of 0 and a standard deviation of 1 </span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>random_values <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(random_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.01050730  0.27205325  0.05998468  1.21702870 -0.47757773  2.31030220</code></pre>
-</div>
-</div>
-<p><strong>Remark</strong>:</p>
-<blockquote class="blockquote">
-<p>“rnorm generates random deviates.”</p>
-<p>In probability and statistics, a <em>random variate</em> (or simply <em>variate</em>) is a particular outcome or realization of a random variable.<br>
-Other outcomes of the same random variable might yield different values — often referred to as random numbers <span class="citation" data-cites="wikipedia-random-variate">[@wikipedia-random-variate]</span>.</p>
-</blockquote>
-</section>
-<section id="sec-qnorm-function" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="sec-qnorm-function"><span class="header-section-number">7.2</span> qnorm()</h2>
-<p>The <code>qnorm</code> function returns the quantile (<em>e.g.</em> the inverse of the CDF).<br>
-<strong>Parameters</strong>:<br>
-- <code>p</code> vector of probabilities<br>
-- <code>mean</code> the center of the distribution (0 by default)<br>
-- <code>sd</code> standard deviation of the distribution(1 by default)</p>
-<p><code>qnorm</code> return the value <span class="math inline">\(z\)</span> such that <span class="math inline">\(\mathbb{P}(Z \le z) = p\)</span> where <span class="math inline">\(Z \sim \mathcal{N}(0,1)\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>) </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.575829 1.959964 1.644854</code></pre>
-</div>
-</div>
-<p>These are the z-values for:<br>
-- 99% CI (α = 0.01)<br>
-- 95% CI (α = 0.05)<br>
-- 90% CI (α = 0.10)</p>
-<section id="definition" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">7.2.1</span> Definition</h3>
-<p>Let us consider : <span class="math inline">\(\mathbb{N} \sim \mathbfcal{N}(0;1)\)</span><br>
-The quantile of order <span class="math inline">\(p\)</span> for <span class="math inline">\(\mathbb{N}\)</span>, denoted <span class="math inline">\(Z_p\)</span> is given by : <span class="math display">\[
-F_N(Z_p) = p \Leftrightarrow z_p = F_N^{-1}(p)
+<p>The value of an estimator varies across samples. A confidence interval aims to quantify the uncertainty of this estimation.</p>
+<section id="definition" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">12.1</span> Definition</h2>
+<p>Let us consider:<br>
+- <span class="math inline">\(X_1, \cdots, X_n\)</span> <em>i.i.d</em> random variables<br>
+- <span class="math inline">\(\theta\)</span> an unknown parameter<br>
+- <span class="math inline">\(\alpha \in [0,1]\)</span>, the risk level</p>
+<p>A confidence interval for <span class="math inline">\(\theta\)</span>, with confidence level <span class="math inline">\(1−\alpha\)</span> (<span class="math inline">\(100 \cdot (1-\alpha)\%\)</span> ) is an interval <span class="math inline">\([A_n,B_n]\)</span> such that the probability that <span class="math inline">\(\theta\)</span> lies within it is <span class="math inline">\(1−\alpha\)</span>.<br>
+<span class="math inline">\(A_n\)</span> and <span class="math inline">\(B_n\)</span> are functions of the sample data <span class="math inline">\(X_1, \cdots, X_n\)</span>, so that : <span class="math display">\[
+\large\mathbb{P}(\theta \in [A_n,B_n]) = 1-\alpha
 \]</span></p>
+</section>
+<section id="motivation" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="motivation"><span class="header-section-number">12.2</span> Motivation</h2>
+<p>Let us consider a Gaussian distribution with mean 0 and variance 2:<br>
+<span class="math display">\[
+  X \sim \mathcal{N}(0,2)
+\]</span></p>
+<p><span class="lead"><strong>Simulating the sample mean of a Gaussian distribution multiple times</strong></span><br>
+<a href="./The_normal_distribution.html#sec-rnorm-function">See the rnorm section</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>p     <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> alpha<span class="sc">/</span><span class="dv">2</span>    </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>z_p   <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(p)      </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>curveX <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">400</span>) <span class="co"># define the plotting window (–3 to 3)</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">t =</span> curveX), <span class="fu">aes</span>(t)) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> pnorm, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span>  <span class="co"># CDF</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> p,  <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"darkgreen"</span>) <span class="sc">+</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> z_p, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"darkgreen"</span>) <span class="sc">+</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="dv">2</span>,   <span class="at">y =</span> p <span class="sc">+</span> <span class="fl">0.03</span>, <span class="at">label =</span> <span class="st">"1 - alpha/2"</span>, <span class="at">size =</span> <span class="dv">6</span>, </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">parse =</span> <span class="cn">TRUE</span>, <span class="at">colour =</span> <span class="st">"darkgreen"</span>)<span class="sc">+</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> z_p, <span class="at">y =</span> <span class="sc">-</span><span class="fl">0.05</span>,  <span class="at">label =</span> <span class="fu">expression</span>(z[p]), <span class="at">size =</span> <span class="dv">6</span>,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> <span class="st">"darkgreen"</span>) <span class="sc">+</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"t"</span>, <span class="at">y =</span> <span class="fu">expression</span>(F[N](t))) <span class="sc">+</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">c</span>() <span class="co"># initialize an empty vector to store the means</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over three different sample sizes: 50, 500, and 5,000 </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">50</span>,<span class="dv">500</span>,<span class="dv">5000</span>)) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)             <span class="co"># simulate the sample mean 50 times    </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        A <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k,<span class="dv">0</span>,<span class="fu">sqrt</span>(<span class="dv">2</span>)) <span class="co"># generate k observations with mean = 0, variance = 2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        m <span class="ot">&lt;-</span> <span class="fu">mean</span>(A)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        M <span class="ot">&lt;-</span> <span class="fu">c</span>(M,m)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We now create a data frame D with:<br>
+- a column <strong>mean</strong> containing the 150 sample means (50 for each sample size), and<br>
+- a column <strong>label</strong> indicating the corresponding sample size.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">mean =</span> M, <span class="at">label =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">'50'</span>,<span class="st">'500'</span>,<span class="st">'5000'</span>), <span class="at">each =</span> <span class="dv">50</span>))  <span class="co"># 'rep(..., each = 50)' aligns labels with sample sizes</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(D<span class="sc">$</span>mean <span class="sc">~</span> D<span class="sc">$</span>label,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Distribution of Sample Means by Sample Size"</span>, <span class="co"># Main title of the boxplot</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Sample Size"</span>, <span class="at">ylab =</span> <span class="st">"Sample Mean"</span>) <span class="co">#Label for the x-axis and the the y-axis</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="The_normal_distribution_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Confidence_interval_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="Professor's Insight: Accuracy and Sample Size">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Professor’s Insight: Accuracy and Sample Size
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As we can see in the boxplot:<br>
+- For a sample size of 50, the sample means fluctuate roughly between -0.4 and 0.4. - With 500 observations, the range narrows to around -0.2 to 0.1. - And for 5,000 observations, the fluctuation becomes minimal, between -0.08 and 0.05.</p>
+<p><strong>This illustrates that as the sample size increases, the accuracy of the sample mean improves</strong>, because the fluctuations (i.e., variance) decrease. The quality of the estimation improves at a rate proportional to 1/√n.</p>
+</div>
+</div>
+<p><span class="lead"><strong>Effect of variance on estimation accuracy</strong></span></p>
+<p>We now study how <strong>variance</strong> affects the <strong>fluctuation of the sample mean</strong>, using the same logic as before but fixing the <strong>sample size</strong> at 500. We consider three different variances: <span class="math display">\[
+X \sim \mathcal{N}(0, 0.1)
+\]</span> <span class="math display">\[
+X \sim \mathcal{N}(0, 1)
+\]</span> <span class="math display">\[
+X \sim \mathcal{N}(0, 10)
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">c</span>() </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over three different variances</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">10</span>)) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>) {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    A <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">500</span>, <span class="dv">0</span>, <span class="fu">sqrt</span>(k))  </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">mean</span>(A)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    M <span class="ot">&lt;-</span> <span class="fu">c</span>(M, m)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">mean =</span> M, <span class="at">label =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"0.1"</span>, <span class="st">"1"</span>, <span class="st">"10"</span>), <span class="at">each =</span> <span class="dv">50</span>))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot of the means by variance group</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(D<span class="sc">$</span>mean <span class="sc">~</span> D<span class="sc">$</span>label,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Distribution of Sample Means by Variance"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Variance"</span>, <span class="at">ylab =</span> <span class="st">"Sample Mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Confidence_interval_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Professor's Insight: Sample Size vs Variance">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Professor’s Insight: Sample Size vs Variance
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These two experiments highlight two distinct effects on the accuracy of the sample mean:</p>
+<ul>
+<li><p>When you <strong>increase the sample size</strong>, you <strong>improve the precision</strong> of your estimate. The fluctuations around the true mean become smaller, which makes your estimation more reliable.</p></li>
+<li><p>In contrast, when the <strong>variance of the distribution increases</strong>, the <strong>quality of your estimation decreases</strong>. The sample mean fluctuates more widely, even with the same number of observations.</p></li>
+</ul>
+<p>So these two effects move in <strong>opposite directions</strong>:<br>
+➤ Increasing <strong>sample size</strong> improves accuracy<br>
+➤ Increasing <strong>variance</strong> reduces accuracy</p>
+</div>
+</div>
+<p><span class="lead"><strong>These simulations show that the precision of an estimator (like the sample mean) is influenced by two key parameters:</strong></span></p>
+<ul>
+<li><strong>The sample size</strong> <span class="math inline">\(n\)</span>: as <span class="math inline">\(n\)</span> increases, the estimation becomes more precise ​</li>
+<li><strong>The variance</strong> <span class="math inline">\(\sigma^2\)</span> of the underlying distribution: as it increases, the estimate becomes more volatile</li>
+</ul>
+<p>So, <strong>the confidence interval</strong>, which is used to quantify the uncertainty around an estimate, <strong>will depend on both of these factors</strong>. Specifically, it depends on a term of the form: <span class="math display">\[
+\dfrac{\sigma}{\sqrt{n}}
+\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Professor’s Warning: Plug-in Estimators Are Not Harmless">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Professor’s Warning: Plug-in Estimators Are Not Harmless
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When replacing an unknown parameter (like variance) with an estimator, you apply what’s called a <strong>plug-in method</strong>. While this is often necessary, it <strong>can alter the distribution</strong> of your statistic.</p>
+<p>For example: - If the <strong>true variance</strong> <span class="math inline">\(\large\sigma^2\;\)</span> were known (which it never is in practice), then the standardized sample mean would follow a <strong>normal distribution</strong>. - In reality, since <span class="math inline">\(\large\sigma^2\;\)</span> is unknown, we estimate it with the sample variance.</p>
+<p>When we do this, the standardized statistic follows a <strong>Student’s t-distribution</strong> instead.</p>
+<blockquote class="blockquote">
+<p>This shift in distribution is not trivial — it must be accounted for in confidence intervals.</p>
+</blockquote>
+<p><strong>Practitioners often ignore this and proceed as if nothing changed.</strong> But this is not statistically correct:<br>
+Every plug-in introduces an <strong>approximation step</strong>, and chaining them carelessly can make your final inference <strong>unreliable</strong>.</p>
+<p>To use plug-in methods correctly, you need supporting results (e.g., convergence in distribution).<br>
+Without them, the theoretical properties of your inference may no longer hold.</p>
+<blockquote class="blockquote">
+<p><em>If you only have data, you never have access to the true parameter — only an estimate. Always be aware of how that impacts your conclusions.</em></p>
+</blockquote>
+</div>
+</div>
 </section>
-</section>
-<section id="references" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="references"><span class="header-section-number">7.3</span> References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-wickham2023ggplot2" class="csl-entry" role="listitem">
-Wickham, Hadley, Danielle Navarro, and Thomas Lin Pedersen. 2023.
-<em>Ggplot2: Elegant Graphics for Data Analysis</em>. <a href="https://ggplot2-book.org">https://ggplot2-book.org</a>.
+<section id="confidence-level-effect-of-alpha" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="confidence-level-effect-of-alpha"><span class="header-section-number">12.3</span> Confidence level : effect of alpha</h2>
+<p><a href="./The_normal_distribution.html#sec-qnorm-function">See the qnorm section</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we create a vector of 3 different values for alpha</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>) </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the z-values associated with the alpha above </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>) <span class="co"># will return the quantile, the z-values</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span><span class="dv">2</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># we create a data set with a sample of 1000 obs that follow a gaussian law</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>,<span class="dv">0</span>,<span class="fu">sqrt</span>(var)) </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># computation of the lower and upper bound. </span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>lowerBound <span class="ot">&lt;-</span> <span class="fu">mean</span>(dataset) <span class="sc">-</span> <span class="fu">sqrt</span>(var)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1000</span>) <span class="sc">*</span> q</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>upperBound <span class="ot">&lt;-</span> <span class="fu">mean</span>(dataset) <span class="sc">+</span> <span class="fu">sqrt</span>(var)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1000</span>) <span class="sc">*</span> q</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(alpha)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01 0.05 0.10</code></pre>
 </div>
-<div id="ref-wikipedia-random-variate" class="csl-entry" role="listitem">
-Wikipedia contributors. 2025. <span>“Random Variate —
-Wikipedia<span>,</span> the Free Encyclopedia.”</span> <a href="https://en.wikipedia.org/wiki/Random_variate" class="uri">https://en.wikipedia.org/wiki/Random_variate</a>. <a href="https://en.wikipedia.org/wiki/Random_variate">https://en.wikipedia.org/wiki/Random_variate</a>.
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lowerBound)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.1940503 -0.1665080 -0.1524158</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(upperBound)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.036338857  0.008796523 -0.005295641</code></pre>
 </div>
 </div>
+<p>For alpha = 0.01, the confidence interval will be between [-0.076 ; 0.155]. for alpha = 0.1 CI <span class="math inline">\(\in\)</span> [-0.034;0.113] So, as alpha is increasing, the confidence interval become smaller.</p>
 
 
 </section>
@@ -896,13 +970,13 @@ Wikipedia<span>,</span> the Free Encyclopedia.”</span> <a href="https://en.wik
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./FSML-MQE.html" class="pagination-link" aria-label="Mean Quadratic Error">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Mean Quadratic Error</span></span>
+      <a href="./Maximum_Likelihood_Estimation.html" class="pagination-link" aria-label="Maximum likelihood">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Maximum likelihood</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Inverse_Transform_Sampling.html" class="pagination-link" aria-label="Inverse Transform Sampling">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ASML-introduction.html" class="pagination-link" aria-label="ASML-introduction.html">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ASML-introduction.html</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
