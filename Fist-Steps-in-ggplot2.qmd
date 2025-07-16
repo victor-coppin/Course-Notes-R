@@ -54,8 +54,25 @@ We can add options or parameters to the aes() functions :
 `aes(disply, hwy, shape = drv)` : the shape aesthetic controls the symbols of points 
 
 ```{r}
+#| warning: false
+#| label: fig-side
+#| fig-cap: "Aesthetic attibutes"
+#| fig-show: hold 
+#| fig-subcap: ["shape","colour"]   
+
+# First plot with shape aes 
 ggplot(mpg, aes(displ,hwy, shape = class)) +
     geom_point()
+# Second plot with colour aes 
+ggplot(mpg, aes(displ,hwy, colour = class)) +
+    geom_point()
+
 ```
 
-To set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of aes(). Compare the following two plots:
+This gives each point a unique shape or colour corresponding to its class. ggplot2 converting data into aesthetic with a scale : there is one scale for each aesthetic mapping in a plot. The scale is also responsible for creating a guide, an axis or a legend. 
+
+To set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of aes(). 
+
+```{r}
+ggplot(mpg, aes(displ,hwy,)) + geom_point(colour= "blue")
+```

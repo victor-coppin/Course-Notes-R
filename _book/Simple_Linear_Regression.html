@@ -356,8 +356,21 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#first-approach-using-simulated-data-in-r" id="toc-first-approach-using-simulated-data-in-r" class="nav-link active" data-scroll-target="#first-approach-using-simulated-data-in-r"><span class="header-section-number">13.1</span> First approach using simulated data in R</a></li>
+  <li><a href="#sec-lm-function" id="toc-sec-lm-function" class="nav-link" data-scroll-target="#sec-lm-function"><span class="header-section-number">13.2</span> Fitting Linear Models : lm()</a>
+  <ul class="collapse">
+  <li><a href="#coefficients" id="toc-coefficients" class="nav-link" data-scroll-target="#coefficients"><span class="header-section-number">13.2.1</span> Coefficients</a></li>
+  <li><a href="#residuals" id="toc-residuals" class="nav-link" data-scroll-target="#residuals"><span class="header-section-number">13.2.2</span> Residuals</a></li>
+  </ul></li>
+  <li><a href="#sampling-variability" id="toc-sampling-variability" class="nav-link" data-scroll-target="#sampling-variability"><span class="header-section-number">13.3</span> Sampling variability</a></li>
+  <li><a href="#prediction-confidence-intervals" id="toc-prediction-confidence-intervals" class="nav-link" data-scroll-target="#prediction-confidence-intervals"><span class="header-section-number">13.4</span> Prediction &amp; Confidence Intervals</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -381,15 +394,15 @@ window.Quarto = {
 </header>
 
 
-<p>with simulated dataset :</p>
+<section id="first-approach-using-simulated-data-in-r" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="first-approach-using-simulated-data-in-r"><span class="header-section-number">13.1</span> First approach using simulated data in R</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creation of variables for two variables </span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># X as 100 observation from -7 to 10 that follow uniform law </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>,<span class="sc">-</span><span class="dv">7</span>,<span class="dv">10</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Y linearly 'connected' to X + some gaussian noise</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> X <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">2</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot of the cloud of point</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 100 observations for X uniformly from -7 to 10</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>,<span class="sc">-</span><span class="dv">7</span>,<span class="dv">10</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate Y as a linear function of X plus Gaussian noise</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> X <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">2</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the scatterplot of X and Y</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -399,10 +412,10 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y<span class="sc">~</span>X) <span class="co"># perform a linea model </span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y<span class="sc">~</span>X) <span class="co"># perform a linear model </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X,Y)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create a red line that fit the linear regression</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(L,<span class="at">col=</span><span class="st">'red'</span>) <span class="co"># equal abline(reg= L, col='red'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the red regression line to the plot</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(L,<span class="at">col=</span><span class="st">"red"</span>) <span class="co"># Equivalent to: abline(reg = L, col = 'red')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -413,11 +426,11 @@ window.Quarto = {
 </div>
 <p>The red line in the plot above represents the fitted simple linear regression model (Y ~ X).<br>
 It shows <strong>the best linear relationship between X and Y</strong> based on the simulated data.</p>
-<p>we create a linear link as<br>
+<p>We generate the data using the theoretical model:<br>
 <span class="math display">\[
-Y= -4 + 2 \times X + \mathcal{N}(0;2)
+Y= -4 + 2 \times X + \mathcal{N}(0, 2)
 \]</span></p>
-<p>Thus we expect a coefficient director of 2 and an intercept at 4 :</p>
+<p>Thus, we expect a slope of 2 and an intercept of -4:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -427,14 +440,238 @@ lm(formula = Y ~ X)
 
 Coefficients:
 (Intercept)            X  
-     -4.053        1.991  </code></pre>
+     -3.960        1.974  </code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
-<p>The equation of L is <span class="math inline">\(-3.686 + 1.962X\)</span> because it is estimation thanks to observations, we are not going to be able to exactly get the theoritical model, but an estimation.</p>
+<p>The estimated equation is approximately:<br>
+<span class="math display">\[
+\hat{Y} = -3.686 + 1.962 \times X
+\]</span></p>
 </blockquote>
+<p>Because we use observed data with noise, the estimated model does not recover the exact theoretical parameters. Instead, it provides an <strong>estimation</strong> of the true underlying relationship.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Professor’s insight">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Professor’s insight
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“If I wanted a perfect fit, I could always use a high-degree polynomial to match the data exactly. But here’s the issue: when your model fits the data too well, you risk overfitting. It means the model captures not just the underlying trend, but also the random noise in your sample.</p>
+<p>Don’t forget—you’re working with just 100 observations. Even if these data come from the same process, a different sample might produce a very different cloud of points. So if your model is too perfectly tailored to this specific sample, it might not perform well on another one.</p>
+<p>That’s why you don’t want a model that fits exactly: your goal is to generalize to the entire population, not just to this particular dataset.”</p>
+</div>
+</div>
+</section>
+<section id="sec-lm-function" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="sec-lm-function"><span class="header-section-number">13.2</span> Fitting Linear Models : lm()</h2>
+<p>The <code>lm()</code> function in R is used to fit linear models, including both simple and multiple regression models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>linearModel <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y<span class="sc">~</span>X)  <span class="co"># Y is the response variable, X is the predictor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>~</code> operator is fundamental in defining linear models in R. An expression of the form Y ~ X specifies that the response variable Y is modeled as a linear function of the predictor(s) X (also called independent variable, explanatory variable, or feature: the variable used to explain or predict the response.)</p>
+<p>The lm() function returns an object of class “lm”, which contains all the information needed to evaluate and interpret the model, including coefficients, residuals, and diagnostics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "coefficients"  "residuals"     "effects"       "rank"         
+ [5] "fitted.values" "assign"        "qr"            "df.residual"  
+ [9] "xlevels"       "call"          "terms"         "model"        </code></pre>
+</div>
+</div>
+<section id="coefficients" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="coefficients"><span class="header-section-number">13.2.1</span> Coefficients</h3>
+<p>Same as print(L) with more precise values to extract the values of the L equation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a> L<span class="sc">$</span>coefficients </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)           X 
+  -3.960255    1.974269 </code></pre>
+</div>
+</div>
+</section>
+<section id="residuals" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="residuals"><span class="header-section-number">13.2.2</span> Residuals</h3>
+<p>For each observation, we know its true value, denoted by <span class="math inline">\(Y\)</span>. When we use the regression model, we obtain a predicted value <span class="math inline">\(\hat{Y}\)</span>.<br>
+The residual is the difference between the actual value and the predicted value. It is defined as: <span class="math display">\[
+\hat{\epsilon}_i = Y_i - \hat{Y}_i
+\]</span></p>
+<p>Residuals measure how far off our model’s predictions are on the training data (also called the learning sample). We talk about residuals when we compare the predicted values <span class="math inline">\(\hat{Y}\)</span> and the observed values <span class="math inline">\(Y\)</span> for data used to fit the model.</p>
+<p>The prediction error has the same formula as the residual, but applies to new, unseen data. In that case, we cannot compute it exactly unless we know the true value of the response variable for the new observation.</p>
+</section>
+</section>
+<section id="sampling-variability" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="sampling-variability"><span class="header-section-number">13.3</span> Sampling variability</h2>
+<p>Let’s create two datasets based on the same theoretical model:<br>
+<span class="math display">\[
+Y=4+2X+N(0,2)
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the random number generator's starting point to a fixed value</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># First dataset</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>X1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="sc">-</span><span class="dv">7</span>, <span class="dv">10</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>Y1 <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> X1 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Second dataset with the same model</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>X2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="sc">-</span><span class="dv">7</span>, <span class="dv">10</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>Y2 <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> X2 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine both datasets into a single data frame</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">X =</span> X1, <span class="at">Y =</span> Y1, <span class="at">Sample =</span> <span class="st">"Sample 1"</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">X =</span> X2, <span class="at">Y =</span> Y2, <span class="at">Sample =</span> <span class="st">"Sample 2"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> <span class="fu">subset</span>(df, Sample <span class="sc">==</span> <span class="st">"Sample 1"</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> <span class="fu">subset</span>(df, Sample <span class="sc">==</span> <span class="st">"Sample 2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">color =</span> Sample)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="fu">coef</span>(mod1)[<span class="st">"X"</span>], <span class="at">intercept =</span> <span class="fu">coef</span>(mod1)[<span class="st">"(Intercept)"</span>], <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="fu">coef</span>(mod2)[<span class="st">"X"</span>], <span class="at">intercept =</span> <span class="fu">coef</span>(mod2)[<span class="st">"(Intercept)"</span>], <span class="at">colour =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Sample 1"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Sample 2"</span> <span class="ot">=</span> <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Two samples from the same model"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"X"</span>, <span class="at">y =</span> <span class="st">"Y"</span>, <span class="at">colour =</span> <span class="st">"Sample"</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Simple_Linear_Regression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure above shows two samples of 100 observations each, drawn from the same model. Although the data-generating process is identical, the two regression lines (red and dark blue) are not exactly the same. This is a natural consequence of sampling variability: each sample leads to slightly different estimates of the intercept and slope.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Professor’s insight">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Professor’s insight
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice how the intervals vary across <span class="math inline">\(X\)</span>. For each fixed value of <span class="math inline">\(X\)</span>, we can ask:<br>
+- “Where is the model likely to predict <span class="math inline">\(\hat{Y}\)</span>?”<br>
+- “Where might an actual new observation <span class="math inline">\(Y\)</span> fall?”</p>
+<p>Understanding the difference between <strong>confidence intervals</strong> (for the mean prediction) and <strong>prediction intervals</strong> (for new data points) is essential in interpreting regression results.</p>
+</div>
+</div>
+</section>
+<section id="prediction-confidence-intervals" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="prediction-confidence-intervals"><span class="header-section-number">13.4</span> Prediction &amp; Confidence Intervals</h2>
+<p>When we fit a linear model, we may want to know not just the fitted values, but also how <strong>certain</strong> we are about those predictions. There are two commonly used types of intervals:</p>
+<ul>
+<li><strong>Confidence interval</strong>: the uncertainty around the <em>mean prediction</em> at a given value of X.</li>
+<li><strong>Prediction interval</strong>: the uncertainty around a <em>new individual response</em> at a given X.</li>
+</ul>
+<p>Both can be computed using the <code>predict()</code> function:</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Interpretation Tip">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Interpretation Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The shaded regression line and points from Sample 2 are included only to illustrate sampling variability.<br>
+<strong>Confidence and prediction intervals are computed for Sample 1.</strong></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare sorted data for Sample 1</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>X_seq <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sample <span class="sc">==</span> <span class="st">"Sample 1"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(X) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(X)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute confidence and prediction intervals</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>conf <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod1, <span class="at">newdata =</span> X_seq, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod1, <span class="at">newdata =</span> X_seq, <span class="at">interval =</span> <span class="st">"prediction"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine everything into one data frame</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X_seq,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fit =</span> conf[, <span class="st">"fit"</span>],</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">lwr_conf =</span> conf[, <span class="st">"lwr"</span>],</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>                 <span class="at">upr_conf =</span> conf[, <span class="st">"upr"</span>],</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>                 <span class="at">lwr_pred =</span> pred[, <span class="st">"lwr"</span>],</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">upr_pred =</span> pred[, <span class="st">"upr"</span>])</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot regression lines and interval bounds</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sample 1 points (mapped to color = Sample)</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">subset</span>(df, Sample <span class="sc">==</span> <span class="st">"Sample 1"</span>),</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">color =</span> Sample), <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sample 2 points also mapped to color = Sample</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">subset</span>(df, Sample <span class="sc">==</span> <span class="st">"Sample 2"</span>),</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">color =</span> Sample), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Regression lines</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="fu">coef</span>(mod1)[<span class="st">"X"</span>], <span class="at">intercept =</span> <span class="fu">coef</span>(mod1)[<span class="st">"(Intercept)"</span>], <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="fu">coef</span>(mod2)[<span class="st">"X"</span>], <span class="at">intercept =</span> <span class="fu">coef</span>(mod2)[<span class="st">"(Intercept)"</span>], <span class="at">colour =</span> <span class="st">"darkblue"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Interval bounds</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_plot, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> lwr_conf), <span class="at">color =</span> <span class="st">"brown"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_plot, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> upr_conf), <span class="at">color =</span> <span class="st">"brown"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_plot, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> lwr_pred), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_plot, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> upr_pred), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Sample 1"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Sample 2"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>)) <span class="sc">+</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Confidence and Prediction Intervals (Sample 1)"</span>,</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"X"</span>, <span class="at">y =</span> <span class="st">"Y"</span>, <span class="at">colour =</span> <span class="st">"Sample"</span>) <span class="sc">+</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Simple_Linear_Regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df_plot))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          X       fit  lwr_conf  upr_conf  lwr_pred  upr_pred
+1 -6.995939 -18.49928 -19.23810 -17.76046 -22.24641 -14.75215
+2 -6.973301 -18.45285 -19.19025 -17.71544 -22.19970 -14.70599
+3 -6.932878 -18.36993 -19.10482 -17.63504 -22.11629 -14.62357
+4 -6.875320 -18.25186 -18.98317 -17.52056 -21.99752 -14.50621
+5 -6.865959 -18.23266 -18.96339 -17.50194 -21.97820 -14.48712
+6 -6.363672 -17.20234 -17.90207 -16.50261 -20.94196 -13.46272</code></pre>
+</div>
+</div>
+<p><span class="lead"><strong>Let’s now interpret the two sets of interval curves shown in the plot:</strong></span></p>
+<p>The brown dashed lines represent the 95% confidence interval for the predicted mean <span class="math inline">\(\hat{Y}\)</span> at each value of <span class="math inline">\(X\)</span>.</p>
+<p>→ *“If I fix a value of* <span class="math inline">\(X\)</span><em>, this is where the average predicted</em> <span class="math inline">\(\hat{Y}\)</span> <em>is likely to fall.</em>”</p>
+<p>The black dotted lines represent the prediction interval for a new observation <span class="math inline">\(Y\)</span> at each value of <span class="math inline">\(X\)</span>.</p>
+<p>→ <em>“If I fix a value of</em> <span class="math inline">\(X\)</span><em>, where might a new observed</em> <span class="math inline">\(Y\)</span> <em>fall?”</em></p>
+<p><u>Recall that our model assumes:</u> <span class="math display">\[
+Y = a + bX + \epsilon
+\]</span> where <span class="math inline">\(\epsilon\)</span> is a random noise term accounting for variability not explained by the linear model.</p>
+<p><u>But the regression line gives us:</u> <span class="math display">\[
+\hat{Y} = \hat{a} + \hat{b}X  
+\]</span></p>
+<p>Thus:</p>
+<ul>
+<li>The <strong>confidence interval</strong> (brown) is for <span class="math inline">\(\hat{Y}\)</span> — the mean response. It assumes the linear model is correct and only accounts for the uncertainty in estimating the coefficients.<br>
+</li>
+<li>The <strong>prediction interval</strong> (black) is for <span class="math inline">\(Y\)</span> — an individual new observation. It includes both the uncertainty in the estimated mean <span class="math inline">\(\hat{Y}\)</span> and the random variability in <span class="math inline">\(Y\)</span> due to the noise term <span class="math inline">\(\epsilon\)</span>, so it’s wider.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

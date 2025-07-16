@@ -247,8 +247,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Motivation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Motivation for confidence interval</span></span></a>
+  <a href="./Confidence_interval.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Confidence interval</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Simple_Linear_Regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -265,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ASML-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ASML-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ASML-introduction.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -282,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./TimeSeries-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">TimeSeries-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">TimeSeries-introduction.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -299,7 +305,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./massive-data-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">massive-data-introduction.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">massive-data-introduction.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -307,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -385,18 +391,50 @@ Then a layer <code>geom_point()</code> is added on with <code>+</code> to create
 <h2 data-number="4.1" class="anchored" data-anchor-id="aesthetic-attributes-colour-size-shape"><span class="header-section-number">4.1</span> Aesthetic attributes : colour, size, shape</h2>
 <p>We can add options or parameters to the aes() functions : <code>aes(disply, hwy, colour = class)</code> : map the variable class for each (x,y) to a colour <code>aes(disply, hwy, size = cyl)</code> : geom_points size will be mapped to the cyl variable. <code>aes(disply, hwy, shape = drv)</code> : the shape aesthetic controls the symbols of points</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ,hwy, <span class="at">shape =</span> class)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: The shape palette can deal with a maximum of 6 discrete values because more
-than 6 becomes difficult to discriminate
-ℹ you have requested 7 values. Consider specifying shapes manually if you need
-  that many of them.</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First plot with shape aes </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ,hwy, <span class="at">shape =</span> class)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Second plot with colour aes </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ,hwy, <span class="at">colour =</span> class)) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-side" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-side-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="fig-side-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-side-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Fist-Steps-in-ggplot2_files/figure-html/fig-side-1.png" class="img-fluid figure-img" data-ref-parent="fig-side" width="672">
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 62 rows containing missing values or values outside the scale range
-(`geom_point()`).</code></pre>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-side-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) shape
+</figcaption>
+</figure>
 </div>
+</div>
+<div class="cell-output-display">
+<div id="fig-side-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-side-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Fist-Steps-in-ggplot2_files/figure-html/fig-side-2.png" class="img-fluid figure-img" data-ref-parent="fig-side" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-side-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) colour
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-side-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Aesthetic attibutes
+</figcaption>
+</figure>
+</div>
+</div>
+<p>This gives each point a unique shape or colour corresponding to its class. ggplot2 converting data into aesthetic with a scale : there is one scale for each aesthetic mapping in a plot. The scale is also responsible for creating a guide, an axis or a legend.</p>
+<p>To set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of aes().</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ,hwy,)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">colour=</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -405,7 +443,6 @@ than 6 becomes difficult to discriminate
 </div>
 </div>
 </div>
-<p>To set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of aes(). Compare the following two plots:</p>
 
 
 </section>
